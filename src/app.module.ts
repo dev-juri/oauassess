@@ -4,6 +4,10 @@ import { AppService } from './app.service';
 import { AdminModule } from './admin/admin.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ExamModule } from './exam/exam.module';
+import environmentValidation from './config/environment.validation';
+import appConfig from './config/app.config';
+import databaseConfig from './config/database.config';
 
 const ENV = process.env.NODE_ENV;
 console.log(ENV);
@@ -14,16 +18,17 @@ console.log(ENV);
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: !ENV ? '.env' : `.env.${ENV}`,
-      // load: [appConfig, databaseConfig],
-      // validationSchema: environmentValidation,
+      validationSchema: environmentValidation,
+      load: [appConfig, databaseConfig],
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        uri: configService.getOrThrow<string>('MONGO_URI')
+        uri: configService.get<string>('database.uri'),
       }),
     }),
+    ExamModule,
   ],
   controllers: [AppController],
   providers: [AppService],
