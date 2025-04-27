@@ -6,7 +6,7 @@ import {
   MinLength,
 } from 'class-validator';
 
-export class AdminDto {
+export class CreateAdminDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(3)

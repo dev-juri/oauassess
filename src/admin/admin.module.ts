@@ -1,10 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AdminController } from './admin.controller';
 import { AuthController } from './auth/auth.controller';
-import { AuthService } from './auth/auth.service';
-import { AdminService } from './admin.service';
+import { AuthService } from './auth/providers/auth.service';
+import { AdminService } from './providers/admin.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Admin, AdminSchema } from './auth/schema/admin.schema';
+import { Admin, AdminSchema } from './schemas/admin.schema';
+import { GenerateTokenProvider } from './auth/providers/generate-token.provider';
+import { JwtModule } from '@nestjs/jwt';
+import jwtConfig from './auth/config/jwt.config';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -14,8 +18,10 @@ import { Admin, AdminSchema } from './auth/schema/admin.schema';
         schema: AdminSchema,
       },
     ]),
+    ConfigModule.forFeature(jwtConfig),
+    JwtModule.registerAsync(jwtConfig.asProvider())
   ],
   controllers: [AdminController, AuthController],
-  providers: [AuthService, AdminService],
+  providers: [AuthService, AdminService, GenerateTokenProvider],
 })
 export class AdminModule {}

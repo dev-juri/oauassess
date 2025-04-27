@@ -8,6 +8,7 @@ import { ExamModule } from './exam/exam.module';
 import environmentValidation from './config/environment.validation';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
+import jwtConfig from './admin/auth/config/jwt.config';
 
 const ENV = process.env.NODE_ENV;
 console.log(ENV);
