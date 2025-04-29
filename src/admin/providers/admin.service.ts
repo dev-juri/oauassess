@@ -12,7 +12,7 @@ export class AdminService {
   ) {}
 
   public async findUserByEmail(email: string): Promise<AdminDocument | null> {
-    let user = await this.adminModel.findOne({ email }).select('+password');
+    let user = await this.adminModel.findOne({ email });
     if (!user) {
       return null;
     }

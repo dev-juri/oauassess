@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { InternalServerErrorException } from '@nestjs/common';
+import { Exclude } from 'class-transformer';
 
 export type AdminDocument = HydratedDocument<Admin>;
 
@@ -23,7 +24,8 @@ export class Admin {
   @Prop({ required: true, unique: true })
   email: string;
 
-  @Prop({ required: true, select: false })
+  @Prop({ required: true })
+  @Exclude()
   password: string;
 }
 
