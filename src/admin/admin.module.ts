@@ -9,6 +9,9 @@ import { GenerateTokenProvider } from './auth/providers/generate-token.provider'
 import { JwtModule } from '@nestjs/jwt';
 import jwtConfig from './auth/config/jwt.config';
 import { ConfigModule } from '@nestjs/config';
+import { AccessTokenGuard } from './auth/guards/access-token.guard';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthenticationGuard } from './auth/guards/authentication.guard';
 
 @Module({
   imports: [
@@ -19,9 +22,18 @@ import { ConfigModule } from '@nestjs/config';
       },
     ]),
     ConfigModule.forFeature(jwtConfig),
-    JwtModule.registerAsync(jwtConfig.asProvider())
+    JwtModule.registerAsync(jwtConfig.asProvider()),
   ],
   controllers: [AdminController, AuthController],
-  providers: [AuthService, AdminService, GenerateTokenProvider],
+  providers: [
+    AuthService,
+    AdminService,
+    GenerateTokenProvider,
+    AccessTokenGuard,
+    {
+      provide: APP_GUARD,
+      useClass: AuthenticationGuard,
+    },
+  ],
 })
 export class AdminModule {}
