@@ -5,10 +5,10 @@ import { AdminModule } from './admin/admin.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ExamModule } from './exam/exam.module';
+import { StudentModule } from './student/student.module';
 import environmentValidation from './config/environment.validation';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
-import jwtConfig from './admin/auth/config/jwt.config';
 
 const ENV = process.env.NODE_ENV;
 console.log(ENV);
@@ -30,6 +30,7 @@ console.log(ENV);
       }),
     }),
     ExamModule,
+    StudentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
