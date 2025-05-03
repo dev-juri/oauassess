@@ -1,4 +1,9 @@
 export interface IStudent {
-    FullName: string;
-    MatricNo: string;
+  fullName: string;
+  matricNo: string;
 }
+
+export const iStudentExpectedKeys: (keyof IStudent)[] = [
+  'fullName',
+  'matricNo',
+];
