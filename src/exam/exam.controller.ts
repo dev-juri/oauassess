@@ -7,6 +7,7 @@ import {
   UseInterceptors,
   UploadedFile,
   UploadedFiles,
+  Body,
 } from '@nestjs/common';
 import { CreateExamDto } from './dtos/create-mcq-exam.dto';
 import { UpdateMcqExamParamDto } from './dtos/update-mcq-exam-param.dto';
@@ -23,7 +24,7 @@ export class ExamController {
   @Post()
   @UseInterceptors(FileInterceptor('tutorialList'))
   public async createExam(
-    createExamDto: CreateExamDto,
+    @Body() createExamDto: CreateExamDto,
     @UploadedFile() tutorialList: Express.Multer.File,
   ) {
     return this.examService.createExam(createExamDto, tutorialList);

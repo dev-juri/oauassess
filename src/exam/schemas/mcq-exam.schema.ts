@@ -29,11 +29,8 @@ export class McqExam {
   @Prop({ enum: examType })
   examType: examType;
 
-  @Prop({ default: 0 })
-  sectionCount?: number;
-
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'McqQuestion' }] })
   questions?: McqQuestion[];
 }
 
-export const ExamSchema = SchemaFactory.createForClass(McqExam);
+export const McqExamSchema = SchemaFactory.createForClass(McqExam);
