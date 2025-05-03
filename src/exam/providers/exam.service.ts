@@ -1,9 +1,13 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { CreateExamDto } from '../dtos/create-mcq-exam.dto';
+import { StudentService } from 'src/student/providers/student.service';
 
 @Injectable()
 export class ExamService {
-  constructor() {}
+  constructor(
+    @Inject()
+    private readonly studentService: StudentService
+  ) {}
 
   public async createExam(
     createExamDto: CreateExamDto,
@@ -18,7 +22,11 @@ export class ExamService {
       }
 
       // Insert the students into the database
-
+      const students = await this.studentService.insertStudents(tutorialList);
+      
+      if (!students || students.length === 0) {
+        throw new BadRequestException('No students found in the tutorial list');
+      }
       // Create the exam in the database
     
   }

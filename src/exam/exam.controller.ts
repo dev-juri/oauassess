@@ -12,11 +12,14 @@ import { CreateExamDto } from './dtos/create-mcq-exam.dto';
 import { UpdateMcqExamParamDto } from './dtos/update-mcq-exam-param.dto';
 import { ExamService } from './providers/exam.service';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { Auth } from 'src/admin/auth/decorators/auth.decorator';
+import { AuthType } from 'src/admin/auth/enums/auth-type.enum';
 
 @Controller('exam')
 export class ExamController {
   constructor(private readonly examService: ExamService) {}
 
+  @Auth(AuthType.None)
   @Post()
   @UseInterceptors(FileInterceptor('tutorialList'))
   public async createExam(

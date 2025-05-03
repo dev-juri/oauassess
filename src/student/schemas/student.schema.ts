@@ -16,7 +16,7 @@ export type StudentDocument = HydratedDocument<Student>;
   },
 })
 export class Student {
-  @Prop({ required: true })
+  @Prop({ required: true, index: true })
   firstName: string;
 
   @Prop({ required: true })
