@@ -15,14 +15,14 @@ export type McqQuestionDocument = HydratedDocument<McqQuestion>;
   },
 })
 export class McqQuestion {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   question: string;
 
-  @Prop({ type: [String], default: undefined, required: true  })
+  @Prop({ type: [String], required: true  })
   options: string[];
 
   @Prop({ required: true })
   answer: string;
 }
 
-export const QuestionSchema = SchemaFactory.createForClass(McqQuestion);
+export const McqQuestionSchema = SchemaFactory.createForClass(McqQuestion);

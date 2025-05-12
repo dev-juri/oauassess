@@ -23,7 +23,6 @@ export function parseTemplate<T>(
     }
 
     const jsonData = XLSX.utils.sheet_to_json<T>(worksheet);
-    console.log('Parsed JSON data:', jsonData);
 
     return jsonData;
   } catch (error) {

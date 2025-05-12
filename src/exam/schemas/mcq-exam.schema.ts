@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
-import { McqQuestion } from './mcq-question.schema';
+import { McqQuestion, McqQuestionSchema } from './mcq-question.schema';
 import { examType } from '../enums/exam-type.enum';
 
 export type McqExamDocument = HydratedDocument<McqExam>;

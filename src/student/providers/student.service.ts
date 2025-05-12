@@ -33,10 +33,10 @@ export class StudentService {
       );
 
       const operations = students
-        .filter((student) => student.matricNo)
+        .filter((student) => student['Matric No'])
         .map((student) => ({
           updateOne: {
-            filter: { matricNo: student.matricNo },
+            filter: { matricNo: student['Matric No'] },
             update: { $set: student },
             upsert: true,
           },
@@ -45,7 +45,7 @@ export class StudentService {
       await this.studentModel.bulkWrite(operations, { session });
 
       // Fetch all affected student IDs
-      const affectedMatricNos = students.map((s) => s.matricNo);
+      const affectedMatricNos = students.map((s) => s['Matric No']);
       const affectedStudents = await this.studentModel
         .find({ matricNo: { $in: affectedMatricNos } }, '_id')
         .session(session);
@@ -61,7 +61,7 @@ export class StudentService {
         error.message || 'Failed to insert students',
       );
     } finally {
-      session.endSession();
+      await session.endSession();
     }
   }
 }

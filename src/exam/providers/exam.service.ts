@@ -1,36 +1,24 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateExamDto } from '../dtos/create-mcq-exam.dto';
-import { StudentService } from 'src/student/providers/student.service';
-import {
-  McqExam,
-  McqExamDocument,
-  McqExamSchema,
-} from '../schemas/mcq-exam.schema';
-import { Connection, Model } from 'mongoose';
-import { InjectConnection, InjectModel } from '@nestjs/mongoose';
-import { CreateExamAssignmentDto } from '../dtos/create-exam-assignment.dto';
-import { examType } from '../enums/exam-type.enum';
-import { examSchemaEnum } from '../enums/exam-schema.enum';
-import {
-  ExamAssignment,
-  ExamAssignmentDocument,
-} from '../schemas/exam-assigment.schema';
+import { CreateExamProvider } from './create-exam.provider';
+import { UpdateMcqExamProvider } from './update-mcq-exam.provider';
+import { Model } from 'mongoose';
+import { McqExam, McqExamDocument } from '../schemas/mcq-exam.schema';
+import { InjectModel } from '@nestjs/mongoose';
 import { successResponse } from 'src/utils/response-writer';
+import { McqQuestion } from '../schemas/mcq-question.schema';
 
 @Injectable()
 export class ExamService {
   constructor(
-    @Inject()
-    private readonly studentService: StudentService,
+    private readonly createExamProvider: CreateExamProvider,
+    private readonly updateMcqExamProvider: UpdateMcqExamProvider,
 
     @InjectModel(McqExam.name)
-    private readonly mcqExamSchema: Model<McqExamDocument>,
+    private readonly mcqExamModel: Model<McqExamDocument>,
 
-    @InjectModel(ExamAssignment.name)
-    private readonly examAssignmentSchema: Model<ExamAssignmentDocument>,
-
-    @InjectConnection()
-    private readonly connection: Connection,
+    @InjectModel(McqQuestion.name)
+    private readonly mcqQuestionModel: Model<McqQuestion>
   ) {}
 
   public async createExam(
@@ -45,61 +33,36 @@ export class ExamService {
       throw new BadRequestException('Only .xlsx files are allowed');
     }
 
-    const session = await this.connection.startSession();
-    session.startTransaction();
-
-    // Insert the students into the database
-    const students = await this.studentService.insertStudents(tutorialList);
-
-    if (!students || students.length === 0) {
-      throw new BadRequestException('No students found in the tutorial list');
-    }
-
-    try {
-      // Create the exam in the database
-      const exam = await this.mcqExamSchema.create(createExamDto);
-      await exam.save({ session });
-
-      const operations = students.map((student) => ({
-        updateOne: {
-          filter: { examId: exam._id, studentId: student },
-          update: {
-            $set: {
-              examId: exam._id.toString(),
-              studentId: student,
-              examSchema:
-                createExamDto.examType == examType.MCQ
-                  ? examSchemaEnum.McqExam
-                  : examSchemaEnum.TheoryExam,
-            } as CreateExamAssignmentDto,
-          },
-          upsert: true,
-        },
-      }));
-
-      await this.examAssignmentSchema.bulkWrite(operations, { session });
-      await session.commitTransaction();
-
-      return successResponse({
-        message: 'Exam created successfully',
-        data: { exam },
-      });
-    } catch (error) {
-      console.error( error);
-      session.abortTransaction();
-      throw new BadRequestException('Error creating exam');
-    } finally {
-      session.endSession();
-    }
+    return this.createExamProvider.createExam(createExamDto, tutorialList)
   }
 
-  public async updateMcqExam(
-    examId: string,
-    tutorialList: Express.Multer.File,
-  ) {
-    // Add Exam questions
-    // Assign the exam to the students
+  public async updateMcqExam(examId: string, mcqTemplate: Express.Multer.File) {
+    if (
+      !mcqTemplate ||
+      mcqTemplate.mimetype !==
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    ) {
+      throw new BadRequestException('Only .xlsx files are allowed');
+    }
+
+    return this.updateMcqExamProvider.updateMcqExam(examId, mcqTemplate)
   }
+
+  public async deleteMcqExam(examId: string) {
+  const exam = await this.mcqExamModel.findById(examId);
+
+  if (!exam) {
+    throw new NotFoundException('Exam not found');
+  }
+
+  if (exam.questions?.length) {
+    await this.mcqQuestionModel.deleteMany({ _id: { $in: exam.questions } });
+  }
+
+  await this.mcqExamModel.findByIdAndDelete(examId);
+
+  return { success: true, message: 'Exam and related questions deleted' };
+}
 
   public async updateOeExam(examId: string, templates: Express.Multer.File[]) {
     // Add Exam questions
