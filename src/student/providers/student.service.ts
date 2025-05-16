@@ -34,13 +34,22 @@ export class StudentService {
 
       const operations = students
         .filter((student) => student['Matric No'])
-        .map((student) => ({
-          updateOne: {
-            filter: { matricNo: student['Matric No'] },
-            update: { $set: student },
-            upsert: true,
-          },
-        }));
+        .map((student) => {
+          const mappedStudent = {
+            matricNo: student['Matric No'],
+            fullName: student['FullName'],
+          };
+
+          return {
+            updateOne: {
+              filter: { matricNo: mappedStudent.matricNo },
+              update: { $set: mappedStudent },
+              upsert: true,
+            },
+          };
+        });
+
+      await this.studentModel.bulkWrite(operations, { session });
 
       await this.studentModel.bulkWrite(operations, { session });
 
