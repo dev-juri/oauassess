@@ -130,16 +130,22 @@
                             <a href="#ExamAssignmentSchema" title="src/exam/schemas/exam-assigment.schema.ts" ><b>ExamAssignmentSchema</b>&nbsp;&nbsp;&nbsp;(src/.../exam-assigment.schema.ts)</a>
                         </li>
                         <li>
+                            <a href="#ExamSchema" title="src/exam/schemas/exam.schema.ts" ><b>ExamSchema</b>&nbsp;&nbsp;&nbsp;(src/.../exam.schema.ts)</a>
+                        </li>
+                        <li>
                             <a href="#iMcqQuestionExpectedKeys" title="src/utils/interfaces/mcq-question.interface.ts" ><b>iMcqQuestionExpectedKeys</b>&nbsp;&nbsp;&nbsp;(src/.../mcq-question.interface.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#iOeExpectedKeys" title="src/utils/interfaces/oe-question.interface.ts" ><b>iOeExpectedKeys</b>&nbsp;&nbsp;&nbsp;(src/.../oe-question.interface.ts)</a>
                         </li>
                         <li>
                             <a href="#iStudentExpectedKeys" title="src/utils/interfaces/student.interface.ts" ><b>iStudentExpectedKeys</b>&nbsp;&nbsp;&nbsp;(src/.../student.interface.ts)</a>
                         </li>
                         <li>
-                            <a href="#McqExamSchema" title="src/exam/schemas/mcq-exam.schema.ts" ><b>McqExamSchema</b>&nbsp;&nbsp;&nbsp;(src/.../mcq-exam.schema.ts)</a>
+                            <a href="#McqQuestionSchema" title="src/exam/schemas/mcq/mcq-question.schema.ts" ><b>McqQuestionSchema</b>&nbsp;&nbsp;&nbsp;(src/.../mcq-question.schema.ts)</a>
                         </li>
                         <li>
-                            <a href="#McqQuestionSchema" title="src/exam/schemas/mcq-question.schema.ts" ><b>McqQuestionSchema</b>&nbsp;&nbsp;&nbsp;(src/.../mcq-question.schema.ts)</a>
+                            <a href="#OeQuestionSchema" title="src/exam/schemas/oe/oe-question.schema.ts" ><b>OeQuestionSchema</b>&nbsp;&nbsp;&nbsp;(src/.../oe-question.schema.ts)</a>
                         </li>
                         <li>
                             <a href="#REQUEST_USER_KEY" title="src/admin/auth/constants/auth.constants.ts" ><b>REQUEST_USER_KEY</b>&nbsp;&nbsp;&nbsp;(src/.../auth.constants.ts)</a>
@@ -331,6 +337,29 @@
         </tbody>
     </table>
 </section>
+    <h3>src/exam/schemas/exam.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ExamSchema"></a>
+                    <span class="name">
+                        <span ><b>ExamSchema</b></span>
+                        <a href="#ExamSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Exam)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
     <h3>src/utils/interfaces/mcq-question.interface.ts</h3>
     <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
@@ -360,6 +389,35 @@
     &quot;D&quot;,
     &quot;Correct Answer&quot;
 ]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/utils/interfaces/oe-question.interface.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="iOeExpectedKeys"></a>
+                    <span class="name">
+                        <span ><b>iOeExpectedKeys</b></span>
+                        <a href="#iOeExpectedKeys"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&quot;Question&quot;]</code>
                     </td>
                 </tr>
 
@@ -399,30 +457,7 @@
         </tbody>
     </table>
 </section>
-    <h3>src/exam/schemas/mcq-exam.schema.ts</h3>
-    <section data-compodoc="block-properties">
-    <h3></h3>    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="McqExamSchema"></a>
-                    <span class="name">
-                        <span ><b>McqExamSchema</b></span>
-                        <a href="#McqExamSchema"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>SchemaFactory.createForClass(McqExam)</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-</section>
-    <h3>src/exam/schemas/mcq-question.schema.ts</h3>
+    <h3>src/exam/schemas/mcq/mcq-question.schema.ts</h3>
     <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>
@@ -438,6 +473,29 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>SchemaFactory.createForClass(McqQuestion)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/exam/schemas/oe/oe-question.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="OeQuestionSchema"></a>
+                    <span class="name">
+                        <span ><b>OeQuestionSchema</b></span>
+                        <a href="#OeQuestionSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(OeQuestion)</code>
                     </td>
                 </tr>
 

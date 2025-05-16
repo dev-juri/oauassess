@@ -95,7 +95,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Classes</li>
-  <li class="breadcrumb-item" >ExamAssignment</li>
+  <li class="breadcrumb-item" >Exam</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -119,7 +119,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/exam/schemas/exam-assigment.schema.ts</code>
+            <code>src/exam/schemas/exam.schema.ts</code>
         </p>
 
 
@@ -141,21 +141,28 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier"></span>
+                                <a href="#courseCode" >courseCode</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#courseName" >courseName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#duration" >duration</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#examType" >examType</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#questionCount" >questionCount</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier">Optional</span>
-                                <a href="#endTime" >endTime</a>
-                            </li>
-                            <li>
-                                    <span class="modifier"></span>
-                                <a href="#examId" >examId</a>
-                            </li>
-                            <li>
-                                    <span class="modifier"></span>
-                                    <span class="modifier">Optional</span>
-                                <a href="#startTime" >startTime</a>
-                            </li>
-                            <li>
-                                    <span class="modifier"></span>
-                                <a href="#studentId" >studentId</a>
+                                <a href="#questions" >questions</a>
                             </li>
                         </ul>
                     </td>
@@ -180,18 +187,198 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="endTime"></a>
+                    <a name="courseCode"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>courseCode</b></span>
+                        <a href="#courseCode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({required: true})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/exam/schemas/exam.schema.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="courseName"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>courseName</b></span>
+                        <a href="#courseName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({required: true})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/exam/schemas/exam.schema.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="duration"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>duration</b></span>
+                        <a href="#duration"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({required: true})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/exam/schemas/exam.schema.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="examType"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>examType</b></span>
+                        <a href="#examType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#examType" target="_self" >examType</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({enum: examType})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/exam/schemas/exam.schema.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="questionCount"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>questionCount</b></span>
+                        <a href="#questionCount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({required: true})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/exam/schemas/exam.schema.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="questions"></a>
                     <span class="name">
                             <span class="modifier"></span>
                             <span class="modifier">Optional</span>
-                        <span ><b>endTime</b></span>
-                        <a href="#endTime"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>questions</b></span>
+                        <a href="#questions"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                        <i>Type : </i>    <code>mongoose.Types.ObjectId[]</code>
 
                     </td>
                 </tr>
@@ -200,122 +387,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @Prop()<br />
+                            @Prop({type: undefined})<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/exam/schemas/exam-assigment.schema.ts:32</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="examId"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                        <span ><b>examId</b></span>
-                        <a href="#examId"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../classes/Exam.html" target="_self" >Exam</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Prop({type: undefined, refPath: &#x27;Exam&#x27;, index: true})<br />
-                        </code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/exam/schemas/exam-assigment.schema.ts:23</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="startTime"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier">Optional</span>
-                        <span ><b>startTime</b></span>
-                        <a href="#startTime"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Prop()<br />
-                        </code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/exam/schemas/exam-assigment.schema.ts:29</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="studentId"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                        <span ><b>studentId</b></span>
-                        <a href="#studentId"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../classes/Student.html" target="_self" >Student</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Prop({type: undefined, ref: &#x27;Student&#x27;, index: true})<br />
-                        </code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/exam/schemas/exam-assigment.schema.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/exam/schemas/exam.schema.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -336,14 +414,12 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
 import mongoose, { HydratedDocument } from &#x27;mongoose&#x27;;
-import { Student } from &#x27;src/student/schemas/student.schema&#x27;;
-import { examSchemaEnum } from &#x27;../enums/exam-schema.enum&#x27;;
-import { Exam } from &#x27;./exam.schema&#x27;;
+import { examType } from &#x27;../enums/exam-type.enum&#x27;;
 
-export type ExamAssignmentDocument &#x3D; HydratedDocument&lt;ExamAssignment&gt;;
+export type ExamDocument &#x3D; HydratedDocument&lt;Exam&gt;;
 
 @Schema({
-  timestamps: false,
+  timestamps: true,
   toJSON: {
     virtuals: true,
     transform: (doc, ret) &#x3D;&gt; {
@@ -353,22 +429,29 @@ export type ExamAssignmentDocument &#x3D; HydratedDocument&lt;ExamAssignment&gt;
     },
   },
 })
-export class ExamAssignment {
+export class Exam {
+  @Prop({ required: true })
+  courseName: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, refPath: &#x27;Exam&#x27;, index: true })
-  examId: Exam;
+  @Prop({ required: true })
+  courseCode: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: &#x27;Student&#x27;, index: true })
-  studentId: Student;
+  @Prop({ required: true })
+  duration: number;
 
-  @Prop()
-  startTime?: Date;
+  @Prop({ enum: examType })
+  examType: examType;
 
-  @Prop()
-  endTime?: Date;
+  @Prop({ required: true })
+  questionCount: number;
+
+  @Prop({
+    type: [{ type: mongoose.Schema.Types.ObjectId, refPath: &#x27;examType&#x27; }],
+  })
+  questions?: mongoose.Types.ObjectId[];
 }
 
-export const ExamAssignmentSchema &#x3D; SchemaFactory.createForClass(ExamAssignment)
+export const ExamSchema &#x3D; SchemaFactory.createForClass(Exam);
 </code></pre>
     </div>
 </div>
@@ -407,7 +490,7 @@ export const ExamAssignmentSchema &#x3D; SchemaFactory.createForClass(ExamAssign
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'ExamAssignment.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'Exam.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

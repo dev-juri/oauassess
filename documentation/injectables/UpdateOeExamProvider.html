@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >UpdateMcqExamProvider</li>
+  <li class="breadcrumb-item" >UpdateOeExamProvider</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,7 +115,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/exam/providers/update-mcq-exam.provider.ts</code>
+            <code>src/exam/providers/update-oe-exam.provider.ts</code>
         </p>
 
 
@@ -136,13 +136,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#prepareListForBulkWrite" >prepareListForBulkWrite</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#updateMcqExam" >updateMcqExam</a>
+                                <a href="#updateOeExam" >updateOeExam</a>
                             </li>
                         </ul>
                     </td>
@@ -162,12 +158,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(mcqQuestionModel: <a href="../undefineds/McqQuestionDocument.html" target="_self">Model&lt;McqQuestionDocument&gt;</a>, examSchema: <a href="../classes/Exam.html" target="_self">Model&lt;ExamDocument&gt;</a>, connection: Connection)</code>
+<code>constructor(oeQuestionModel: <a href="../classes/OeQuestion.html" target="_self">Model&lt;OeQuestionDocument&gt;</a>, examSchema: <a href="../classes/Exam.html" target="_self">Model&lt;ExamDocument&gt;</a>, connection: Connection)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/exam/providers/update-mcq-exam.provider.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/exam/providers/update-oe-exam.provider.ts:22</a></div>
                             </td>
                         </tr>
 
@@ -185,10 +181,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>mcqQuestionModel</td>
+                                                        <td>oeQuestionModel</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../miscellaneous/typealiases.html#McqQuestionDocument" target="_self" >Model&lt;McqQuestionDocument&gt;</a></code>
+                                                                        <code><a href="../classes/OeQuestion.html" target="_self" >Model&lt;OeQuestionDocument&gt;</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -238,96 +234,27 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="prepareListForBulkWrite"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>prepareListForBulkWrite</b></span>
-                        <a href="#prepareListForBulkWrite"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>prepareListForBulkWrite(mcqList: <a href="../interfaces/IMcqQuestion.html" target="_self">IMcqQuestion[]</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="84"
-                                    class="link-to-prism">src/exam/providers/update-mcq-exam.provider.ts:84</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>mcqList</td>
-                                            <td>
-                                                            <code><a href="../interfaces/IMcqQuestion.html" target="_self" >IMcqQuestion[]</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="updateMcqExam"></a>
+                    <a name="updateOeExam"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>updateMcqExam</b></span>
-                        <a href="#updateMcqExam"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>updateOeExam</b></span>
+                        <a href="#updateOeExam"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateMcqExam(examId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mcqTemplate: Express.Multer.File)</code>
+                    <code>updateOeExam(examId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, markingGuide: Express.Multer.File, oeTemplate: Express.Multer.File)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/exam/providers/update-mcq-exam.provider.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">src/exam/providers/update-oe-exam.provider.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -360,7 +287,19 @@
 
                                         </tr>
                                         <tr>
-                                                <td>mcqTemplate</td>
+                                                <td>markingGuide</td>
+                                            <td>
+                                                        <code>Express.Multer.File</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>oeTemplate</td>
                                             <td>
                                                         <code>Express.Multer.File</code>
                                             </td>
@@ -394,29 +333,28 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
   BadRequestException,
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
 } from &#x27;@nestjs/common&#x27;;
-import {
-  IMcqQuestion,
-  iMcqQuestionExpectedKeys,
-} from &#x27;src/utils/interfaces/mcq-question.interface&#x27;;
-import { parseTemplate } from &#x27;src/utils/template-parser&#x27;;
-import { Connection, Model } from &#x27;mongoose&#x27;;
+import { Exam, ExamDocument } from &#x27;../schemas/exam.schema&#x27;;
 import { InjectConnection, InjectModel } from &#x27;@nestjs/mongoose&#x27;;
 import {
-  McqQuestion,
-  McqQuestionDocument,
-} from &#x27;../schemas/mcq/mcq-question.schema&#x27;;
-import { Exam, ExamDocument } from &#x27;../schemas/exam.schema&#x27;;
+  OeQuestion,
+  OeQuestionDocument,
+} from &#x27;../schemas/oe/oe-question.schema&#x27;;
+import { Connection, Model } from &#x27;mongoose&#x27;;
+import { parseTemplate } from &#x27;src/utils/template-parser&#x27;;
+import {
+  iOeExpectedKeys,
+  IOeQuestion,
+} from &#x27;src/utils/interfaces/oe-question.interface&#x27;;
 import { successResponse } from &#x27;src/utils/response-writer&#x27;;
 import { examType } from &#x27;../enums/exam-type.enum&#x27;;
 
 @Injectable()
-export class UpdateMcqExamProvider {
+export class UpdateOeExamProvider {
   constructor(
-    @InjectModel(McqQuestion.name)
-    private readonly mcqQuestionModel: Model&lt;McqQuestionDocument&gt;,
+    @InjectModel(OeQuestion.name)
+    private readonly oeQuestionModel: Model&lt;OeQuestionDocument&gt;,
 
     @InjectModel(Exam.name)
     private readonly examSchema: Model&lt;ExamDocument&gt;,
@@ -425,45 +363,50 @@ export class UpdateMcqExamProvider {
     private readonly connection: Connection,
   ) {}
 
-  public async updateMcqExam(examId: string, mcqTemplate: Express.Multer.File) {
-
+  public async updateOeExam(
+    examId: string,
+    markingGuide: Express.Multer.File,
+    oeTemplate: Express.Multer.File,
+  ) {
     const exam &#x3D; await this.examSchema.findById(examId);
 
     if (!exam) {
       throw new NotFoundException(&#x27;Exam not found&#x27;);
     }
 
-    if (exam.examType !&#x3D;&#x3D; examType.MCQ) {
-      throw new BadRequestException(&#x27;Exam mode is not MCQ&#x27;)
+    if (exam.examType !&#x3D;&#x3D; examType.OE) {
+      throw new BadRequestException(&#x27;Exam mode is not OE&#x27;);
     }
 
-    const mcqList &#x3D; parseTemplate&lt;IMcqQuestion&gt;(
-      mcqTemplate,
-      iMcqQuestionExpectedKeys,
-    );
+    const oeqList &#x3D; parseTemplate&lt;IOeQuestion&gt;(oeTemplate, iOeExpectedKeys);
 
-    if (mcqList.length &#x3D;&#x3D;&#x3D; 0) {
-      throw new BadRequestException(&#x27;Questions template is empty&#x27;);
+    if (oeqList.length &#x3D;&#x3D;&#x3D; 0) {
+      throw new BadRequestException(&#x27;Question template is empty&#x27;);
     }
 
     const session &#x3D; await this.connection.startSession();
     session.startTransaction();
 
     try {
-      const operations &#x3D; this.prepareListForBulkWrite(mcqList);
+      const operations &#x3D; oeqList.map((oeq) &#x3D;&gt; ({
+        insertOne: { document: { question: oeq.Question } },
+      }));
 
-      let result &#x3D; await this.mcqQuestionModel.bulkWrite(operations, {
+      let result &#x3D; await this.oeQuestionModel.bulkWrite(operations, {
         session,
       });
 
-      const insertedQuestionIds &#x3D; Object.values(result.upsertedIds || {});
+      const insertedQuestionIds &#x3D; Object.values(result.insertedIds || {});
+      console.log(insertedQuestionIds)
 
-      exam.questions.push(...insertedQuestionIds)
-      await exam.save({session})
+      // TODO: Create Assistant and update exam with assistantId
+
+      exam.questions.push(...insertedQuestionIds);
+      await exam.save({ session });
 
       await session.commitTransaction();
 
-      return successResponse({ message: &#x27;Exam updated successfully.&#x27; });
+      return successResponse({ message: &#x27;Exam updated successfully&#x27; });
     } catch (error) {
       await session.abortTransaction();
       throw new BadRequestException(
@@ -472,23 +415,6 @@ export class UpdateMcqExamProvider {
     } finally {
       await session.endSession();
     }
-  }
-
-  private prepareListForBulkWrite(mcqList: IMcqQuestion[]) {
-    const collapseMcqList &#x3D; mcqList.map((mcq) &#x3D;&gt; ({
-      question: mcq.Question,
-      options: [mcq.A, mcq.B, mcq.C, mcq.D],
-      answer: mcq[&#x27;Correct Answer&#x27;],
-    }));
-
-    const operations &#x3D; collapseMcqList.map((item) &#x3D;&gt; ({
-      updateOne: {
-        filter: { question: item.question },
-        update: { $set: item },
-        upsert: true,
-      },
-    }));
-    return operations;
   }
 }
 </code></pre>
@@ -534,7 +460,7 @@ export class UpdateMcqExamProvider {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'UpdateMcqExamProvider.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'UpdateOeExamProvider.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

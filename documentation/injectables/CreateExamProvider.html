@@ -158,7 +158,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(connection: Connection, studentService: <a href="../injectables/StudentService.html" target="_self">StudentService</a>, mcqExamModel: <a href="../undefineds/McqExamDocument.html" target="_self">Model&lt;McqExamDocument&gt;</a>, examAssignmentModel: <a href="../classes/ExamAssignment.html" target="_self">Model&lt;ExamAssignmentDocument&gt;</a>)</code>
+<code>constructor(connection: Connection, studentService: <a href="../injectables/StudentService.html" target="_self">StudentService</a>, mcqExamModel: <a href="../classes/Exam.html" target="_self">Model&lt;ExamDocument&gt;</a>, examAssignmentModel: <a href="../undefineds/ExamAssignmentDocument.html" target="_self">Model&lt;ExamAssignmentDocument&gt;</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -208,7 +208,7 @@
                                                         <td>mcqExamModel</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../miscellaneous/typealiases.html#McqExamDocument" target="_self" >Model&lt;McqExamDocument&gt;</a></code>
+                                                                        <code><a href="../classes/Exam.html" target="_self" >Model&lt;ExamDocument&gt;</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -220,7 +220,7 @@
                                                         <td>examAssignmentModel</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../classes/ExamAssignment.html" target="_self" >Model&lt;ExamAssignmentDocument&gt;</a></code>
+                                                                        <code><a href="../miscellaneous/typealiases.html#ExamAssignmentDocument" target="_self" >Model&lt;ExamAssignmentDocument&gt;</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -332,7 +332,7 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { BadRequestException, Inject, Injectable } from &#x27;@nestjs/common&#x27;;
 import { CreateExamDto } from &#x27;../dtos/create-mcq-exam.dto&#x27;;
-import { McqExam, McqExamDocument } from &#x27;../schemas/mcq-exam.schema&#x27;;
+import { Exam, ExamDocument } from &#x27;../schemas/exam.schema&#x27;;
 import { StudentService } from &#x27;src/student/providers/student.service&#x27;;
 import { Connection, Model } from &#x27;mongoose&#x27;;
 import { InjectConnection, InjectModel } from &#x27;@nestjs/mongoose&#x27;;
@@ -354,8 +354,8 @@ export class CreateExamProvider {
     @Inject()
     private readonly studentService: StudentService,
 
-    @InjectModel(McqExam.name)
-    private readonly mcqExamModel: Model&lt;McqExamDocument&gt;,
+    @InjectModel(Exam.name)
+    private readonly mcqExamModel: Model&lt;ExamDocument&gt;,
 
     @InjectModel(ExamAssignment.name)
     private readonly examAssignmentModel: Model&lt;ExamAssignmentDocument&gt;,
