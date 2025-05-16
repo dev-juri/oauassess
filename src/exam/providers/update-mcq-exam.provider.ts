@@ -14,9 +14,10 @@ import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import {
   McqQuestion,
   McqQuestionDocument,
-} from '../schemas/mcq-question.schema';
-import { McqExam, McqExamDocument } from '../schemas/mcq-exam.schema';
+} from '../schemas/mcq/mcq-question.schema';
+import { Exam, ExamDocument } from '../schemas/exam.schema';
 import { successResponse } from 'src/utils/response-writer';
+import { examType } from '../enums/exam-type.enum';
 
 @Injectable()
 export class UpdateMcqExamProvider {
@@ -24,8 +25,8 @@ export class UpdateMcqExamProvider {
     @InjectModel(McqQuestion.name)
     private readonly mcqQuestionModel: Model<McqQuestionDocument>,
 
-    @InjectModel(McqExam.name)
-    private readonly mcqExamSchema: Model<McqExamDocument>,
+    @InjectModel(Exam.name)
+    private readonly examSchema: Model<ExamDocument>,
 
     @InjectConnection()
     private readonly connection: Connection,
@@ -33,10 +34,14 @@ export class UpdateMcqExamProvider {
 
   public async updateMcqExam(examId: string, mcqTemplate: Express.Multer.File) {
 
-    const exam = await this.mcqExamSchema.findById(examId);
+    const exam = await this.examSchema.findById(examId);
 
     if (!exam) {
       throw new NotFoundException('Exam not found');
+    }
+
+    if (exam.examType !== examType.MCQ) {
+      throw new BadRequestException('Exam mode is not MCQ')
     }
 
     const mcqList = parseTemplate<IMcqQuestion>(

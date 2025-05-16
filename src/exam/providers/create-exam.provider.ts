@@ -1,6 +1,6 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { CreateExamDto } from '../dtos/create-mcq-exam.dto';
-import { McqExam, McqExamDocument } from '../schemas/mcq-exam.schema';
+import { Exam, ExamDocument } from '../schemas/exam.schema';
 import { StudentService } from 'src/student/providers/student.service';
 import { Connection, Model } from 'mongoose';
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
@@ -22,8 +22,8 @@ export class CreateExamProvider {
     @Inject()
     private readonly studentService: StudentService,
 
-    @InjectModel(McqExam.name)
-    private readonly mcqExamModel: Model<McqExamDocument>,
+    @InjectModel(Exam.name)
+    private readonly mcqExamModel: Model<ExamDocument>,
 
     @InjectModel(ExamAssignment.name)
     private readonly examAssignmentModel: Model<ExamAssignmentDocument>,

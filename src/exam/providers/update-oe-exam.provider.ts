@@ -1,0 +1,87 @@
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { Exam, ExamDocument } from '../schemas/exam.schema';
+import { InjectConnection, InjectModel } from '@nestjs/mongoose';
+import {
+  OeQuestion,
+  OeQuestionDocument,
+} from '../schemas/oe/oe-question.schema';
+import { Connection, Model } from 'mongoose';
+import { parseTemplate } from 'src/utils/template-parser';
+import {
+  iOeExpectedKeys,
+  IOeQuestion,
+} from 'src/utils/interfaces/oe-question.interface';
+import { successResponse } from 'src/utils/response-writer';
+import { examType } from '../enums/exam-type.enum';
+
+@Injectable()
+export class UpdateOeExamProvider {
+  constructor(
+    @InjectModel(OeQuestion.name)
+    private readonly oeQuestionModel: Model<OeQuestionDocument>,
+
+    @InjectModel(Exam.name)
+    private readonly examSchema: Model<ExamDocument>,
+
+    @InjectConnection()
+    private readonly connection: Connection,
+  ) {}
+
+  public async updateOeExam(
+    examId: string,
+    markingGuide: Express.Multer.File,
+    oeTemplate: Express.Multer.File,
+  ) {
+    const exam = await this.examSchema.findById(examId);
+
+    if (!exam) {
+      throw new NotFoundException('Exam not found');
+    }
+
+    if (exam.examType !== examType.OE) {
+      throw new BadRequestException('Exam mode is not OE');
+    }
+
+    const oeqList = parseTemplate<IOeQuestion>(oeTemplate, iOeExpectedKeys);
+
+    if (oeqList.length === 0) {
+      throw new BadRequestException('Question template is empty');
+    }
+
+    const session = await this.connection.startSession();
+    session.startTransaction();
+
+    try {
+      const operations = oeqList.map((oeq) => ({
+        insertOne: { document: { question: oeq.Question } },
+      }));
+
+      let result = await this.oeQuestionModel.bulkWrite(operations, {
+        session,
+      });
+
+      const insertedQuestionIds = Object.values(result.insertedIds || {});
+      console.log(insertedQuestionIds)
+
+      // TODO: Create Assistant and update exam with assistantId
+
+      exam.questions.push(...insertedQuestionIds);
+      await exam.save({ session });
+
+      await session.commitTransaction();
+
+      return successResponse({ message: 'Exam updated successfully' });
+    } catch (error) {
+      await session.abortTransaction();
+      throw new BadRequestException(
+        error.message || 'Failed to save exam questions',
+      );
+    } finally {
+      await session.endSession();
+    }
+  }
+}

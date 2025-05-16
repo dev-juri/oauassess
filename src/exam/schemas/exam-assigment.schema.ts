@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Student } from 'src/student/schemas/student.schema';
 import { examSchemaEnum } from '../enums/exam-schema.enum';
+import { Exam } from './exam.schema';
 
 export type ExamAssignmentDocument = HydratedDocument<ExamAssignment>;
 
@@ -18,11 +19,8 @@ export type ExamAssignmentDocument = HydratedDocument<ExamAssignment>;
 })
 export class ExamAssignment {
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, refPath: 'examSchema', index: true })
-  examId: mongoose.Types.ObjectId;
-
-  @Prop({ type: String, enum: examSchemaEnum, required: true })
-  examSchema: examSchemaEnum;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, refPath: 'Exam', index: true })
+  examId: Exam;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Student', index: true })
   studentId: Student;

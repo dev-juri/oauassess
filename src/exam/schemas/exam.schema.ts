@@ -1,9 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
-import { McqQuestion, McqQuestionSchema } from './mcq-question.schema';
 import { examType } from '../enums/exam-type.enum';
 
-export type McqExamDocument = HydratedDocument<McqExam>;
+export type ExamDocument = HydratedDocument<Exam>;
 
 @Schema({
   timestamps: true,
@@ -16,7 +15,7 @@ export type McqExamDocument = HydratedDocument<McqExam>;
     },
   },
 })
-export class McqExam {
+export class Exam {
   @Prop({ required: true })
   courseName: string;
 
@@ -29,8 +28,13 @@ export class McqExam {
   @Prop({ enum: examType })
   examType: examType;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'McqQuestion' }] })
-  questions?: McqQuestion[];
+  @Prop({ required: true })
+  questionCount: number;
+
+  @Prop({
+    type: [{ type: mongoose.Schema.Types.ObjectId, refPath: 'examType' }],
+  })
+  questions?: mongoose.Types.ObjectId[];
 }
 
-export const McqExamSchema = SchemaFactory.createForClass(McqExam);
+export const ExamSchema = SchemaFactory.createForClass(Exam);
