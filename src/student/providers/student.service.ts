@@ -1,76 +1,37 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { InjectConnection, InjectModel } from '@nestjs/mongoose';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 import { Student, StudentDocument } from '../schemas/student.schema';
-import { Connection, Model } from 'mongoose';
-import { parseTemplate } from 'src/utils/template-parser';
-import {
-  iStudentExpectedKeys,
-  IStudent,
-} from 'src/utils/interfaces/student.interface';
+import { Model } from 'mongoose';
+import { InsertStudentProvider } from './insert-student.provider';
+import { LoginStudentDto } from '../dtos/login-student.dto';
+import { successResponse } from 'src/utils/response-writer';
 
 @Injectable()
 export class StudentService {
   constructor(
     @InjectModel(Student.name)
     private readonly studentModel: Model<StudentDocument>,
-    @InjectConnection()
-    private readonly connection: Connection,
-  ) {}
+
+    private readonly insertStudentProvider: InsertStudentProvider
+  ) { }
+
+  public async loginStudent(loginStudentDto: LoginStudentDto) {
+
+    let student = await this.studentModel.findOne({ matricNo: loginStudentDto.matricNo })
+    if (!student) {
+      throw new NotFoundException('Student with matric number does not exist.')
+    }
+
+    if (student.fullName.split(' ')[0].toLowerCase() != loginStudentDto.password.toLowerCase()) {
+      throw new UnauthorizedException('Incorrect password')
+    }
+
+    return successResponse({ message: 'Login Successful', data: student })
+  }
 
   public async insertStudents(
     tutorialList: Express.Multer.File,
   ): Promise<string[] | null> {
-    let insertedStudentIds: string[] = [];
-
-    const session = await this.connection.startSession();
-    session.startTransaction();
-
-    try {
-      // Extract student data from the tutorial list template
-      const students = parseTemplate<IStudent>(
-        tutorialList,
-        iStudentExpectedKeys,
-      );
-
-      const operations = students
-        .filter((student) => student['Matric No'])
-        .map((student) => {
-          const mappedStudent = {
-            matricNo: student['Matric No'],
-            fullName: student['FullName'],
-          };
-
-          return {
-            updateOne: {
-              filter: { matricNo: mappedStudent.matricNo },
-              update: { $set: mappedStudent },
-              upsert: true,
-            },
-          };
-        });
-
-      await this.studentModel.bulkWrite(operations, { session });
-
-      await this.studentModel.bulkWrite(operations, { session });
-
-      // Fetch all affected student IDs
-      const affectedMatricNos = students.map((s) => s['Matric No']);
-      const affectedStudents = await this.studentModel
-        .find({ matricNo: { $in: affectedMatricNos } }, '_id')
-        .session(session);
-
-      insertedStudentIds = affectedStudents.map((s) => s._id.toString());
-
-      await session.commitTransaction();
-
-      return insertedStudentIds;
-    } catch (error) {
-      await session.abortTransaction();
-      throw new InternalServerErrorException(
-        error.message || 'Failed to insert students',
-      );
-    } finally {
-      await session.endSession();
-    }
+    return this.insertStudentProvider.insertStudents(tutorialList)
   }
 }

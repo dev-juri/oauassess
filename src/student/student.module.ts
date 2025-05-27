@@ -3,6 +3,7 @@ import { StudentController } from './student.controller';
 import { StudentService } from './providers/student.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Student, StudentSchema } from './schemas/student.schema';
+import { InsertStudentProvider } from './providers/insert-student.provider';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { Student, StudentSchema } from './schemas/student.schema';
     ]),
   ],
   controllers: [StudentController],
-  providers: [StudentService],
+  providers: [StudentService, InsertStudentProvider],
   exports: [StudentService]
 })
 export class StudentModule {}
