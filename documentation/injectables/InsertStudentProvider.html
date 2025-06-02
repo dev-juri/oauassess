@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >StudentService</li>
+  <li class="breadcrumb-item" >InsertStudentProvider</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,7 +115,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/student/providers/student.service.ts</code>
+            <code>src/student/providers/insert-student.provider.ts</code>
         </p>
 
 
@@ -140,11 +140,6 @@
                                     <span class="modifier">Async</span>
                                 <a href="#insertStudents" >insertStudents</a>
                             </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#loginStudent" >loginStudent</a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -163,12 +158,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(studentModel: <a href="../classes/Student.html" target="_self">Model&lt;StudentDocument&gt;</a>, insertStudentProvider: <a href="../injectables/InsertStudentProvider.html" target="_self">InsertStudentProvider</a>)</code>
+<code>constructor(studentModel: <a href="../classes/Student.html" target="_self">Model&lt;StudentDocument&gt;</a>, connection: Connection)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/student/providers/student.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/student/providers/insert-student.provider.ts:9</a></div>
                             </td>
                         </tr>
 
@@ -198,10 +193,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>insertStudentProvider</td>
+                                                        <td>connection</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/InsertStudentProvider.html" target="_self" >InsertStudentProvider</a></code>
+                                                                    <code>Connection</code>
                                                         </td>
                                                   
                                                     <td>
@@ -246,8 +241,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">src/student/providers/student.service.ts:32</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="15"
+                                    class="link-to-prism">src/student/providers/insert-student.provider.ts:15</a></div>
                         </td>
                     </tr>
 
@@ -293,118 +288,82 @@
             </tr>
         </tbody>
     </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="loginStudent"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>loginStudent</b></span>
-                        <a href="#loginStudent"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>loginStudent(loginStudentDto: <a href="../classes/LoginStudentDto.html" target="_self">LoginStudentDto</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="18"
-                                    class="link-to-prism">src/student/providers/student.service.ts:18</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>loginStudentDto</td>
-                                            <td>
-                                                            <code><a href="../classes/LoginStudentDto.html" target="_self" >LoginStudentDto</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, NotFoundException, UnauthorizedException } from &#x27;@nestjs/common&#x27;;
-import { InjectModel } from &#x27;@nestjs/mongoose&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, InternalServerErrorException } from &#x27;@nestjs/common&#x27;;
+import { InjectConnection, InjectModel } from &#x27;@nestjs/mongoose&#x27;;
 import { Student, StudentDocument } from &#x27;../schemas/student.schema&#x27;;
-import { Model } from &#x27;mongoose&#x27;;
-import { InsertStudentProvider } from &#x27;./insert-student.provider&#x27;;
-import { LoginStudentDto } from &#x27;../dtos/login-student.dto&#x27;;
-import { successResponse } from &#x27;src/utils/response-writer&#x27;;
+import { Connection, Model } from &#x27;mongoose&#x27;;
+import { parseTemplate } from &#x27;src/utils/template-parser&#x27;;
+import { IStudent, iStudentExpectedKeys } from &#x27;src/utils/interfaces/student.interface&#x27;;
 
 @Injectable()
-export class StudentService {
-  constructor(
-    @InjectModel(Student.name)
+export class InsertStudentProvider {
+    constructor(@InjectModel(Student.name)
     private readonly studentModel: Model&lt;StudentDocument&gt;,
+        @InjectConnection()
+        private readonly connection: Connection,) { }
 
-    private readonly insertStudentProvider: InsertStudentProvider
-  ) { }
+    public async insertStudents(
+        tutorialList: Express.Multer.File,
+    ): Promise&lt;string[] | null&gt; {
+        let insertedStudentIds: string[] &#x3D; [];
 
-  public async loginStudent(loginStudentDto: LoginStudentDto) {
+        const session &#x3D; await this.connection.startSession();
+        session.startTransaction();
 
-    let student &#x3D; await this.studentModel.findOne({ matricNo: loginStudentDto.matricNo })
-    if (!student) {
-      throw new NotFoundException(&#x27;Student with matric number does not exist.&#x27;)
+        try {
+            // Extract student data from the tutorial list template
+            const students &#x3D; parseTemplate&lt;IStudent&gt;(
+                tutorialList,
+                iStudentExpectedKeys,
+            );
+
+            const operations &#x3D; students
+                .filter((student) &#x3D;&gt; student[&#x27;Matric No&#x27;])
+                .map((student) &#x3D;&gt; {
+                    const mappedStudent &#x3D; {
+                        matricNo: student[&#x27;Matric No&#x27;],
+                        fullName: student[&#x27;FullName&#x27;],
+                    };
+
+                    return {
+                        updateOne: {
+                            filter: { matricNo: mappedStudent.matricNo },
+                            update: { $set: mappedStudent },
+                            upsert: true,
+                        },
+                    };
+                });
+
+            await this.studentModel.bulkWrite(operations, { session });
+
+            await this.studentModel.bulkWrite(operations, { session });
+
+            // Fetch all affected student IDs
+            const affectedMatricNos &#x3D; students.map((s) &#x3D;&gt; s[&#x27;Matric No&#x27;]);
+            const affectedStudents &#x3D; await this.studentModel
+                .find({ matricNo: { $in: affectedMatricNos } }, &#x27;_id&#x27;)
+                .session(session);
+
+            insertedStudentIds &#x3D; affectedStudents.map((s) &#x3D;&gt; s._id.toString());
+
+            await session.commitTransaction();
+
+            return insertedStudentIds;
+        } catch (error) {
+            await session.abortTransaction();
+            throw new InternalServerErrorException(
+                error.message || &#x27;Failed to insert students&#x27;,
+            );
+        } finally {
+            await session.endSession();
+        }
     }
-
-    if (student.fullName.split(&#x27; &#x27;)[0].toLowerCase() !&#x3D; loginStudentDto.password.toLowerCase()) {
-      throw new UnauthorizedException(&#x27;Incorrect password&#x27;)
-    }
-
-    return successResponse({ message: &#x27;Login Successful&#x27;, data: student })
-  }
-
-  public async insertStudents(
-    tutorialList: Express.Multer.File,
-  ): Promise&lt;string[] | null&gt; {
-    return this.insertStudentProvider.insertStudents(tutorialList)
-  }
 }
 </code></pre>
     </div>
@@ -449,7 +408,7 @@ export class StudentService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'StudentService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'InsertStudentProvider.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
