@@ -9,6 +9,7 @@ import { StudentModule } from './student/student.module';
 import environmentValidation from './config/environment.validation';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
+import { CacheModule } from '@nestjs/cache-manager';
 
 const ENV = process.env.NODE_ENV;
 console.log(ENV);
@@ -16,6 +17,9 @@ console.log(ENV);
 @Module({
   imports: [
     AdminModule,
+    CacheModule.register({
+      isGlobal: true
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: !ENV ? '.env' : `.env.${ENV}`,

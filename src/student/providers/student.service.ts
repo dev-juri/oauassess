@@ -1,10 +1,12 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Student, StudentDocument } from '../schemas/student.schema';
 import { Model } from 'mongoose';
 import { InsertStudentProvider } from './insert-student.provider';
 import { LoginStudentDto } from '../dtos/login-student.dto';
 import { successResponse } from 'src/utils/response-writer';
+import { ExamService } from 'src/exam/providers/exam.service';
+import { FetchExamAssignmentsProvider } from 'src/exam/providers/fetch-exam-assignments.provider';
 
 @Injectable()
 export class StudentService {
@@ -12,7 +14,11 @@ export class StudentService {
     @InjectModel(Student.name)
     private readonly studentModel: Model<StudentDocument>,
 
-    private readonly insertStudentProvider: InsertStudentProvider
+    private readonly insertStudentProvider: InsertStudentProvider,
+
+    @Inject(forwardRef(() => FetchExamAssignmentsProvider))
+    private readonly fetchExamAssignmentsProviders: FetchExamAssignmentsProvider,
+
   ) { }
 
   public async loginStudent(loginStudentDto: LoginStudentDto) {
@@ -33,5 +39,9 @@ export class StudentService {
     tutorialList: Express.Multer.File,
   ): Promise<string[] | null> {
     return this.insertStudentProvider.insertStudents(tutorialList)
+  }
+
+  public async fetchStudentAssignments(studentId: string) {
+    return this.fetchExamAssignmentsProviders.getAssignmentsForStudent(studentId)
   }
 }

@@ -1,4 +1,4 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, forwardRef, Inject, Injectable } from '@nestjs/common';
 import { CreateExamDto } from '../dtos/create-mcq-exam.dto';
 import { Exam, ExamDocument } from '../schemas/exam.schema';
 import { StudentService } from 'src/student/providers/student.service';
@@ -19,7 +19,7 @@ export class CreateExamProvider {
     @InjectConnection()
     private readonly connection: Connection,
 
-    @Inject()
+    @Inject(forwardRef(()=> StudentService))
     private readonly studentService: StudentService,
 
     @InjectModel(Exam.name)
@@ -50,11 +50,11 @@ export class CreateExamProvider {
 
       const operations = students.map((student) => ({
         updateOne: {
-          filter: { examId: exam._id, studentId: student },
+          filter: { exam: exam._id, student: student },
           update: {
             $set: {
-              examId: exam._id.toString(),
-              studentId: student,
+              exam: exam._id.toString(),
+              student: student,
               examSchema:
                 createExamDto.examType == examType.MCQ
                   ? examSchemaEnum.McqExam

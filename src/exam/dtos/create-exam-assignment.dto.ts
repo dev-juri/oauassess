@@ -4,11 +4,11 @@ import { examSchemaEnum } from "../enums/exam-schema.enum";
 export class CreateExamAssignmentDto {
     @IsString()
     @IsNotEmpty()
-    examId: string;
+    exam: string;
 
     @IsString()
     @IsNotEmpty()
-    studentId: string;
+    student: string;
 
     @IsString()
     @IsNotEmpty()
