@@ -11,8 +11,8 @@ import {
   HttpStatus,
   HttpCode,
 } from '@nestjs/common';
-import { CreateExamDto } from './dtos/create-mcq-exam.dto';
-import { UpdateMcqExamParamDto } from './dtos/update-mcq-exam-param.dto';
+import { CreateExamDto } from './dtos/create-exam.dto';
+import { UpdateExamParamDto } from './dtos/update-exam-param.dto';
 import { ExamService } from './providers/exam.service';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import {
@@ -24,15 +24,26 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { Auth } from 'src/admin/auth/decorators/auth.decorator';
-import { AuthType } from 'src/admin/auth/enums/auth-type.enum';
 
+/**
+ * Controller for handling exam-related operations.
+ * Supports creating, updating, and deleting MCQ and open-ended (OE) exams.
+ */
 @ApiBearerAuth()
 @ApiTags('admin')
 @Controller('exam')
 export class ExamController {
   constructor(private readonly examService: ExamService) {}
 
+  /**
+   * Create a new exam.
+   *
+   * Accepts a tutorial list in `.xlsx` format and exam metadata.
+   *
+   * @param createExamDto - DTO containing exam metadata
+   * @param tutorialList - XLSX file upload with tutorial data
+   * @returns Success response containing the created exam object
+   */
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(FileInterceptor('tutorialList'))
@@ -71,6 +82,13 @@ export class ExamController {
     return this.examService.createExam(createExamDto, tutorialList);
   }
 
+  /**
+   * Upload a new MCQ template to update an existing exam.
+   *
+   * @param updateExamParamDto - DTO with the exam ID
+   * @param mcqTemplate - XLSX file with updated MCQ questions
+   * @returns Successful response containing the updated exam details
+   */
   @Patch('mcq/:examId')
   @HttpCode(HttpStatus.OK)
   @UseInterceptors(FileInterceptor('mcqList'))
@@ -93,12 +111,18 @@ export class ExamController {
   @ApiResponse({ status: 200, description: 'MCQ exam updated successfully' })
   @ApiResponse({ status: 400, description: 'Invalid file or parameters' })
   public async updateMcqExam(
-    @Param() updateExamParamDto: UpdateMcqExamParamDto,
+    @Param() updateExamParamDto: UpdateExamParamDto,
     @UploadedFile() mcqTemplate: Express.Multer.File,
   ) {
     return this.examService.updateMcqExam(updateExamParamDto.examId, mcqTemplate);
   }
 
+  /**
+   * Delete an MCQ exam and its associated questions.
+   *
+   * @param examId - ID of the MCQ exam
+   * @returns Deletion success message
+   */
   @Delete('mcq/:examId')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Delete an MCQ exam by ID' })
@@ -109,6 +133,15 @@ export class ExamController {
     return this.examService.deleteMcqExam(examId);
   }
 
+  /**
+   * Update an OE exam with new marking guide and question templates.
+   *
+   * Accepts a `.docx` or `.pdf` marking guide and a `.xlsx` question file.
+   *
+   * @param updateExamParamDto - DTO with the exam ID
+   * @param templates - Array of files (max 2): [marking guide, questions]
+   * @returns Update result
+   */
   @Patch('oe/:examId')
   @HttpCode(HttpStatus.OK)
   @UseInterceptors(FilesInterceptor('templates', 2))
@@ -133,13 +166,19 @@ export class ExamController {
   @ApiResponse({ status: 200, description: 'Open-ended exam updated successfully' })
   @ApiResponse({ status: 400, description: 'Invalid template files' })
   public async updateOeExam(
-    @Param() updateExamParamDto: UpdateMcqExamParamDto,
+    @Param() updateParamDto: UpdateExamParamDto,
     @UploadedFiles() templates: Express.Multer.File[],
   ) {
-    return this.examService.updateOeExam(updateExamParamDto.examId, templates);
+    return this.examService.updateOeExam(updateParamDto.examId, templates);
   }
 
-    @Delete('oe/:examId')
+  /**
+   * Delete an OE exam and its associated questions.
+   *
+   * @param examId - ID of the OE exam
+   * @returns Deletion confirmation
+   */
+  @Delete('oe/:examId')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Delete an OE exam by ID' })
   @ApiParam({ name: 'examId', type: 'string', description: 'ID of the OE exam' })

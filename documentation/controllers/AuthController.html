@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>examigpt documentation</title>
+        <title>oauassess documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">examigpt documentation</a>
+                    <a href="../" class="navbar-brand">oauassess documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -144,6 +144,9 @@
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
                                 <a href="#login" >login</a>
@@ -174,6 +177,9 @@
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
                             <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
                         <span ><b>login</b></span>
@@ -192,14 +198,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post()<br />@Auth(AuthType.None)<br />@UseInterceptors(ClassSerializerInterceptor)<br /></code>
+                    <code>@Post()<br />@Auth(AuthType.None)<br />@UseInterceptors(ClassSerializerInterceptor)<br />@ApiOperation({summary: &#x27;Admin login&#x27;})<br />@ApiResponse({description: &#x27;Login successful&#x27;})<br />@ApiBadRequestResponse({description: &#x27;Invalid credentials or validation failed&#x27;})<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="14"
-                                    class="link-to-prism">src/admin/auth/auth.controller.ts:14</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/admin/auth/auth.controller.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -249,22 +255,43 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, ClassSerializerInterceptor, Controller, Post, UseInterceptors } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Body,
+  ClassSerializerInterceptor,
+  Controller,
+  Post,
+  UseInterceptors,
+} from &#x27;@nestjs/common&#x27;;
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiCreatedResponse,
+  ApiBadRequestResponse,
+} from &#x27;@nestjs/swagger&#x27;;
 import { AuthService } from &#x27;./providers/auth.service&#x27;;
 import { LoginDto } from &#x27;./dtos/login.dto&#x27;;
 import { Auth } from &#x27;./decorators/auth.decorator&#x27;;
 import { AuthType } from &#x27;./enums/auth-type.enum&#x27;;
 
+@ApiTags(&#x27;admin&#x27;)
 @Controller(&#x27;auth&#x27;)
 export class AuthController {
-    constructor(private readonly authService: AuthService){}
+  constructor(private readonly authService: AuthService) {}
 
-    @Post()
-    @Auth(AuthType.None)
-    @UseInterceptors(ClassSerializerInterceptor)
-    public async login(@Body() loginDto: LoginDto) {
-        return await this.authService.login(loginDto);
-    }
+  @Post()
+  @Auth(AuthType.None)
+  @UseInterceptors(ClassSerializerInterceptor)
+  @ApiOperation({ summary: &#x27;Admin login&#x27; })
+  @ApiResponse({
+    description: &#x27;Login successful&#x27;
+  })
+  @ApiBadRequestResponse({
+    description: &#x27;Invalid credentials or validation failed&#x27;,
+  })
+  public async login(@Body() loginDto: LoginDto) {
+    return await this.authService.login(loginDto);
+  }
 }
 </code></pre>
     </div>

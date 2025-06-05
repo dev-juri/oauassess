@@ -14,16 +14,19 @@ import { Exam, ExamDocument } from '../schemas/exam.schema';
 import { examType } from '../enums/exam-type.enum';
 import { Types } from 'mongoose';
 
-const CACHE_TTL = 3600; // 1 hour
+/**
+ * Cache for just 1hour
+ */
+const CACHE_TTL = 3600;
 
+/**
+ * Provider class to generate and/or fetch assignment for each student
+ */
 @Injectable()
 export class FetchExamAssignmentsProvider {
     constructor(
         @InjectModel(ExamAssignment.name)
         private readonly examAssignmentModel: Model<ExamAssignmentDocument>,
-
-        @InjectModel(Exam.name)
-        private readonly examModel: Model<Exam>,
 
         @InjectModel('McqQuestion')
         private readonly mcqModel: Model<any>,

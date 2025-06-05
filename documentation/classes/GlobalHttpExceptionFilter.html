@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>examigpt documentation</title>
+        <title>oauassess documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">examigpt documentation</a>
+                    <a href="../" class="navbar-brand">oauassess documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -123,6 +123,21 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Global HTTP exception filter to handle all uncaught exceptions.</p>
+<p>This filter catches all exceptions thrown during request handling and
+formats the response into a consistent JSON structure. It extracts the
+HTTP status code and message from either standard <code>HttpException</code> or
+other unknown exceptions, providing a default 500 status for unhandled errors.</p>
+<p>Example output:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
+  &quot;success&quot;: false,
+  &quot;message&quot;: &quot;Invalid input provided&quot;
+}</code></pre></div>
+            </p>
 
 
             <p class="comment">
@@ -188,14 +203,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="12"
-                                    class="link-to-prism">src/filters/global-http-exception.filter.ts:12</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/filters/global-http-exception.filter.ts:35</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Method that handles caught exceptions and sends a formatted error response.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -206,6 +223,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -220,6 +238,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The thrown exception object.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>host</td>
@@ -232,6 +256,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The current execution context.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -266,8 +296,31 @@
 } from &#x27;@nestjs/common&#x27;;
 import { Response } from &#x27;express&#x27;;
 
+/**
+ * Global HTTP exception filter to handle all uncaught exceptions.
+ *
+ * This filter catches all exceptions thrown during request handling and
+ * formats the response into a consistent JSON structure. It extracts the
+ * HTTP status code and message from either standard &#x60;HttpException&#x60; or
+ * other unknown exceptions, providing a default 500 status for unhandled errors.
+ *
+ * Example output:
+ * &#x60;&#x60;&#x60;json
+ * {
+ *   &quot;success&quot;: false,
+ *   &quot;message&quot;: &quot;Invalid input provided&quot;
+ * }
+ * &#x60;&#x60;&#x60;
+ */
 @Catch()
 export class GlobalHttpExceptionFilter implements ExceptionFilter {
+
+  /**
+   * Method that handles caught exceptions and sends a formatted error response.
+   *
+   * @param exception - The thrown exception object.
+   * @param host - The current execution context.
+   */
   catch(exception: any, host: ArgumentsHost) {
     const ctx &#x3D; host.switchToHttp();
     const response &#x3D; ctx.getResponse&lt;Response&gt;();
@@ -291,8 +344,7 @@ export class GlobalHttpExceptionFilter implements ExceptionFilter {
 
     return response.status(status).json({ success: false, message: message });
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 </div>
 

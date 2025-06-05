@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>examigpt documentation</title>
+        <title>oauassess documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">examigpt documentation</a>
+                    <a href="../" class="navbar-brand">oauassess documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -146,7 +146,7 @@
                             </li>
                             <li>
                                     <span class="modifier"></span>
-                                <a href="#examId" >examId</a>
+                                <a href="#exam" >exam</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
@@ -155,7 +155,7 @@
                             </li>
                             <li>
                                     <span class="modifier"></span>
-                                <a href="#studentId" >studentId</a>
+                                <a href="#student" >student</a>
                             </li>
                         </ul>
                     </td>
@@ -206,7 +206,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/exam/schemas/exam-assigment.schema.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/exam/schemas/exam-assigment.schema.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -217,11 +217,11 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="examId"></a>
+                    <a name="exam"></a>
                     <span class="name">
                             <span class="modifier"></span>
-                        <span ><b>examId</b></span>
-                        <a href="#examId"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>exam</b></span>
+                        <a href="#exam"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -236,13 +236,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @Prop({type: undefined, refPath: &#x27;Exam&#x27;, index: true})<br />
+                            @Prop({type: undefined, ref: &#x27;Exam&#x27;, index: true})<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/exam/schemas/exam-assigment.schema.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/exam/schemas/exam-assigment.schema.ts:22</a></div>
                         </td>
                     </tr>
 
@@ -279,7 +279,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/exam/schemas/exam-assigment.schema.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/exam/schemas/exam-assigment.schema.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -290,11 +290,11 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="studentId"></a>
+                    <a name="student"></a>
                     <span class="name">
                             <span class="modifier"></span>
-                        <span ><b>studentId</b></span>
-                        <a href="#studentId"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>student</b></span>
+                        <a href="#student"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -315,7 +315,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/exam/schemas/exam-assigment.schema.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/exam/schemas/exam-assigment.schema.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -337,7 +337,6 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
 import mongoose, { HydratedDocument } from &#x27;mongoose&#x27;;
 import { Student } from &#x27;src/student/schemas/student.schema&#x27;;
-import { examSchemaEnum } from &#x27;../enums/exam-schema.enum&#x27;;
 import { Exam } from &#x27;./exam.schema&#x27;;
 
 export type ExamAssignmentDocument &#x3D; HydratedDocument&lt;ExamAssignment&gt;;
@@ -355,11 +354,11 @@ export type ExamAssignmentDocument &#x3D; HydratedDocument&lt;ExamAssignment&gt;
 })
 export class ExamAssignment {
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, refPath: &#x27;Exam&#x27;, index: true })
-  examId: Exam;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: &#x27;Exam&#x27;, index: true })
+  exam: Exam;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: &#x27;Student&#x27;, index: true })
-  studentId: Student;
+  student: Student;
 
   @Prop()
   startTime?: Date;

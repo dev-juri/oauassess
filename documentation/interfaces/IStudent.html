@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>examigpt documentation</title>
+        <title>oauassess documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">examigpt documentation</a>
+                    <a href="../" class="navbar-brand">oauassess documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -126,6 +126,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface representing a student assigned to take an exam.</p>
+<p>This includes the student&#39;s full name and matriculation number.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -194,6 +202,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The full name of the student.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -227,6 +241,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The matriculation number uniquely identifying the student.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -235,10 +255,22 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface IStudent {
+  /**
+   * The full name of the student.
+   */
   &#x27;FullName&#x27;: string;
+
+  /**
+   * The matriculation number uniquely identifying the student.
+   */
   &#x27;Matric No&#x27;: string;
 }
 
+/**
+ * List of expected keys in a valid student object.
+ *
+ * This is useful for validating structured data such as CSV or Excel file imports.
+ */
 export const iStudentExpectedKeys: (keyof IStudent)[] &#x3D; [
   &#x27;FullName&#x27;,
   &#x27;Matric No&#x27;,

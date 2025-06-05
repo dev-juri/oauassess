@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>examigpt documentation</title>
+        <title>oauassess documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">examigpt documentation</a>
+                    <a href="../" class="navbar-brand">oauassess documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -142,6 +142,11 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#fetchExams" >fetchExams</a>
+                            </li>
+                            <li>
                                     <span class="modifier"></span>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
@@ -168,9 +173,86 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="login"></a>
+                    <a name="fetchExams"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>fetchExams</b></span>
+                        <a href="#fetchExams"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchExams(studentId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;assignments/:studentId&#x27;)<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="20"
+                                    class="link-to-prism">src/student/student.controller.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>studentId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="login"></a>
+                    <span class="name">
                             <span class="modifier"></span>
                             <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
@@ -190,7 +272,7 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Auth(AuthType.None)<br />@Post(&#x27;auth&#x27;)<br /></code>
+                    <code>@Post(&#x27;auth&#x27;)<br /></code>
                 </td>
             </tr>
 
@@ -247,22 +329,27 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Post } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Get, Param, Post } from &#x27;@nestjs/common&#x27;;
 import { LoginStudentDto } from &#x27;./dtos/login-student.dto&#x27;;
 import { StudentService } from &#x27;./providers/student.service&#x27;;
 import { Auth } from &#x27;src/admin/auth/decorators/auth.decorator&#x27;;
 import { AuthType } from &#x27;src/admin/auth/enums/auth-type.enum&#x27;;
 
+@Auth(AuthType.None)
 @Controller(&#x27;student&#x27;)
 export class StudentController {
     constructor(
         private readonly studentService: StudentService
     ) {}
 
-    @Auth(AuthType.None)
     @Post(&#x27;auth&#x27;)
     public async login(@Body() loginStudentDto: LoginStudentDto) {
         return this.studentService.loginStudent(loginStudentDto)
+    }
+
+    @Get(&#x27;assignments/:studentId&#x27;)
+    public async fetchExams(@Param(&#x27;studentId&#x27;) studentId: string) {
+        return this.studentService.fetchStudentAssignments(studentId)
     }
 }
 </code></pre>

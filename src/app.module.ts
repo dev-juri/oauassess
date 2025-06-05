@@ -11,9 +11,6 @@ import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import { CacheModule } from '@nestjs/cache-manager';
 
-const ENV = process.env.NODE_ENV;
-console.log(ENV);
-
 @Module({
   imports: [
     AdminModule,
@@ -22,7 +19,7 @@ console.log(ENV);
     }),
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: !ENV ? '.env' : `.env.${ENV}`,
+      envFilePath: !process.env.NODE_ENV ? '.env' : `.env.${process.env.NODE_ENV}`,
       validationSchema: environmentValidation,
       load: [appConfig, databaseConfig],
     }),

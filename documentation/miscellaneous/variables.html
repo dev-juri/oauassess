@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>examigpt documentation</title>
+        <title>oauassess documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">examigpt documentation</a>
+                    <a href="../" class="navbar-brand">oauassess documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -122,6 +122,9 @@
                         </li>
                         <li>
                             <a href="#AUTH_TYPE_KEY" title="src/admin/auth/constants/auth.constants.ts" ><b>AUTH_TYPE_KEY</b>&nbsp;&nbsp;&nbsp;(src/.../auth.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CACHE_TTL" title="src/exam/providers/fetch-exam-assignments.provider.ts" ><b>CACHE_TTL</b>&nbsp;&nbsp;&nbsp;(src/.../fetch-exam-assignments.provider.ts)</a>
                         </li>
                         <li>
                             <a href="#ENV" title="src/app.module.ts" ><b>ENV</b>&nbsp;&nbsp;&nbsp;(src/.../app.module.ts)</a>
@@ -291,6 +294,41 @@
         </tbody>
     </table>
 </section>
+    <h3>src/exam/providers/fetch-exam-assignments.provider.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CACHE_TTL"></a>
+                    <span class="name">
+                        <span ><b>CACHE_TTL</b></span>
+                        <a href="#CACHE_TTL"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>3600</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cache for just 1hour</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
     <h3>src/app.module.ts</h3>
     <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
@@ -382,16 +420,23 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>[
-    &quot;Question&quot;,
-    &quot;A&quot;,
-    &quot;B&quot;,
-    &quot;C&quot;,
-    &quot;D&quot;,
-    &quot;Correct Answer&quot;
+  &#x27;Question&#x27;,
+  &#x27;A&#x27;,
+  &#x27;B&#x27;,
+  &#x27;C&#x27;,
+  &#x27;D&#x27;,
+  &#x27;Correct Answer&#x27;,
 ]</code>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>An array of the expected keys for a valid MCQ question object.</p>
+<p>This can be used for validation or checking the shape of imported data.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -417,10 +462,17 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>[&quot;Question&quot;]</code>
+                        <i>Default value : </i><code>[&#x27;Question&#x27;]</code>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>An array of the expected keys for a valid open-ended question object.</p>
+<p>Useful for validating imported data or ensuring consistency.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -453,6 +505,13 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>List of expected keys in a valid student object.</p>
+<p>This is useful for validating structured data such as CSV or Excel file imports.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>

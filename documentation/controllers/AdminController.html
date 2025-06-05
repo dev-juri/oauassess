@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>examigpt documentation</title>
+        <title>oauassess documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">examigpt documentation</a>
+                    <a href="../" class="navbar-brand">oauassess documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -127,17 +127,164 @@
 
 
 
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
 
-    </div>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#createAdmin" >createAdmin</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createAdmin"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>createAdmin</b></span>
+                        <a href="#createAdmin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createAdmin(createAdminDto: <a href="../classes/CreateAdminDto.html" target="_self">CreateAdminDto</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Post()<br />@ApiBearerAuth()<br />@ApiOperation({summary: &#x27;Create a new admin account&#x27;})<br />@ApiCreatedResponse({description: &#x27;Admin account successfully created&#x27;})<br />@ApiUnauthorizedResponse({description: &#x27;Unauthorized - Missing or invalid Bearer token&#x27;})<br />@ApiResponse({status: 400, description: &#x27;Bad Request - Validation failed&#x27;})<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="28"
+                                    class="link-to-prism">src/admin/admin.controller.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>createAdminDto</td>
+                                            <td>
+                                                            <code><a href="../classes/CreateAdminDto.html" target="_self" >CreateAdminDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, Delete, Param, Patch, Post } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Delete, Param, Patch, Post } from &#x27;@nestjs/common&#x27;;
 import { AdminService } from &#x27;./providers/admin.service&#x27;;
+import { CreateAdminDto } from &#x27;./dtos/create-admin.dto&#x27;;
+import {
+  ApiTags,
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiCreatedResponse,
+  ApiUnauthorizedResponse,
+} from &#x27;@nestjs/swagger&#x27;;
 
+@ApiTags(&#x27;admin&#x27;)
 @Controller(&#x27;admin&#x27;)
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
+
+  @Post()
+  @ApiBearerAuth()
+  @ApiOperation({ summary: &#x27;Create a new admin account&#x27; })
+  @ApiCreatedResponse({
+    description: &#x27;Admin account successfully created&#x27;
+  })
+  @ApiUnauthorizedResponse({
+    description: &#x27;Unauthorized - Missing or invalid Bearer token&#x27;,
+  })
+  @ApiResponse({ status: 400, description: &#x27;Bad Request - Validation failed&#x27; })
+  public async createAdmin(@Body() createAdminDto: CreateAdminDto) {
+    return this.adminService.createAdmin(createAdminDto);
+  }
 }
 </code></pre>
     </div>

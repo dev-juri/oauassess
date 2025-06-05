@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>examigpt documentation</title>
+        <title>oauassess documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">examigpt documentation</a>
+                    <a href="../" class="navbar-brand">oauassess documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -126,6 +126,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface representing the structure of a Multiple Choice Question (MCQ).</p>
+<p>Each MCQ includes a question, four possible answers labeled A through D,
+and the correct answer.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -218,6 +227,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Option A.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -251,6 +266,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Option B.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -284,6 +305,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Option C.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -317,6 +344,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The correct answer (should match one of A, B, C, or D).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -350,6 +383,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Option D.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -383,6 +422,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The text of the question.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -391,22 +436,51 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface IMcqQuestion {
-    Question: string;
-    A: string;
-    B: string;
-    C: string;
-    D: string;
-    &#x27;Correct Answer&#x27;: string;
+  /**
+   * The text of the question.
+   */
+  Question: string;
+
+  /**
+   * Option A.
+   */
+  A: string;
+
+  /**
+   * Option B.
+   */
+  B: string;
+
+  /**
+   * Option C.
+   */
+  C: string;
+
+  /**
+   * Option D.
+   */
+  D: string;
+
+  /**
+   * The correct answer (should match one of A, B, C, or D).
+   */
+  &#x27;Correct Answer&#x27;: string;
 }
 
-export const iMcqQuestionExpectedKeys : (keyof IMcqQuestion)[] &#x3D; [
-    &quot;Question&quot;,
-    &quot;A&quot;,
-    &quot;B&quot;,
-    &quot;C&quot;,
-    &quot;D&quot;,
-    &quot;Correct Answer&quot;
-]</code></pre>
+/**
+ * An array of the expected keys for a valid MCQ question object.
+ *
+ * This can be used for validation or checking the shape of imported data.
+ */
+export const iMcqQuestionExpectedKeys: (keyof IMcqQuestion)[] &#x3D; [
+  &#x27;Question&#x27;,
+  &#x27;A&#x27;,
+  &#x27;B&#x27;,
+  &#x27;C&#x27;,
+  &#x27;D&#x27;,
+  &#x27;Correct Answer&#x27;,
+];
+</code></pre>
     </div>
 </div>
 

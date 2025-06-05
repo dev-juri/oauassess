@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>examigpt documentation</title>
+        <title>oauassess documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">examigpt documentation</a>
+                    <a href="../" class="navbar-brand">oauassess documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -119,6 +119,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Provider responsible for updating open-ended (OE) exams.</p>
+
+            </p>
 
 
 
@@ -163,7 +170,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/exam/providers/update-oe-exam.provider.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/exam/providers/update-oe-exam.provider.ts:25</a></div>
                             </td>
                         </tr>
 
@@ -253,14 +260,21 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="34"
-                                    class="link-to-prism">src/exam/providers/update-oe-exam.provider.ts:34</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/exam/providers/update-oe-exam.provider.ts:52</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates an OE exam by inserting parsed questions from an uploaded template.</p>
+<ul>
+<li>Verifies exam existence and type</li>
+<li>Parses OE questions template</li>
+<li>Inserts questions and links them to the exam</li>
+</ul>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -271,6 +285,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -285,6 +300,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>ID of the exam to update</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>markingGuide</td>
@@ -297,6 +318,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>File containing marking guide (not yet processed)</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>oeTemplate</td>
@@ -309,16 +336,23 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>File containing open-ended questions</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
+                            <b>Returns : </b>        <code><a href="../interfaces/IResponse.html" target="_self" >Promise&lt;IResponse&gt;</a></code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Success response if update completes</p>
+
                             </div>
                 </td>
             </tr>
@@ -347,9 +381,12 @@ import {
   iOeExpectedKeys,
   IOeQuestion,
 } from &#x27;src/utils/interfaces/oe-question.interface&#x27;;
-import { successResponse } from &#x27;src/utils/response-writer&#x27;;
+import { IResponse, successResponse } from &#x27;src/utils/response-writer&#x27;;
 import { examType } from &#x27;../enums/exam-type.enum&#x27;;
 
+/**
+ * Provider responsible for updating open-ended (OE) exams.
+ */
 @Injectable()
 export class UpdateOeExamProvider {
   constructor(
@@ -363,11 +400,26 @@ export class UpdateOeExamProvider {
     private readonly connection: Connection,
   ) {}
 
+  /**
+   * Updates an OE exam by inserting parsed questions from an uploaded template.
+   *
+   * - Verifies exam existence and type
+   * - Parses OE questions template
+   * - Inserts questions and links them to the exam
+   *
+   * @param examId - ID of the exam to update
+   * @param markingGuide - File containing marking guide (not yet processed)
+   * @param oeTemplate - File containing open-ended questions
+   * @returns Success response if update completes
+   *
+   * @throws {NotFoundException} If exam is not found
+   * @throws {BadRequestException} If exam type is not OE or questions are invalid
+   */
   public async updateOeExam(
     examId: string,
     markingGuide: Express.Multer.File,
     oeTemplate: Express.Multer.File,
-  ) {
+  ): Promise&lt;IResponse&gt; {
     const exam &#x3D; await this.examSchema.findById(examId);
 
     if (!exam) {
@@ -392,12 +444,12 @@ export class UpdateOeExamProvider {
         insertOne: { document: { question: oeq.Question } },
       }));
 
-      let result &#x3D; await this.oeQuestionModel.bulkWrite(operations, {
+      const result &#x3D; await this.oeQuestionModel.bulkWrite(operations, {
         session,
       });
 
       const insertedQuestionIds &#x3D; Object.values(result.insertedIds || {});
-      console.log(insertedQuestionIds)
+      console.log(insertedQuestionIds);
 
       // TODO: Create Assistant and update exam with assistantId
 

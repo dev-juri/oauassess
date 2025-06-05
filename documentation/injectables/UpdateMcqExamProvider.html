@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>examigpt documentation</title>
+        <title>oauassess documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">examigpt documentation</a>
+                    <a href="../" class="navbar-brand">oauassess documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -119,6 +119,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Provider responsible for updating MCQ exams by parsing a template file and storing the questions.</p>
+
+            </p>
 
 
 
@@ -167,7 +174,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/exam/providers/update-mcq-exam.provider.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/exam/providers/update-mcq-exam.provider.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -256,14 +263,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="84"
-                                    class="link-to-prism">src/exam/providers/update-mcq-exam.provider.ts:84</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="109"
+                                    class="link-to-prism">src/exam/providers/update-mcq-exam.provider.ts:109</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Prepares a bulk write operation list from an array of parsed MCQ questions.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -274,6 +283,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -288,6 +298,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Parsed MCQ questions</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -297,7 +313,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>List of MongoDB bulk write operations</p>
+
                             </div>
                 </td>
             </tr>
@@ -326,14 +343,22 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/exam/providers/update-mcq-exam.provider.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/exam/providers/update-mcq-exam.provider.ts:53</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates an MCQ exam with questions from an uploaded template file.</p>
+<ul>
+<li>Verifies exam existence and type</li>
+<li>Parses and validates the MCQ template</li>
+<li>Saves new or updated MCQ questions to the database</li>
+<li>Links questions to the exam using a transactional operation</li>
+</ul>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -344,6 +369,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -358,6 +384,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>ID of the exam to update</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>mcqTemplate</td>
@@ -370,16 +402,23 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>File containing MCQ questions</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
+                            <b>Returns : </b>        <code><a href="../interfaces/IResponse.html" target="_self" >Promise&lt;IResponse&gt;</a></code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Success response if operation completes</p>
+
                             </div>
                 </td>
             </tr>
@@ -409,9 +448,12 @@ import {
   McqQuestionDocument,
 } from &#x27;../schemas/mcq/mcq-question.schema&#x27;;
 import { Exam, ExamDocument } from &#x27;../schemas/exam.schema&#x27;;
-import { successResponse } from &#x27;src/utils/response-writer&#x27;;
+import { IResponse, successResponse } from &#x27;src/utils/response-writer&#x27;;
 import { examType } from &#x27;../enums/exam-type.enum&#x27;;
 
+/**
+ * Provider responsible for updating MCQ exams by parsing a template file and storing the questions.
+ */
 @Injectable()
 export class UpdateMcqExamProvider {
   constructor(
@@ -425,8 +467,25 @@ export class UpdateMcqExamProvider {
     private readonly connection: Connection,
   ) {}
 
-  public async updateMcqExam(examId: string, mcqTemplate: Express.Multer.File) {
-
+  /**
+   * Updates an MCQ exam with questions from an uploaded template file.
+   *
+   * - Verifies exam existence and type
+   * - Parses and validates the MCQ template
+   * - Saves new or updated MCQ questions to the database
+   * - Links questions to the exam using a transactional operation
+   *
+   * @param examId - ID of the exam to update
+   * @param mcqTemplate - File containing MCQ questions
+   * @returns Success response if operation completes
+   *
+   * @throws {NotFoundException} If exam is not found
+   * @throws {BadRequestException} If exam type is not MCQ or template is invalid
+   */
+  public async updateMcqExam(
+    examId: string,
+    mcqTemplate: Express.Multer.File,
+  ): Promise&lt;IResponse&gt; {
     const exam &#x3D; await this.examSchema.findById(examId);
 
     if (!exam) {
@@ -434,7 +493,7 @@ export class UpdateMcqExamProvider {
     }
 
     if (exam.examType !&#x3D;&#x3D; examType.MCQ) {
-      throw new BadRequestException(&#x27;Exam mode is not MCQ&#x27;)
+      throw new BadRequestException(&#x27;Exam mode is not MCQ&#x27;);
     }
 
     const mcqList &#x3D; parseTemplate&lt;IMcqQuestion&gt;(
@@ -452,14 +511,13 @@ export class UpdateMcqExamProvider {
     try {
       const operations &#x3D; this.prepareListForBulkWrite(mcqList);
 
-      let result &#x3D; await this.mcqQuestionModel.bulkWrite(operations, {
+      const result &#x3D; await this.mcqQuestionModel.bulkWrite(operations, {
         session,
       });
 
       const insertedQuestionIds &#x3D; Object.values(result.upsertedIds || {});
-
-      exam.questions.push(...insertedQuestionIds)
-      await exam.save({session})
+      exam.questions.push(...insertedQuestionIds);
+      await exam.save({ session });
 
       await session.commitTransaction();
 
@@ -474,6 +532,12 @@ export class UpdateMcqExamProvider {
     }
   }
 
+  /**
+   * Prepares a bulk write operation list from an array of parsed MCQ questions.
+   *
+   * @param mcqList - Parsed MCQ questions
+   * @returns List of MongoDB bulk write operations
+   */
   private prepareListForBulkWrite(mcqList: IMcqQuestion[]) {
     const collapseMcqList &#x3D; mcqList.map((mcq) &#x3D;&gt; ({
       question: mcq.Question,
@@ -490,8 +554,7 @@ export class UpdateMcqExamProvider {
     }));
     return operations;
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 
 </div>

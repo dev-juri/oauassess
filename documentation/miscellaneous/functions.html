@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>examigpt documentation</title>
+        <title>oauassess documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">examigpt documentation</a>
+                    <a href="../" class="navbar-brand">oauassess documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -175,6 +175,9 @@
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Parses an uploaded Excel file and maps it into a strongly-typed array of objects.</p>
+<p>This function ensures that the uploaded file contains the expected columns.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -184,6 +187,7 @@
                                         <tr>
                                             <td>Name</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -195,6 +199,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The uploaded file received through a multipart/form-data request.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>expectedKeys</td>
@@ -204,6 +214,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>An array of keys (column headers) that must be present in the file.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -213,7 +229,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>An array of objects parsed from the Excel file, typed as <code>T[]</code>.</p>
+
                             </div>
                 </td>
             </tr>
@@ -243,6 +260,10 @@
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Utility function to generate a standardized success response.</p>
+<p>This is used across the application to ensure all successful API responses
+follow a consistent structure defined by the <code>IResponse</code> interface.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -282,6 +303,14 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/IResponse.html" target="_self" >IResponse</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>A standardized success response object.</p>
+
                             </div>
                 </td>
             </tr>

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>examigpt documentation</title>
+        <title>oauassess documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">examigpt documentation</a>
+                    <a href="../" class="navbar-brand">oauassess documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -119,10 +119,20 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/exam/dtos/create-mcq-exam.dto.ts</code>
+            <code>src/exam/dtos/create-exam.dto.ts</code>
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Data Transfer Object for creating a new exam.</p>
+<p>This DTO supports both multiple choice (MCQ) and open-ended exams. It ensures
+that all required fields like course name, course code, duration, question count,
+and exam type are provided with appropriate validation.</p>
+
+            </p>
 
 
 
@@ -143,9 +153,11 @@
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#courseCode" >courseCode</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                 <a href="#courseName" >courseName</a>
@@ -154,14 +166,17 @@
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#duration" >duration</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#examType" >examType</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
@@ -195,6 +210,7 @@
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>courseCode</b></span>
                         <a href="#courseCode"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -211,16 +227,22 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsString()<br />@IsNotEmpty()<br />@MinLength(6)<br />
+                            @ApiProperty({description: &#x27;Unique course code (minimum 6 characters)&#x27;, example: &#x27;CS101A&#x27;, minLength: 6})<br />@IsString()<br />@IsNotEmpty()<br />@MinLength(6)<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/exam/dtos/create-mcq-exam.dto.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/exam/dtos/create-exam.dto.ts:46</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unique course code (minimum 6 characters).</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html"></code></pre></div></div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -230,6 +252,7 @@
                 <td class="col-md-4">
                     <a name="courseName"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                         <span ><b>courseName</b></span>
@@ -248,16 +271,22 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsString()<br />@IsNotEmpty()<br />
+                            @ApiProperty({description: &#x27;Name of the course for which the exam is being created&#x27;, example: &#x27;Computer Science 101&#x27;})<br />@IsString()<br />@IsNotEmpty()<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/exam/dtos/create-mcq-exam.dto.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/exam/dtos/create-exam.dto.ts:31</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Name of the course for which the exam is being created.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html"></code></pre></div></div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -267,6 +296,7 @@
                 <td class="col-md-4">
                     <a name="duration"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
@@ -286,16 +316,22 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsInt()<br />@IsNotEmpty()<br />@Min(10)<br />
+                            @ApiProperty({description: &#x27;Exam duration in minutes (minimum 10)&#x27;, example: 60, minimum: 10})<br />@IsInt()<br />@IsNotEmpty()<br />@Min(10)<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/exam/dtos/create-mcq-exam.dto.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/exam/dtos/create-exam.dto.ts:61</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Duration of the exam in minutes. Must be at least 10.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html"></code></pre></div></div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -305,6 +341,7 @@
                 <td class="col-md-4">
                     <a name="examType"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                         <span ><b>examType</b></span>
@@ -323,16 +360,22 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsEnum(examType, {message: &#x27;examType must be either McqQuestion or OeQuestion&#x27;})<br />@IsNotEmpty()<br />
+                            @ApiProperty({description: &#x27;Type of exam: McqQuestion for MCQs or OeQuestion for Open-Ended&#x27;, enum: examType, example: undefined})<br />@IsEnum(examType, {message: &#x27;examType must be either McqQuestion or OeQuestion&#x27;})<br />@IsNotEmpty()<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/exam/dtos/create-mcq-exam.dto.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/exam/dtos/create-exam.dto.ts:92</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Type of exam: McqQuestion for MCQs or OeQuestion for Open-Ended.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html"></code></pre></div></div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -342,6 +385,7 @@
                 <td class="col-md-4">
                     <a name="questionCount"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
@@ -361,16 +405,22 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsInt()<br />@IsNotEmpty()<br />@Min(1)<br />
+                            @ApiProperty({description: &#x27;Number of questions in the exam (minimum 1)&#x27;, example: 20, minimum: 1})<br />@IsInt()<br />@IsNotEmpty()<br />@Min(1)<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/exam/dtos/create-mcq-exam.dto.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/exam/dtos/create-exam.dto.ts:76</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Total number of questions in the exam. Must be at least 1.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html"></code></pre></div></div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -386,7 +436,8 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ApiProperty } from &#x27;@nestjs/swagger&#x27;;
+import {
   IsEnum,
   IsInt,
   IsNotEmpty,
@@ -396,26 +447,82 @@
 } from &#x27;class-validator&#x27;;
 import { examType } from &#x27;../enums/exam-type.enum&#x27;;
 
+/**
+ * Data Transfer Object for creating a new exam.
+ * 
+ * This DTO supports both multiple choice (MCQ) and open-ended exams. It ensures
+ * that all required fields like course name, course code, duration, question count,
+ * and exam type are provided with appropriate validation.
+ */
 export class CreateExamDto {
+  /**
+   * Name of the course for which the exam is being created.
+   * 
+   * @example &#x27;Computer Science 101&#x27;
+   */
+  @ApiProperty({
+    description: &#x27;Name of the course for which the exam is being created&#x27;,
+    example: &#x27;Computer Science 101&#x27;,
+  })
   @IsString()
   @IsNotEmpty()
   courseName: string;
 
+  /**
+   * Unique course code (minimum 6 characters).
+   * 
+   * @example &#x27;CS101A&#x27;
+   */
+  @ApiProperty({
+    description: &#x27;Unique course code (minimum 6 characters)&#x27;,
+    example: &#x27;CS101A&#x27;,
+    minLength: 6,
+  })
   @IsString()
   @IsNotEmpty()
   @MinLength(6)
   courseCode: string;
 
+  /**
+   * Duration of the exam in minutes. Must be at least 10.
+   * 
+   * @example 60
+   */
+  @ApiProperty({
+    description: &#x27;Exam duration in minutes (minimum 10)&#x27;,
+    example: 60,
+    minimum: 10,
+  })
   @IsInt()
   @IsNotEmpty()
   @Min(10)
-  duration: number; // in minutes
+  duration: number;
 
+  /**
+   * Total number of questions in the exam. Must be at least 1.
+   * 
+   * @example 20
+   */
+  @ApiProperty({
+    description: &#x27;Number of questions in the exam (minimum 1)&#x27;,
+    example: 20,
+    minimum: 1,
+  })
   @IsInt()
   @IsNotEmpty()
   @Min(1)
   questionCount: number;
 
+  /**
+   * Type of exam: McqQuestion for MCQs or OeQuestion for Open-Ended.
+   * 
+   * @example &#x27;McqQuestion&#x27;
+   */
+  @ApiProperty({
+    description: &#x27;Type of exam: McqQuestion for MCQs or OeQuestion for Open-Ended&#x27;,
+    enum: examType,
+    example: examType.MCQ,
+  })
   @IsEnum(examType, {
     message: &#x27;examType must be either McqQuestion or OeQuestion&#x27;,
   })

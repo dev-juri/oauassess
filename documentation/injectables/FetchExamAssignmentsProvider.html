@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >StudentService</li>
+  <li class="breadcrumb-item" >FetchExamAssignmentsProvider</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,10 +115,17 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/student/providers/student.service.ts</code>
+            <code>src/exam/providers/fetch-exam-assignments.provider.ts</code>
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Provider class to generate and/or fetch assignment for each student</p>
+
+            </p>
 
 
 
@@ -136,19 +143,20 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#fetchStudentAssignments" >fetchStudentAssignments</a>
+                                <a href="#generateAndCacheQuestions" >generateAndCacheQuestions</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#insertStudents" >insertStudents</a>
+                                <a href="#getAssignmentsForStudent" >getAssignmentsForStudent</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#loginStudent" >loginStudent</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#getQuestionModel" >getQuestionModel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#shuffleAndSelect" >shuffleAndSelect</a>
                             </li>
                         </ul>
                     </td>
@@ -168,12 +176,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(studentModel: <a href="../classes/Student.html" target="_self">Model&lt;StudentDocument&gt;</a>, insertStudentProvider: <a href="../injectables/InsertStudentProvider.html" target="_self">InsertStudentProvider</a>, fetchExamAssignmentsProviders: <a href="../injectables/FetchExamAssignmentsProvider.html" target="_self">FetchExamAssignmentsProvider</a>)</code>
+<code>constructor(examAssignmentModel: <a href="../undefineds/ExamAssignmentDocument.html" target="_self">Model&lt;ExamAssignmentDocument&gt;</a>, mcqModel: Model<any>, oeModel: Model<any>, cacheManager: Cache)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/student/providers/student.service.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -191,10 +199,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>studentModel</td>
+                                                        <td>examAssignmentModel</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../classes/Student.html" target="_self" >Model&lt;StudentDocument&gt;</a></code>
+                                                                        <code><a href="../miscellaneous/typealiases.html#ExamAssignmentDocument" target="_self" >Model&lt;ExamAssignmentDocument&gt;</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -203,10 +211,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>insertStudentProvider</td>
+                                                        <td>mcqModel</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/InsertStudentProvider.html" target="_self" >InsertStudentProvider</a></code>
+                                                                    <code>Model&lt;any&gt;</code>
                                                         </td>
                                                   
                                                     <td>
@@ -215,10 +223,22 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>fetchExamAssignmentsProviders</td>
+                                                        <td>oeModel</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/FetchExamAssignmentsProvider.html" target="_self" >FetchExamAssignmentsProvider</a></code>
+                                                                    <code>Model&lt;any&gt;</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cacheManager</td>
+                                                  
+                                                        <td>
+                                                                    <code>Cache</code>
                                                         </td>
                                                   
                                                     <td>
@@ -244,19 +264,101 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="fetchStudentAssignments"></a>
+                    <a name="generateAndCacheQuestions"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>fetchStudentAssignments</b></span>
-                        <a href="#fetchStudentAssignments"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>generateAndCacheQuestions</b></span>
+                        <a href="#generateAndCacheQuestions"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>fetchStudentAssignments(studentId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>generateAndCacheQuestions(studentId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, exam: <a href="../undefineds/ExamDocument.html" target="_self">ExamDocument</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:83</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Generate and cache a list of randomized question IDs for a student-exam combo</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>studentId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>exam</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExamDocument" target="_self" >ExamDocument</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;string[]&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAssignmentsForStudent"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getAssignmentsForStudent</b></span>
+                        <a href="#getAssignmentsForStudent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAssignmentsForStudent(studentId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -264,13 +366,15 @@
                     <tr>
                         <td class="col-md-4">
                             <div class="io-line">Defined in <a href="" data-line="44"
-                                    class="link-to-prism">src/student/providers/student.service.ts:44</a></div>
+                                    class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:44</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Get all exam assignments for a given student and include cached/randomized questions.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -314,33 +418,34 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="insertStudents"></a>
+                    <a name="getQuestionModel"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>insertStudents</b></span>
-                        <a href="#insertStudents"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                        <span ><b>getQuestionModel</b></span>
+                        <a href="#getQuestionModel"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>insertStudents(tutorialList: Express.Multer.File)</code>
+                    <code>getQuestionModel(type: <a href="../undefineds/examType.html" target="_self">examType</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">src/student/providers/student.service.ts:38</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:139</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Get Mongoose model based on examType enum</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -355,9 +460,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>tutorialList</td>
+                                                <td>type</td>
                                             <td>
-                                                        <code>Express.Multer.File</code>
+                                                            <code><a href="../miscellaneous/enumerations.html#examType" target="_self" >examType</a></code>
                                             </td>
 
                                             <td>
@@ -370,7 +475,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;[] | null&gt;</code>
+                            <b>Returns : </b>    <code>Model&lt;any&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -384,33 +489,42 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="loginStudent"></a>
+                    <a name="shuffleAndSelect"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>loginStudent</b></span>
-                        <a href="#loginStudent"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                        <span ><b>shuffleAndSelect</b></span>
+                        <a href="#shuffleAndSelect"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>loginStudent(loginStudentDto: <a href="../classes/LoginStudentDto.html" target="_self">LoginStudentDto</a>)</code>
+                    <code>shuffleAndSelect(array: T[], count: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="24"
-                                    class="link-to-prism">src/student/providers/student.service.ts:24</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:127</a></div>
                         </td>
                     </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>T</li>
+                            </ul>
+                        </td>
+                    </tr>
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Shuffle an array and return <code>count</code> number of items</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -425,9 +539,21 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>loginStudentDto</td>
+                                                <td>array</td>
                                             <td>
-                                                            <code><a href="../classes/LoginStudentDto.html" target="_self" >LoginStudentDto</a></code>
+                                                        <code>T[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>count</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
                                             </td>
 
                                             <td>
@@ -440,7 +566,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
+                            <b>Returns : </b>    <code>T[]</code>
 
                         </div>
                             <div class="io-description">
@@ -456,52 +582,154 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { forwardRef, Inject, Injectable, NotFoundException, UnauthorizedException } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+    Inject,
+    Injectable,
+    NotFoundException,
+    InternalServerErrorException,
+} from &#x27;@nestjs/common&#x27;;
 import { InjectModel } from &#x27;@nestjs/mongoose&#x27;;
-import { Student, StudentDocument } from &#x27;../schemas/student.schema&#x27;;
 import { Model } from &#x27;mongoose&#x27;;
-import { InsertStudentProvider } from &#x27;./insert-student.provider&#x27;;
-import { LoginStudentDto } from &#x27;../dtos/login-student.dto&#x27;;
-import { successResponse } from &#x27;src/utils/response-writer&#x27;;
-import { ExamService } from &#x27;src/exam/providers/exam.service&#x27;;
-import { FetchExamAssignmentsProvider } from &#x27;src/exam/providers/fetch-exam-assignments.provider&#x27;;
+import { CACHE_MANAGER } from &#x27;@nestjs/cache-manager&#x27;;
+import { Cache } from &#x27;cache-manager&#x27;;
 
+import { ExamAssignment, ExamAssignmentDocument } from &#x27;../schemas/exam-assigment.schema&#x27;;
+import { Exam, ExamDocument } from &#x27;../schemas/exam.schema&#x27;;
+import { examType } from &#x27;../enums/exam-type.enum&#x27;;
+import { Types } from &#x27;mongoose&#x27;;
+
+/**
+ * Cache for just 1hour
+ */
+const CACHE_TTL &#x3D; 3600;
+
+/**
+ * Provider class to generate and/or fetch assignment for each student
+ */
 @Injectable()
-export class StudentService {
-  constructor(
-    @InjectModel(Student.name)
-    private readonly studentModel: Model&lt;StudentDocument&gt;,
+export class FetchExamAssignmentsProvider {
+    constructor(
+        @InjectModel(ExamAssignment.name)
+        private readonly examAssignmentModel: Model&lt;ExamAssignmentDocument&gt;,
 
-    private readonly insertStudentProvider: InsertStudentProvider,
+        @InjectModel(&#x27;McqQuestion&#x27;)
+        private readonly mcqModel: Model&lt;any&gt;,
 
-    @Inject(forwardRef(() &#x3D;&gt; FetchExamAssignmentsProvider))
-    private readonly fetchExamAssignmentsProviders: FetchExamAssignmentsProvider,
+        @InjectModel(&#x27;OeQuestion&#x27;)
+        private readonly oeModel: Model&lt;any&gt;,
 
-  ) { }
+        @Inject(CACHE_MANAGER)
+        private readonly cacheManager: Cache,
+    ) { }
 
-  public async loginStudent(loginStudentDto: LoginStudentDto) {
+    /**
+     * Get all exam assignments for a given student and include cached/randomized questions.
+     */
+    async getAssignmentsForStudent(studentId: string) {
+        const assignments &#x3D; await this.examAssignmentModel
+            .find({ student: new Types.ObjectId(studentId) })
+            .populate({
+                path: &#x27;exam&#x27;,
+                select: &#x27;courseName courseCode duration examType questionCount questions&#x27;,
+            })
+            .lean()
+            .exec();
 
-    let student &#x3D; await this.studentModel.findOne({ matricNo: loginStudentDto.matricNo })
-    if (!student) {
-      throw new NotFoundException(&#x27;Student with matric number does not exist.&#x27;)
+        if (!assignments.length) {
+            throw new NotFoundException(&#x60;No exam assignments found for student ${studentId}&#x60;);
+        }
+
+        const results &#x3D; await Promise.all(
+            assignments.map(async (assignment) &#x3D;&gt; {
+                const exam &#x3D; assignment.exam as unknown as ExamDocument;
+
+                if (!exam || !exam.questions?.length) return null;
+
+                const examId &#x3D; exam._id.toString();
+                await this.generateAndCacheQuestions(studentId, exam);
+
+                return {
+                    examId,
+                    courseName: exam.courseName,
+                    courseCode: exam.courseCode,
+                    duration: exam.duration,
+                    examType: exam.examType
+                };
+            }),
+        );
+
+        return results.filter(Boolean); // Remove nulls
     }
 
-    if (student.fullName.split(&#x27; &#x27;)[0].toLowerCase() !&#x3D; loginStudentDto.password.toLowerCase()) {
-      throw new UnauthorizedException(&#x27;Incorrect password&#x27;)
+    /**
+     * Generate and cache a list of randomized question IDs for a student-exam combo
+     */
+    async generateAndCacheQuestions(studentId: string, exam: ExamDocument): Promise&lt;string[]&gt; {
+        const examId &#x3D; exam._id.toString();
+        const cacheKey &#x3D; &#x60;exam-questions:${studentId}:${examId}&#x60;;
+
+        // Return cached question IDs if available
+        const cached &#x3D; await this.cacheManager.get&lt;string[]&gt;(cacheKey);
+        if (cached) return cached;
+
+        const questions &#x3D; exam.questions;
+        if (!questions?.length) {
+            throw new Error(&#x60;No questions available for exam ${examId}&#x60;);
+        }
+
+        if (exam.questionCount &gt; questions.length) {
+            throw new Error(&#x60;Exam ${examId} requests ${exam.questionCount} questions but only ${questions.length} are available&#x60;);
+        }
+
+        const selected &#x3D; this.shuffleAndSelect(questions, exam.questionCount);
+        const questionIds &#x3D; selected.map((q) &#x3D;&gt; q.toString());
+
+        // Cache the selected question IDs
+        await this.cacheManager.set(cacheKey, questionIds, CACHE_TTL);
+
+        // Load full question objects and cache each individually
+        const model &#x3D; this.getQuestionModel(exam.examType);
+        const fullQuestions &#x3D; await model.find({ _id: { $in: selected } }).lean().exec();
+
+        await Promise.all(
+            fullQuestions.map(async (question) &#x3D;&gt; {
+                const qid &#x3D; question._id.toString();
+                const key &#x3D; &#x60;question:${qid}&#x60;;
+                const exists &#x3D; await this.cacheManager.get(key);
+                if (!exists) {
+                    await this.cacheManager.set(key, question, CACHE_TTL);
+                }
+            }),
+        );
+
+        return questionIds;
     }
 
-    return successResponse({ message: &#x27;Login Successful&#x27;, data: student })
-  }
+    /**
+     * Shuffle an array and return &#x60;count&#x60; number of items
+     */
+    private shuffleAndSelect&lt;T&gt;(array: T[], count: number): T[] {
+        const copy &#x3D; [...array];
+        for (let i &#x3D; 0; i &lt; count; i++) {
+            const j &#x3D; i + Math.floor(Math.random() * (copy.length - i));
+            [copy[i], copy[j]] &#x3D; [copy[j], copy[i]];
+        }
+        return copy.slice(0, count);
+    }
 
-  public async insertStudents(
-    tutorialList: Express.Multer.File,
-  ): Promise&lt;string[] | null&gt; {
-    return this.insertStudentProvider.insertStudents(tutorialList)
-  }
-
-  public async fetchStudentAssignments(studentId: string) {
-    return this.fetchExamAssignmentsProviders.getAssignmentsForStudent(studentId)
-  }
+    /**
+     * Get Mongoose model based on examType enum
+     */
+    private getQuestionModel(type: examType): Model&lt;any&gt; {
+        switch (type) {
+            case examType.MCQ:
+                return this.mcqModel;
+            case examType.OE:
+                return this.oeModel;
+            default:
+                throw new InternalServerErrorException(&#x60;Unknown exam type: ${type}&#x60;);
+        }
+    }
 }
 </code></pre>
     </div>
@@ -546,7 +774,7 @@ export class StudentService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'StudentService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'FetchExamAssignmentsProvider.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

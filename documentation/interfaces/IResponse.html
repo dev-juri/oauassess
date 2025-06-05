@@ -98,7 +98,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  ActiveAdminData</li>
+  IResponse</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -122,10 +122,18 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/admin/auth/interfaces/active-admin-data.interface.ts</code>
+            <code>src/utils/response-writer.ts</code>
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Standard interface for API responses.</p>
+<p>This structure is used to return a consistent response format across all endpoints.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -141,21 +149,22 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#email" 
+                                            <span class="modifier">Optional</span>
+                                        <a href="#data" 
 >
-                                            email
+                                            data
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#name" 
+                                        <a href="#message" 
 >
-                                            name
+                                            message
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#sub" 
+                                        <a href="#success" 
 >
-                                            sub
+                                            success
                                         </a>
                                 </li>
                             </ul>
@@ -173,9 +182,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="email"></a>
-                                        <span class="name "><b>email</b>
-                                            <a href="#email">
+                                        <a name="data"></a>
+                                        <span class="name "><b>data</b>
+                                            <a href="#data">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -183,7 +192,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>email:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>data:         <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -191,24 +200,45 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
                                         </td>
                                     </tr>
 
 
 
 
-
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The actual response payload.</p>
+<ul>
+<li>Can be <code>null</code> or <code>undefined</code> if there’s no data to return.</li>
+<li>The structure depends on the specific endpoint.</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>A created user object.</li>
+<li>An array of exams.</li>
+<li>A single exam result.</li>
+</ul>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="name"></a>
-                                        <span class="name "><b>name</b>
-                                            <a href="#name">
+                                        <a name="message"></a>
+                                        <span class="name "><b>message</b>
+                                            <a href="#message">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -216,7 +246,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>name:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>message:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -233,15 +263,26 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>A descriptive message providing additional context about the result of the operation.</p>
+<p>For example:</p>
+<ul>
+<li><code>&quot;Exam created successfully&quot;</code> for successful actions.</li>
+<li><code>&quot;Invalid exam ID&quot;</code> for errors.</li>
+</ul>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="sub"></a>
-                                        <span class="name "><b>sub</b>
-                                            <a href="#sub">
+                                        <a name="success"></a>
+                                        <span class="name "><b>success</b>
+                                            <a href="#success">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -249,7 +290,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>sub:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>success:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -257,7 +298,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                                         </td>
                                     </tr>
@@ -266,6 +307,16 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Indicates whether the operation was successful.</p>
+<ul>
+<li><code>true</code> if the request was handled successfully.</li>
+<li><code>false</code> if an error occurred.</li>
+</ul>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -273,10 +324,55 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface ActiveAdminData {
-    sub: string;
-    name: string;
-    email: string;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export function successResponse({
+  message,
+  data,
+}: {
+  message: string;
+  data?: any;
+}): IResponse {
+  return {
+    success: true,
+    message,
+    data,
+  };
+}
+
+
+/**
+ * Standard interface for API responses.
+ * 
+ * This structure is used to return a consistent response format across all endpoints.
+ */
+export interface IResponse {
+  /**
+   * Indicates whether the operation was successful.
+   * - &#x60;true&#x60; if the request was handled successfully.
+   * - &#x60;false&#x60; if an error occurred.
+   */
+  success: boolean;
+
+  /**
+   * A descriptive message providing additional context about the result of the operation.
+   * 
+   * For example:
+   * - &#x60;&quot;Exam created successfully&quot;&#x60; for successful actions.
+   * - &#x60;&quot;Invalid exam ID&quot;&#x60; for errors.
+   */
+  message: string;
+
+  /**
+   * The actual response payload.
+   * 
+   * - Can be &#x60;null&#x60; or &#x60;undefined&#x60; if there’s no data to return.
+   * - The structure depends on the specific endpoint.
+   * 
+   * Examples:
+   * - A created user object.
+   * - An array of exams.
+   * - A single exam result.
+   */
+  data?: any;
 }</code></pre>
     </div>
 </div>
@@ -314,7 +410,7 @@
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'ActiveAdminData.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'IResponse.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

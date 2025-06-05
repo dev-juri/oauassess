@@ -95,7 +95,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Classes</li>
-  <li class="breadcrumb-item" >UpdateMcqExamParamDto</li>
+  <li class="breadcrumb-item" >UpdateExamParamDto</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -119,10 +119,18 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/exam/dtos/update-mcq-exam-param.dto.ts</code>
+            <code>src/exam/dtos/update-exam-param.dto.ts</code>
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>DTO for extracting the <code>examId</code> from the URL path
+when updating or deleting an exam (MCQ or OE).</p>
+
+            </p>
 
 
 
@@ -189,16 +197,23 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @ApiProperty({description: &#x27;Unique identifier of the MCQ exam to update&#x27;, example: &#x27;exam_123abc&#x27;})<br />@IsString()<br />@IsNotEmpty()<br />
+                            @ApiProperty({description: &#x27;Unique identifier of the exam to update or delete&#x27;, example: &#x27;exam_123abc&#x27;})<br />@IsString()<br />@IsNotEmpty()<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/exam/dtos/update-mcq-exam-param.dto.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/exam/dtos/update-exam-param.dto.ts:20</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unique identifier of the exam to update or delete.</p>
+<p>Example: <code>exam_123abc</code></p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -217,9 +232,18 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ApiProperty } from &#x27;@nestjs/swagger&#x27;;
 import { IsString, IsNotEmpty } from &#x27;class-validator&#x27;;
 
-export class UpdateMcqExamParamDto {
+/**
+ * DTO for extracting the &#x60;examId&#x60; from the URL path
+ * when updating or deleting an exam (MCQ or OE).
+ */
+export class UpdateExamParamDto {
+  /**
+   * Unique identifier of the exam to update or delete.
+   * 
+   * Example: &#x60;exam_123abc&#x60;
+   */
   @ApiProperty({
-    description: &#x27;Unique identifier of the MCQ exam to update&#x27;,
+    description: &#x27;Unique identifier of the exam to update or delete&#x27;,
     example: &#x27;exam_123abc&#x27;,
   })
   @IsString()
@@ -264,7 +288,7 @@ export class UpdateMcqExamParamDto {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'UpdateMcqExamParamDto.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'UpdateExamParamDto.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

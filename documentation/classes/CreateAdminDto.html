@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>examigpt documentation</title>
+        <title>oauassess documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">examigpt documentation</a>
+                    <a href="../" class="navbar-brand">oauassess documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -143,15 +143,18 @@
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#email" >email</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#name" >name</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
@@ -186,6 +189,7 @@
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>email</b></span>
                         <a href="#email"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -202,13 +206,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsEmail()<br />@IsNotEmpty()<br />@IsString()<br />
+                            @ApiProperty({description: &#x27;Email address of the admin&#x27;, example: &#x27;admin@example.com&#x27;})<br />@IsEmail()<br />@IsNotEmpty()<br />@IsString()<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/admin/dtos/create-admin.dto.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/admin/dtos/create-admin.dto.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -221,6 +225,7 @@
                 <td class="col-md-4">
                     <a name="name"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
@@ -240,13 +245,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsString()<br />@IsNotEmpty()<br />@MinLength(3)<br />
+                            @ApiProperty({description: &#x27;Full name of the admin&#x27;, example: &#x27;John Doe&#x27;, minLength: 3})<br />@IsString()<br />@IsNotEmpty()<br />@MinLength(3)<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/admin/dtos/create-admin.dto.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/admin/dtos/create-admin.dto.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -259,6 +264,7 @@
                 <td class="col-md-4">
                     <a name="password"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
@@ -279,13 +285,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsString()<br />@IsNotEmpty()<br />@MinLength(8)<br />@Matches(/^(?&#x3D;.*[A-Za-z])(?&#x3D;.*\d)(?&#x3D;.*[@$!%*#?&amp;])[A-Za-z\d@$!%*#?&amp;]{8,}$/, {message: &#x27;Minimum eight characters, at least one letter, one number and one special character&#x27;})<br />
+                            @ApiProperty({description: &#x27;Password (Minimum eight characters, at least one letter, one number, and one special character)&#x27;, example: &#x27;Passw0rd!&#x27;, minLength: 8})<br />@IsString()<br />@IsNotEmpty()<br />@MinLength(8)<br />@Matches(/^(?&#x3D;.*[A-Za-z])(?&#x3D;.*\d)(?&#x3D;.*[@$!%*#?&amp;])[A-Za-z\d@$!%*#?&amp;]{8,}$/, {message: &#x27;Minimum eight characters, at least one letter, one number and one special character&#x27;})<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/admin/dtos/create-admin.dto.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/admin/dtos/create-admin.dto.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -304,7 +310,8 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ApiProperty } from &#x27;@nestjs/swagger&#x27;;
+import {
   IsEmail,
   IsNotEmpty,
   IsString,
@@ -313,16 +320,31 @@
 } from &#x27;class-validator&#x27;;
 
 export class CreateAdminDto {
+  @ApiProperty({
+    description: &#x27;Full name of the admin&#x27;,
+    example: &#x27;John Doe&#x27;,
+    minLength: 3,
+  })
   @IsString()
   @IsNotEmpty()
   @MinLength(3)
   name: string;
 
+  @ApiProperty({
+    description: &#x27;Email address of the admin&#x27;,
+    example: &#x27;admin@example.com&#x27;,
+  })
   @IsEmail()
   @IsNotEmpty()
   @IsString()
   email: string;
 
+  @ApiProperty({
+    description:
+      &#x27;Password (Minimum eight characters, at least one letter, one number, and one special character)&#x27;,
+    example: &#x27;Passw0rd!&#x27;,
+    minLength: 8,
+  })
   @IsString()
   @IsNotEmpty()
   @MinLength(8)

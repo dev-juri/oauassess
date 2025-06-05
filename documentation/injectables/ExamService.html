@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>examigpt documentation</title>
+        <title>oauassess documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">examigpt documentation</a>
+                    <a href="../" class="navbar-brand">oauassess documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -119,6 +119,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service responsible for managing exams and their related operations.
+Delegates creation and updates to appropriate providers based on exam type.</p>
+
+            </p>
 
 
 
@@ -148,6 +156,11 @@
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
+                                <a href="#deleteOeExam" >deleteOeExam</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
                                 <a href="#updateMcqExam" >updateMcqExam</a>
                             </li>
                             <li>
@@ -173,12 +186,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(createExamProvider: <a href="../injectables/CreateExamProvider.html" target="_self">CreateExamProvider</a>, updateMcqExamProvider: <a href="../injectables/UpdateMcqExamProvider.html" target="_self">UpdateMcqExamProvider</a>, updateOeExamProvider: <a href="../injectables/UpdateOeExamProvider.html" target="_self">UpdateOeExamProvider</a>, examModel: <a href="../classes/Exam.html" target="_self">Model&lt;ExamDocument&gt;</a>, mcqQuestionModel: Model<McqQuestion>)</code>
+<code>constructor(createExamProvider: <a href="../injectables/CreateExamProvider.html" target="_self">CreateExamProvider</a>, updateMcqExamProvider: <a href="../injectables/UpdateMcqExamProvider.html" target="_self">UpdateMcqExamProvider</a>, updateOeExamProvider: <a href="../injectables/UpdateOeExamProvider.html" target="_self">UpdateOeExamProvider</a>, examModel: <a href="../classes/Exam.html" target="_self">Model&lt;ExamDocument&gt;</a>, mcqQuestionModel: Model<McqQuestion>, oeQuestionModel: <a href="../classes/OeQuestion.html" target="_self">Model&lt;OeQuestion&gt;</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/exam/providers/exam.service.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/exam/providers/exam.service.ts:22</a></div>
                             </td>
                         </tr>
 
@@ -255,6 +268,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>oeQuestionModel</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/OeQuestion.html" target="_self" >Model&lt;OeQuestion&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -292,14 +317,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="30"
-                                    class="link-to-prism">src/exam/providers/exam.service.ts:30</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/exam/providers/exam.service.ts:47</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Creates a new exam and assigns it to students from the uploaded list.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -310,6 +337,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -324,6 +352,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Exam creation data</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>tutorialList</td>
@@ -336,6 +370,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>XLSX file containing student list</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -345,7 +385,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Response object with created exam</p>
+
                             </div>
                 </td>
             </tr>
@@ -374,14 +415,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="57"
-                                    class="link-to-prism">src/exam/providers/exam.service.ts:57</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/exam/providers/exam.service.ts:91</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Deletes an MCQ exam and all its associated questions.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -392,6 +435,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -406,6 +450,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>ID of the exam to delete</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -415,7 +465,88 @@
 
                         </div>
                             <div class="io-description">
+                                <p>Response confirming deletion</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteOeExam"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>deleteOeExam</b></span>
+                        <a href="#deleteOeExam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteOeExam(examId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="164"
+                                    class="link-to-prism">src/exam/providers/exam.service.ts:164</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Deletes an open-ended (OE) exam and all its associated questions.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
                                 
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>examId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>ID of the exam to delete</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Response confirming deletion</p>
+
                             </div>
                 </td>
             </tr>
@@ -444,14 +575,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">src/exam/providers/exam.service.ts:45</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="71"
+                                    class="link-to-prism">src/exam/providers/exam.service.ts:71</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates an existing MCQ exam by uploading new question templates.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -462,6 +595,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -476,6 +610,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>ID of the exam to update</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>mcqTemplate</td>
@@ -488,6 +628,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>XLSX file containing MCQ questions</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -497,7 +643,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Response on successful update</p>
+
                             </div>
                 </td>
             </tr>
@@ -526,14 +673,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="73"
-                                    class="link-to-prism">src/exam/providers/exam.service.ts:73</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/exam/providers/exam.service.ts:116</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates an open-ended (OE) exam with new questions and marking guide.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -544,6 +693,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -558,6 +708,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>ID of the exam to update</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>templates</td>
@@ -570,6 +726,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Array of files including XLSX for questions and DOCX/PDF for marking guide</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -579,7 +741,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Response on successful update</p>
+
                             </div>
                 </td>
             </tr>
@@ -596,7 +759,7 @@
   Injectable,
   NotFoundException,
 } from &#x27;@nestjs/common&#x27;;
-import { CreateExamDto } from &#x27;../dtos/create-mcq-exam.dto&#x27;;
+import { CreateExamDto } from &#x27;../dtos/create-exam.dto&#x27;;
 import { CreateExamProvider } from &#x27;./create-exam.provider&#x27;;
 import { UpdateMcqExamProvider } from &#x27;./update-mcq-exam.provider&#x27;;
 import { Model } from &#x27;mongoose&#x27;;
@@ -605,7 +768,12 @@ import { InjectModel } from &#x27;@nestjs/mongoose&#x27;;
 import { successResponse } from &#x27;src/utils/response-writer&#x27;;
 import { McqQuestion } from &#x27;../schemas/mcq/mcq-question.schema&#x27;;
 import { UpdateOeExamProvider } from &#x27;./update-oe-exam.provider&#x27;;
+import { OeQuestion } from &#x27;../schemas/oe/oe-question.schema&#x27;;
 
+/**
+ * Service responsible for managing exams and their related operations.
+ * Delegates creation and updates to appropriate providers based on exam type.
+ */
 @Injectable()
 export class ExamService {
   constructor(
@@ -618,8 +786,20 @@ export class ExamService {
 
     @InjectModel(McqQuestion.name)
     private readonly mcqQuestionModel: Model&lt;McqQuestion&gt;,
+
+    @InjectModel(OeQuestion.name)
+    private readonly oeQuestionModel: Model&lt;OeQuestion&gt;,
   ) {}
 
+  /**
+   * Creates a new exam and assigns it to students from the uploaded list.
+   *
+   * @param createExamDto - Exam creation data
+   * @param tutorialList - XLSX file containing student list
+   * @returns Response object with created exam
+   *
+   * @throws {BadRequestException} If file is not a valid .xlsx format
+   */
   public async createExam(
     createExamDto: CreateExamDto,
     tutorialList: Express.Multer.File,
@@ -635,6 +815,15 @@ export class ExamService {
     return this.createExamProvider.createExam(createExamDto, tutorialList);
   }
 
+  /**
+   * Updates an existing MCQ exam by uploading new question templates.
+   *
+   * @param examId - ID of the exam to update
+   * @param mcqTemplate - XLSX file containing MCQ questions
+   * @returns Response on successful update
+   *
+   * @throws {BadRequestException} If file is not a valid .xlsx format
+   */
   public async updateMcqExam(examId: string, mcqTemplate: Express.Multer.File) {
     if (
       !mcqTemplate ||
@@ -647,6 +836,14 @@ export class ExamService {
     return this.updateMcqExamProvider.updateMcqExam(examId, mcqTemplate);
   }
 
+  /**
+   * Deletes an MCQ exam and all its associated questions.
+   *
+   * @param examId - ID of the exam to delete
+   * @returns Response confirming deletion
+   *
+   * @throws {NotFoundException} If exam is not found
+   */
   public async deleteMcqExam(examId: string) {
     const exam &#x3D; await this.examModel.findById(examId);
 
@@ -663,6 +860,15 @@ export class ExamService {
     return successResponse({ message: &#x27;Exam and related questions deleted&#x27; });
   }
 
+  /**
+   * Updates an open-ended (OE) exam with new questions and marking guide.
+   *
+   * @param examId - ID of the exam to update
+   * @param templates - Array of files including XLSX for questions and DOCX/PDF for marking guide
+   * @returns Response on successful update
+   *
+   * @throws {BadRequestException} If required files are missing or invalid
+   */
   public async updateOeExam(examId: string, templates: Express.Multer.File[]) {
     let mGuide: Express.Multer.File;
     let oeTemplate: Express.Multer.File;
@@ -702,8 +908,31 @@ export class ExamService {
 
     return this.updateOeExamProvider.updateOeExam(examId, mGuide, oeTemplate);
   }
-}
-</code></pre>
+
+  /**
+   * Deletes an open-ended (OE) exam and all its associated questions.
+   *
+   * @param examId - ID of the exam to delete
+   * @returns Response confirming deletion
+   *
+   * @throws {NotFoundException} If exam is not found
+   */
+  public async deleteOeExam(examId: string) {
+    const exam &#x3D; await this.examModel.findById(examId);
+
+    if (!exam) {
+      throw new NotFoundException(&#x27;Exam not found&#x27;);
+    }
+
+    if (exam.questions?.length) {
+      await this.oeQuestionModel.deleteMany({ _id: { $in: exam.questions } });
+    }
+
+    await this.examModel.findByIdAndDelete(examId);
+
+    return successResponse({ message: &#x27;Exam and related questions deleted&#x27; });
+  }
+}</code></pre>
     </div>
 
 </div>

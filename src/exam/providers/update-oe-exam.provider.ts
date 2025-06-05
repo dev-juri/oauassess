@@ -15,9 +15,12 @@ import {
   iOeExpectedKeys,
   IOeQuestion,
 } from 'src/utils/interfaces/oe-question.interface';
-import { successResponse } from 'src/utils/response-writer';
+import { IResponse, successResponse } from 'src/utils/response-writer';
 import { examType } from '../enums/exam-type.enum';
 
+/**
+ * Provider responsible for updating open-ended (OE) exams.
+ */
 @Injectable()
 export class UpdateOeExamProvider {
   constructor(
@@ -31,11 +34,26 @@ export class UpdateOeExamProvider {
     private readonly connection: Connection,
   ) {}
 
+  /**
+   * Updates an OE exam by inserting parsed questions from an uploaded template.
+   *
+   * - Verifies exam existence and type
+   * - Parses OE questions template
+   * - Inserts questions and links them to the exam
+   *
+   * @param examId - ID of the exam to update
+   * @param markingGuide - File containing marking guide (not yet processed)
+   * @param oeTemplate - File containing open-ended questions
+   * @returns Success response if update completes
+   *
+   * @throws {NotFoundException} If exam is not found
+   * @throws {BadRequestException} If exam type is not OE or questions are invalid
+   */
   public async updateOeExam(
     examId: string,
     markingGuide: Express.Multer.File,
     oeTemplate: Express.Multer.File,
-  ) {
+  ): Promise<IResponse> {
     const exam = await this.examSchema.findById(examId);
 
     if (!exam) {
@@ -60,12 +78,12 @@ export class UpdateOeExamProvider {
         insertOne: { document: { question: oeq.Question } },
       }));
 
-      let result = await this.oeQuestionModel.bulkWrite(operations, {
+      const result = await this.oeQuestionModel.bulkWrite(operations, {
         session,
       });
 
       const insertedQuestionIds = Object.values(result.insertedIds || {});
-      console.log(insertedQuestionIds)
+      console.log(insertedQuestionIds);
 
       // TODO: Create Assistant and update exam with assistantId
 
