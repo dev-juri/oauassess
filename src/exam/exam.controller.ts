@@ -66,10 +66,10 @@ export class ExamController {
         tutorialList: {
           type: 'string',
           format: 'binary',
-          description: 'Optional tutorial file upload',
+          description: 'Tutorial file upload',
         },
       },
-      required: ['courseName', 'courseCode', 'duration', 'questionCount', 'examType'],
+      required: ['courseName', 'courseCode', 'duration', 'questionCount', 'examType', 'tutorialList'],
     },
   })
   @ApiResponse({ status: 201, description: 'Exam created successfully' })
