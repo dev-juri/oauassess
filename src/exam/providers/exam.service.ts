@@ -12,6 +12,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { successResponse } from 'src/utils/response-writer';
 import { McqQuestion } from '../schemas/mcq/mcq-question.schema';
 import { UpdateOeExamProvider } from './update-oe-exam.provider';
+import { OeQuestion } from '../schemas/oe/oe-question.schema';
 
 @Injectable()
 export class ExamService {
@@ -25,6 +26,9 @@ export class ExamService {
 
     @InjectModel(McqQuestion.name)
     private readonly mcqQuestionModel: Model<McqQuestion>,
+
+    @InjectModel(OeQuestion.name)
+    private readonly oeQuestionModel: Model<OeQuestion>
   ) {}
 
   public async createExam(
@@ -108,5 +112,21 @@ export class ExamService {
     }
 
     return this.updateOeExamProvider.updateOeExam(examId, mGuide, oeTemplate);
+  }
+
+    public async deleteOeExam(examId: string) {
+    const exam = await this.examModel.findById(examId);
+
+    if (!exam) {
+      throw new NotFoundException('Exam not found');
+    }
+
+    if (exam.questions?.length) {
+      await this.oeQuestionModel.deleteMany({ _id: { $in: exam.questions } });
+    }
+
+    await this.examModel.findByIdAndDelete(examId);
+
+    return successResponse({ message: 'Exam and related questions deleted' });
   }
 }

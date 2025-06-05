@@ -6,7 +6,6 @@ import { Connection, Model } from 'mongoose';
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import { CreateExamAssignmentDto } from '../dtos/create-exam-assignment.dto';
 import { examType } from '../enums/exam-type.enum';
-import { examSchemaEnum } from '../enums/exam-schema.enum';
 import {
   ExamAssignment,
   ExamAssignmentDocument,
@@ -55,10 +54,7 @@ export class CreateExamProvider {
             $set: {
               exam: exam._id.toString(),
               student: student,
-              examSchema:
-                createExamDto.examType == examType.MCQ
-                  ? examSchemaEnum.McqExam
-                  : examSchemaEnum.TheoryExam,
+              examSchema: exam.examType,
             } as CreateExamAssignmentDto,
           },
           upsert: true,

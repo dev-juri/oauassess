@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Student } from 'src/student/schemas/student.schema';
-import { examSchemaEnum } from '../enums/exam-schema.enum';
 import { Exam } from './exam.schema';
 
 export type ExamAssignmentDocument = HydratedDocument<ExamAssignment>;
