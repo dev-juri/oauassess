@@ -11,12 +11,8 @@ export class CacheService {
   async get<T>(key: string): Promise<T | null> {
     try {
       const cached = await this.cacheManager.get<T>(key);
-      if (cached) {
-        console.log(`Cache hit: ${key}`);
-      }
       return cached;
     } catch (error) {
-      console.error(`Cache get error for key ${key}:`, error);
       return null;
     }
   }
@@ -24,7 +20,6 @@ export class CacheService {
   async set<T>(key: string, value: T, ttl?: number): Promise<void> {
     try {
       await this.cacheManager.set(key, value, ttl);
-      console.log(`Cache set: ${key}`);
     } catch (error) {
       console.error(`Cache set error for key ${key}:`, error);
     }
@@ -33,7 +28,6 @@ export class CacheService {
   async del(key: string): Promise<void> {
     try {
       await this.cacheManager.del(key);
-      console.log(`Cache delete: ${key}`);
     } catch (error) {
       console.error(`Cache delete error for key ${key}:`, error);
     }
@@ -45,7 +39,6 @@ export class CacheService {
       const promises = keys.map(key => this.get<T>(key));
       return await Promise.all(promises);
     } catch (error) {
-      console.error('Cache mget error:', error);
       return keys.map(() => null);
     }
   }

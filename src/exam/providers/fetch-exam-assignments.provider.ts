@@ -12,9 +12,9 @@ import { Types } from 'mongoose';
 import { CacheService } from 'src/cache/cache.service';
 
 /**
- * Cache for just 1hour
+ * Cache for just 2hours
  */
-const CACHE_TTL = 3600;
+const CACHE_TTL = 7200000;
 
 /**
  * Provider class to generate and/or fetch assignment for each student
@@ -86,7 +86,6 @@ export class FetchExamAssignmentsProvider {
         try {
             const cached = await this.cacheService.get<CachedQuestion[]>(cacheKey);
             if (cached) {
-                console.log(`Cache hit for key: ${cacheKey}, returning ${cached.length} questions`);
                 return cached;
             }
 
@@ -102,7 +101,6 @@ export class FetchExamAssignmentsProvider {
 
             // Select random questions
             const selected = this.shuffleAndSelect(questions, exam.questionCount);
-            console.log(`Selected ${selected.length} questions for exam ${examId}`);
 
             // Get the appropriate model based on exam type
             const model = this.getQuestionModel(exam.examType);
@@ -113,8 +111,6 @@ export class FetchExamAssignmentsProvider {
                 .lean()
                 .exec();
 
-            console.log(`Fetched ${fullQuestions.length} questions from database`);
-
             // Process questions based on exam type
             let processedQuestions: CachedQuestion[];
 
@@ -124,7 +120,6 @@ export class FetchExamAssignmentsProvider {
                     id: q._id.toString(),
                     question: q.question
                 }));
-                console.log(`Processed ${processedQuestions.length} OE questions`);
             } else {
                 // For MCQ questions, cache id, question, and options
                 processedQuestions = fullQuestions.map(q => ({
@@ -132,7 +127,6 @@ export class FetchExamAssignmentsProvider {
                     question: q.question,
                     options: q.options
                 }));
-                console.log(`Processed ${processedQuestions.length} MCQ questions`);
             }
 
             await this.cacheService.set<CachedQuestion[]>(cacheKey, processedQuestions, CACHE_TTL);
