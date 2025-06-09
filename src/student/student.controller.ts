@@ -16,7 +16,7 @@ export class StudentController {
         return this.studentService.loginStudent(loginStudentDto)
     }
 
-    @Get('assignments/:studentId')
+    @Get(':studentId/assignments')
     public async fetchExams(@Param('studentId') studentId: string) {
         return this.studentService.fetchStudentAssignments(studentId)
     }

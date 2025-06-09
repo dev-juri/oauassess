@@ -42,6 +42,8 @@ export class StudentService {
   }
 
   public async fetchStudentAssignments(studentId: string) {
-    return this.fetchExamAssignmentsProviders.getAssignmentsForStudent(studentId)
+    const result = await this.fetchExamAssignmentsProviders.getAssignmentsForStudent(studentId)
+
+    return successResponse({ message: 'Exam Assignments for Student fetched', data: result })
   }
 }
