@@ -33,7 +33,8 @@ export class ExamService {
 
     @InjectModel(OeQuestion.name)
     private readonly oeQuestionModel: Model<OeQuestion>,
-  ) {}
+
+  ) { }
 
   /**
    * Creates a new exam and assigns it to students from the uploaded list.
@@ -51,7 +52,7 @@ export class ExamService {
     if (
       !tutorialList ||
       tutorialList.mimetype !==
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     ) {
       throw new BadRequestException('Only .xlsx files are allowed');
     }
@@ -72,7 +73,7 @@ export class ExamService {
     if (
       !mcqTemplate ||
       mcqTemplate.mimetype !==
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     ) {
       throw new BadRequestException('Only .xlsx files are allowed');
     }
@@ -89,11 +90,7 @@ export class ExamService {
    * @throws {NotFoundException} If exam is not found
    */
   public async deleteMcqExam(examId: string) {
-    const exam = await this.examModel.findById(examId);
-
-    if (!exam) {
-      throw new NotFoundException('Exam not found');
-    }
+    const exam = await this.fetchExam(examId)
 
     if (exam.questions?.length) {
       await this.mcqQuestionModel.deleteMany({ _id: { $in: exam.questions } });
@@ -126,7 +123,7 @@ export class ExamService {
     for (const template of templates) {
       if (
         template.mimetype ===
-          'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
         template.mimetype === 'application/pdf'
       ) {
         mGuide = template;
@@ -162,11 +159,7 @@ export class ExamService {
    * @throws {NotFoundException} If exam is not found
    */
   public async deleteOeExam(examId: string) {
-    const exam = await this.examModel.findById(examId);
-
-    if (!exam) {
-      throw new NotFoundException('Exam not found');
-    }
+    const exam = await this.fetchExam(examId)
 
     if (exam.questions?.length) {
       await this.oeQuestionModel.deleteMany({ _id: { $in: exam.questions } });
@@ -175,5 +168,16 @@ export class ExamService {
     await this.examModel.findByIdAndDelete(examId);
 
     return successResponse({ message: 'Exam and related questions deleted' });
+  }
+
+
+  public async fetchExam(examId: string) {
+    const exam = await this.examModel.findById(examId);
+
+    if (!exam) {
+      throw new NotFoundException('Exam not found');
+    }
+
+    return exam
   }
 }

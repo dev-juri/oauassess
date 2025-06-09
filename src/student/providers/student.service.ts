@@ -7,6 +7,7 @@ import { LoginStudentDto } from '../dtos/login-student.dto';
 import { successResponse } from 'src/utils/response-writer';
 import { ExamService } from 'src/exam/providers/exam.service';
 import { FetchExamAssignmentsProvider } from 'src/exam/providers/fetch-exam-assignments.provider';
+import { FetchQuestionParamsDto } from '../dtos/fetch-question-params.dto';
 
 @Injectable()
 export class StudentService {
@@ -18,6 +19,9 @@ export class StudentService {
 
     @Inject(forwardRef(() => FetchExamAssignmentsProvider))
     private readonly fetchExamAssignmentsProviders: FetchExamAssignmentsProvider,
+
+    @Inject(forwardRef(() => ExamService))
+    private readonly examService: ExamService,
 
   ) { }
 
@@ -45,5 +49,13 @@ export class StudentService {
     const result = await this.fetchExamAssignmentsProviders.getAssignmentsForStudent(studentId)
 
     return successResponse({ message: 'Exam Assignments for Student fetched', data: result })
+  }
+
+  public async fetchQuestionsForStudent(fetchQuestionParamsDto: FetchQuestionParamsDto) {
+    const exam = await this.examService.fetchExam(fetchQuestionParamsDto.examId);
+
+    const questions = await this.fetchExamAssignmentsProviders.generateAndCacheQuestions(fetchQuestionParamsDto.studentId, exam)
+  
+    return successResponse({message: "Questions retrieved successfully", data: questions})
   }
 }

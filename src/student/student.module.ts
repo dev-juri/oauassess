@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Student, StudentSchema } from './schemas/student.schema';
 import { InsertStudentProvider } from './providers/insert-student.provider';
 import { ExamModule } from 'src/exam/exam.module';
+import { ExamService } from 'src/exam/providers/exam.service';
 
 @Module({
   imports: [

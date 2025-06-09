@@ -1,18 +1,15 @@
 import {
-    Inject,
     Injectable,
     NotFoundException,
     InternalServerErrorException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Cache } from 'cache-manager';
-
 import { ExamAssignment, ExamAssignmentDocument } from '../schemas/exam-assigment.schema';
-import { Exam, ExamDocument } from '../schemas/exam.schema';
+import { ExamDocument } from '../schemas/exam.schema';
 import { examType } from '../enums/exam-type.enum';
 import { Types } from 'mongoose';
+import { CacheService } from 'src/cache/cache.service';
 
 /**
  * Cache for just 1hour
@@ -34,8 +31,7 @@ export class FetchExamAssignmentsProvider {
         @InjectModel('OeQuestion')
         private readonly oeModel: Model<any>,
 
-        @Inject(CACHE_MANAGER)
-        private readonly cacheManager: Cache,
+        private readonly cacheService: CacheService,
     ) { }
 
     /**
@@ -57,12 +53,11 @@ export class FetchExamAssignmentsProvider {
 
         const results = await Promise.all(
             assignments.map(async (assignment) => {
-                const exam = assignment.exam as unknown as ExamDocument;
+                const exam = assignment.exam as ExamDocument;
 
                 if (!exam || !exam.questions?.length) return null;
 
                 const examId = exam._id.toString();
-                await this.generateAndCacheQuestions(studentId, exam);
 
                 return {
                     examId,
@@ -77,48 +72,76 @@ export class FetchExamAssignmentsProvider {
         return results.filter(Boolean); // Remove nulls
     }
 
+
     /**
-     * Generate and cache a list of randomized question IDs for a student-exam combo
+     * Generate and cache a list of randomized questions for a student-exam combo
      */
-    async generateAndCacheQuestions(studentId: string, exam: ExamDocument): Promise<string[]> {
+    async generateAndCacheQuestions(
+        studentId: string,
+        exam: ExamDocument
+    ): Promise<CachedQuestion[]> {
         const examId = exam._id.toString();
         const cacheKey = `exam-questions:${studentId}:${examId}`;
 
-        // Return cached question IDs if available
-        const cached = await this.cacheManager.get<string[]>(cacheKey);
-        if (cached) return cached;
+        try {
+            const cached = await this.cacheService.get<CachedQuestion[]>(cacheKey);
+            if (cached) {
+                console.log(`Cache hit for key: ${cacheKey}, returning ${cached.length} questions`);
+                return cached;
+            }
 
-        const questions = exam.questions;
-        if (!questions?.length) {
-            throw new Error(`No questions available for exam ${examId}`);
+            // Validate exam questions
+            const questions = exam.questions;
+            if (!questions?.length) {
+                throw new Error(`No questions available for exam ${examId}`);
+            }
+
+            if (exam.questionCount > questions.length) {
+                throw new Error(`Exam ${examId} requests ${exam.questionCount} questions but only ${questions.length} are available`);
+            }
+
+            // Select random questions
+            const selected = this.shuffleAndSelect(questions, exam.questionCount);
+            console.log(`Selected ${selected.length} questions for exam ${examId}`);
+
+            // Get the appropriate model based on exam type
+            const model = this.getQuestionModel(exam.examType);
+
+            // Bulk fetch all questions in a single query
+            const fullQuestions = await model
+                .find({ _id: { $in: selected } })
+                .lean()
+                .exec();
+
+            console.log(`Fetched ${fullQuestions.length} questions from database`);
+
+            // Process questions based on exam type
+            let processedQuestions: CachedQuestion[];
+
+            if (exam.examType === 'OeQuestion') {
+                // For Open-Ended questions, only cache id and question
+                processedQuestions = fullQuestions.map(q => ({
+                    id: q._id.toString(),
+                    question: q.question
+                }));
+                console.log(`Processed ${processedQuestions.length} OE questions`);
+            } else {
+                // For MCQ questions, cache id, question, and options
+                processedQuestions = fullQuestions.map(q => ({
+                    id: q._id.toString(),
+                    question: q.question,
+                    options: q.options
+                }));
+                console.log(`Processed ${processedQuestions.length} MCQ questions`);
+            }
+
+            await this.cacheService.set<CachedQuestion[]>(cacheKey, processedQuestions, CACHE_TTL);
+
+            return processedQuestions;
+
+        } catch (error) {
+            throw new InternalServerErrorException("Error fetching questions for exam");
         }
-
-        if (exam.questionCount > questions.length) {
-            throw new Error(`Exam ${examId} requests ${exam.questionCount} questions but only ${questions.length} are available`);
-        }
-
-        const selected = this.shuffleAndSelect(questions, exam.questionCount);
-        const questionIds = selected.map((q) => q.toString());
-
-        // Cache the selected question IDs
-        await this.cacheManager.set(cacheKey, questionIds, CACHE_TTL);
-
-        // Load full question objects and cache each individually
-        const model = this.getQuestionModel(exam.examType);
-        const fullQuestions = await model.find({ _id: { $in: selected } }).lean().exec();
-
-        await Promise.all(
-            fullQuestions.map(async (question) => {
-                const qid = question._id.toString();
-                const key = `question:${qid}`;
-                const exists = await this.cacheManager.get(key);
-                if (!exists) {
-                    await this.cacheManager.set(key, question, CACHE_TTL);
-                }
-            }),
-        );
-
-        return questionIds;
     }
 
     /**

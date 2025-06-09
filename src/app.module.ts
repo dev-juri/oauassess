@@ -6,22 +6,20 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ExamModule } from './exam/exam.module';
 import { StudentModule } from './student/student.module';
+import { CacheModule } from './cache/cache.module';
 import environmentValidation from './config/environment.validation';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
-import { CacheModule } from '@nestjs/cache-manager';
+import cacheConfig from './config/cache.config';
 
 @Module({
   imports: [
     AdminModule,
-    CacheModule.register({
-      isGlobal: true
-    }),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: !process.env.NODE_ENV ? '.env' : `.env.${process.env.NODE_ENV}`,
       validationSchema: environmentValidation,
-      load: [appConfig, databaseConfig],
+      load: [appConfig, databaseConfig, cacheConfig],
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
@@ -32,6 +30,7 @@ import { CacheModule } from '@nestjs/cache-manager';
     }),
     ExamModule,
     StudentModule,
+    CacheModule,
   ],
   controllers: [AppController],
   providers: [AppService],

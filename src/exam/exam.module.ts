@@ -37,6 +37,6 @@ import { FetchExamAssignmentsProvider } from './providers/fetch-exam-assignments
       }
     ]),
   ],
-  exports: [FetchExamAssignmentsProvider]
+  exports: [FetchExamAssignmentsProvider, ExamService]
 })
 export class ExamModule { }
