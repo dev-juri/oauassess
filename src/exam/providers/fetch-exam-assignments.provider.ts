@@ -10,11 +10,13 @@ import { ExamDocument } from '../schemas/exam.schema';
 import { examType } from '../enums/exam-type.enum';
 import { Types } from 'mongoose';
 import { CacheService } from 'src/cache/cache.service';
+import { McqQuestion, McqQuestionDocument } from '../schemas/mcq/mcq-question.schema';
+import { generateExamQuestionsCacheKey, generateMcqQuestionCacheKey } from '../constants/cache-keys';
 
 /**
- * Cache for just 2hours
+ * Cache for just 1 day
  */
-const CACHE_TTL = 7200000;
+const CACHE_TTL = 1000 * 60 * 60 * 24;
 
 /**
  * Provider class to generate and/or fetch assignment for each student
@@ -39,7 +41,7 @@ export class FetchExamAssignmentsProvider {
      */
     async getAssignmentsForStudent(studentId: string) {
         const assignments = await this.examAssignmentModel
-            .find({ student: new Types.ObjectId(studentId) })
+            .find({ student: new Types.ObjectId(studentId), isCompleted: false })
             .populate({
                 path: 'exam',
                 select: 'courseName courseCode duration examType questionCount questions',
@@ -81,9 +83,10 @@ export class FetchExamAssignmentsProvider {
         exam: ExamDocument
     ): Promise<CachedQuestion[]> {
         const examId = exam._id.toString();
-        const cacheKey = `exam-questions:${studentId}:${examId}`;
+        const cacheKey = generateExamQuestionsCacheKey(studentId, examId);
 
         try {
+            // Check if questions are already cached
             const cached = await this.cacheService.get<CachedQuestion[]>(cacheKey);
             if (cached) {
                 return cached;
@@ -96,7 +99,9 @@ export class FetchExamAssignmentsProvider {
             }
 
             if (exam.questionCount > questions.length) {
-                throw new Error(`Exam ${examId} requests ${exam.questionCount} questions but only ${questions.length} are available`);
+                throw new Error(
+                    `Exam ${examId} requests ${exam.questionCount} questions but only ${questions.length} are available`
+                );
             }
 
             // Select random questions
@@ -111,30 +116,87 @@ export class FetchExamAssignmentsProvider {
                 .lean()
                 .exec();
 
+            // Validate that we got the expected number of questions
+            if (fullQuestions.length !== selected.length) {
+                throw new Error(
+                    `Expected ${selected.length} questions but found ${fullQuestions.length} for exam ${examId}`
+                );
+            }
+
             // Process questions based on exam type
             let processedQuestions: CachedQuestion[];
 
             if (exam.examType === 'OeQuestion') {
-                // For Open-Ended questions, only cache id and question
+                // For Open-Ended questions, only id and question
                 processedQuestions = fullQuestions.map(q => ({
                     id: q._id.toString(),
                     question: q.question
                 }));
             } else {
-                // For MCQ questions, cache id, question, and options
+                // For MCQ questions, id, question, and options
                 processedQuestions = fullQuestions.map(q => ({
                     id: q._id.toString(),
                     question: q.question,
                     options: q.options
                 }));
+
+                // Cache individual MCQ questions
+                await this.cacheMcqQuestions(fullQuestions, CACHE_TTL);
             }
 
+            // Cache the processed questions for this student-exam combination
             await this.cacheService.set<CachedQuestion[]>(cacheKey, processedQuestions, CACHE_TTL);
 
             return processedQuestions;
 
         } catch (error) {
-            throw new InternalServerErrorException("Error fetching questions for exam");
+            console.error('Error in generateAndCacheQuestions:', error);
+            throw new InternalServerErrorException(
+                `Error fetching questions for exam ${examId}: ${error.message}`
+            );
+        }
+    }
+
+    /**
+     * Cache individual MCQ questions for faster retrieval
+     * @param questions - Array of question objects (lean or full documents)
+     * @param ttl - Time to live in seconds (optional)
+     */
+    async cacheMcqQuestions<T extends { _id: any }>(
+        questions: T[],
+        ttl?: number
+    ): Promise<void> {
+        try {
+            const cacheItems = questions.map(question => {
+                if (!question._id) {
+                    throw new Error('Question missing _id field');
+                }
+
+                return {
+                    key: generateMcqQuestionCacheKey(question._id.toString()),
+                    value: question,
+                    ttl
+                };
+            });
+
+            await this.cacheService.mset(cacheItems);
+        } catch (error) {
+            throw new Error(`Failed to cache individual MCQ questions: ${error.message}`);
+        }
+    }
+
+    /**
+     * Retrieve a single MCQ question from cache
+     * @param questionId - The ID of the question to retrieve
+     * @returns The cached question or null if not found
+     */
+    async getCachedMcqQuestion<T = any>(questionId: string): Promise<T | null> {
+        try {
+            const cacheKey = generateMcqQuestionCacheKey(questionId);
+            return await this.cacheService.get<T>(cacheKey);
+        } catch (error) {
+            console.error(`Error retrieving cached MCQ question ${questionId}:`, error);
+            return null;
         }
     }
 

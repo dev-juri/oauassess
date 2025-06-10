@@ -29,6 +29,9 @@ export class ExamAssignment {
 
   @Prop()
   endTime?: Date;
+
+  @Prop({ type: Boolean, default: false })
+  isCompleted: Boolean
 }
 
 export const ExamAssignmentSchema = SchemaFactory.createForClass(ExamAssignment)

@@ -3,7 +3,6 @@ interface McqQuestionCache {
     question: string;
     options: string[];
 }
-
 interface OeQuestionCache {
     id: string;
     question: string;
