@@ -31,7 +31,7 @@ export class InsertStudentProvider {
                 .filter((student) => student['Matric No'])
                 .map((student) => {
                     const mappedStudent = {
-                        matricNo: student['Matric No'],
+                        matricNo: student['Matric No'].toUpperCase(),
                         fullName: student['FullName'],
                     };
 
@@ -43,8 +43,6 @@ export class InsertStudentProvider {
                         },
                     };
                 });
-
-            await this.studentModel.bulkWrite(operations, { session });
 
             await this.studentModel.bulkWrite(operations, { session });
 
