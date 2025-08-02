@@ -2,6 +2,7 @@ import {
     Injectable,
     NotFoundException,
     InternalServerErrorException,
+    ForbiddenException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -35,6 +36,27 @@ export class FetchExamAssignmentsProvider {
 
         private readonly cacheService: CacheService,
     ) { }
+
+    async updateStudentMcqScore(examId: string, studentId: string, score: number) {
+        const assignment = await this.examAssignmentModel.findOne({ exam: examId, student: studentId });
+
+        if (!assignment) {
+            throw new NotFoundException("Assignment not found for student.");
+        }
+
+        if (assignment.score !== undefined && assignment.score !== null) {
+            throw new ForbiddenException("Exam has already been graded.");
+        }
+
+        await this.examAssignmentModel.updateOne(
+            { _id: assignment._id },
+            {
+                score: score,
+                isCompleted: true
+            },
+            { runValidators: true }
+        );
+    }
 
     /**
      * Get all exam assignments for a given student and include cached/randomized questions.
@@ -193,7 +215,10 @@ export class FetchExamAssignmentsProvider {
     async getCachedMcqQuestion<T = any>(questionId: string): Promise<T | null> {
         try {
             const cacheKey = generateMcqQuestionCacheKey(questionId);
-            return await this.cacheService.get<T>(cacheKey);
+            
+            const cacheQuestion = await this.cacheService.get<T>(cacheKey);
+
+            return cacheQuestion
         } catch (error) {
             console.error(`Error retrieving cached MCQ question ${questionId}:`, error);
             return null;
@@ -201,7 +226,7 @@ export class FetchExamAssignmentsProvider {
     }
 
     /**
-     * Shuffle an array and return `count` number of items
+     * Shuffle the array and return `count` number of items
      */
     private shuffleAndSelect<T>(array: T[], count: number): T[] {
         const copy = [...array];

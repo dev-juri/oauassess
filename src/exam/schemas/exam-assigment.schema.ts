@@ -31,7 +31,10 @@ export class ExamAssignment {
   endTime?: Date;
 
   @Prop({ type: Boolean, default: false })
-  isCompleted: Boolean
+  isCompleted: Boolean;
+
+  @Prop({ type: Number, default: null })
+  score?: Number
 }
 
 export const ExamAssignmentSchema = SchemaFactory.createForClass(ExamAssignment)
