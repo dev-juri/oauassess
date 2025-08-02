@@ -93,7 +93,7 @@ export class FetchExamAssignmentsProvider {
             }),
         );
 
-        return results.filter(Boolean); // Remove nulls
+        return results.filter(Boolean);
     }
 
 

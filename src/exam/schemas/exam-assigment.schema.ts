@@ -24,12 +24,6 @@ export class ExamAssignment {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Student', index: true })
   student: Student;
 
-  @Prop()
-  startTime?: Date;
-
-  @Prop()
-  endTime?: Date;
-
   @Prop({ type: Boolean, default: false })
   isCompleted: Boolean;
 
