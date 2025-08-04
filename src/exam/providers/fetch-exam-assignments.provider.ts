@@ -72,7 +72,7 @@ export class FetchExamAssignmentsProvider {
             .exec();
 
         if (!assignments.length) {
-            throw new NotFoundException(`No exam assignments found for student ${studentId}`);
+            return [];
         }
 
         const results = await Promise.all(

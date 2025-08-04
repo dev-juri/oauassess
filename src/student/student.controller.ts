@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
 import { LoginStudentDto } from './dtos/login-student.dto';
 import { StudentService } from './providers/student.service';
 import { Auth } from 'src/admin/auth/decorators/auth.decorator';
@@ -29,11 +29,13 @@ export class StudentController {
         return this.studentService.fetchQuestionsForStudent(fetchQuestionparamsDto)
     }
 
+    @HttpCode(HttpStatus.OK)
     @Post('submit/mcq')
     public async submitMcqExam(@Body() submitMcqExamDto: SubmitMcqExamDto) {
         return this.studentService.submitMcqExam(submitMcqExamDto)
     }
 
+    @HttpCode(HttpStatus.OK)
     @Post('submit/oe')
     public async submitOeExam(@Body() submitOeExamDto: SubmitOeExamDto) {
         return this.studentService.submitOeExam(submitOeExamDto)
