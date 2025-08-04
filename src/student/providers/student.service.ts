@@ -9,6 +9,8 @@ import { ExamService } from 'src/exam/providers/exam.service';
 import { FetchExamAssignmentsProvider } from 'src/exam/providers/fetch-exam-assignments.provider';
 import { FetchQuestionParamsDto } from '../dtos/fetch-question-params.dto';
 import { SubmitMcqExamDto } from '../dtos/submit-mcq-exam.dto';
+import { SubmitOeExamDto } from '../dtos/submit-oe-exam.dto';
+import { GradeOeExamProvider } from 'src/exam/providers/grade-oe-exam.provider';
 
 @Injectable()
 export class StudentService {
@@ -22,7 +24,9 @@ export class StudentService {
     private readonly fetchExamAssignmentsProvider: FetchExamAssignmentsProvider,
 
     @Inject(forwardRef(() => ExamService))
-    private readonly examService: ExamService
+    private readonly examService: ExamService,
+
+    private readonly gradeOeExamProvider: GradeOeExamProvider,
 
   ) { }
 
@@ -76,6 +80,11 @@ export class StudentService {
 
     await this.fetchExamAssignmentsProvider.updateStudentMcqScore(submitMcqExamDto.examId, submitMcqExamDto.studentId, totalScore);
 
+    return successResponse({ message: "Exam Successfully Submitted." })
+  }
+
+  public async submitOeExam(submitOeExamDto: SubmitOeExamDto) {
+    await this.gradeOeExamProvider.submitResponses(submitOeExamDto)
     return successResponse({ message: "Exam Successfully Submitted." })
   }
 }

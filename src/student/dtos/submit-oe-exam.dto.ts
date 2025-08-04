@@ -1,8 +1,9 @@
-import { IsArray, IsNotEmpty, IsString, ValidateNested, ArrayMinSize } from "class-validator";
-import { Type } from "class-transformer";
+import { IsArray, IsNotEmpty, IsString, ValidateNested } from "class-validator";
 import { StudentAnswerDto } from "./student-answer.dto";
+import { Type } from "class-transformer";
 
-export class SubmitMcqExamDto {
+export class SubmitOeExamDto {
+
     @IsString()
     @IsNotEmpty()
     studentId: string;
@@ -11,6 +12,7 @@ export class SubmitMcqExamDto {
     @IsNotEmpty()
     examId: string;
     
+
     @IsArray()
     @ValidateNested({ each: true })
     @Type(() => StudentAnswerDto)

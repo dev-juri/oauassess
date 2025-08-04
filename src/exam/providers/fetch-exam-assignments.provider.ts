@@ -84,6 +84,7 @@ export class FetchExamAssignmentsProvider {
                 const examId = exam._id.toString();
 
                 return {
+                    assignmentId: assignment._id,
                     examId,
                     courseName: exam.courseName,
                     courseCode: exam.courseCode,
@@ -215,7 +216,7 @@ export class FetchExamAssignmentsProvider {
     async getCachedMcqQuestion<T = any>(questionId: string): Promise<T | null> {
         try {
             const cacheKey = generateMcqQuestionCacheKey(questionId);
-            
+
             const cacheQuestion = await this.cacheService.get<T>(cacheKey);
 
             return cacheQuestion

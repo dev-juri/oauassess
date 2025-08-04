@@ -11,10 +11,12 @@ import { McqQuestion, McqQuestionSchema } from './schemas/mcq/mcq-question.schem
 import { UpdateOeExamProvider } from './providers/update-oe-exam.provider';
 import { OeQuestion, OeQuestionSchema } from './schemas/oe/oe-question.schema';
 import { FetchExamAssignmentsProvider } from './providers/fetch-exam-assignments.provider';
+import { GradeOeExamProvider } from './providers/grade-oe-exam.provider';
+import { OeExamGrading, OeExamGradingSchema } from './schemas/oe-exam-grading.schema';
 
 @Module({
   controllers: [ExamController],
-  providers: [ExamService, CreateExamProvider, UpdateMcqExamProvider, UpdateOeExamProvider, FetchExamAssignmentsProvider],
+  providers: [ExamService, CreateExamProvider, UpdateMcqExamProvider, UpdateOeExamProvider, FetchExamAssignmentsProvider, GradeOeExamProvider],
   imports: [
     forwardRef(() => StudentModule),
 
@@ -34,9 +36,13 @@ import { FetchExamAssignmentsProvider } from './providers/fetch-exam-assignments
       {
         name: OeQuestion.name,
         schema: OeQuestionSchema
+      },
+      {
+        name: OeExamGrading.name,
+        schema: OeExamGradingSchema
       }
     ]),
   ],
-  exports: [FetchExamAssignmentsProvider, ExamService]
+  exports: [FetchExamAssignmentsProvider, ExamService, GradeOeExamProvider]
 })
 export class ExamModule { }
