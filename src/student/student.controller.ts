@@ -14,6 +14,7 @@ export class StudentController {
         private readonly studentService: StudentService
     ) { }
 
+    @HttpCode(HttpStatus.OK)
     @Post('auth')
     public async login(@Body() loginStudentDto: LoginStudentDto) {
         return this.studentService.loginStudent(loginStudentDto)

@@ -2,6 +2,8 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
+  HttpCode,
+  HttpStatus,
   Post,
   UseInterceptors,
 } from '@nestjs/common';
@@ -22,6 +24,7 @@ import { AuthType } from './enums/auth-type.enum';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @HttpCode(HttpStatus.OK)
   @Post()
   @Auth(AuthType.None)
   @UseInterceptors(ClassSerializerInterceptor)
