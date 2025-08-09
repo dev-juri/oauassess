@@ -10,6 +10,7 @@ import {
   Body,
   HttpStatus,
   HttpCode,
+  Get,
 } from '@nestjs/common';
 import { CreateExamDto } from './dtos/create-exam.dto';
 import { UpdateExamParamDto } from './dtos/update-exam-param.dto';
@@ -80,6 +81,11 @@ export class ExamController {
     @UploadedFile() tutorialList?: Express.Multer.File,
   ) {
     return this.examService.createExam(createExamDto, tutorialList);
+  }
+
+  @Get('/all')
+  public async fetchExams() {
+    return await this.examService.fetchExams();
   }
 
   /**

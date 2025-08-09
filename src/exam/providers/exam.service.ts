@@ -36,6 +36,11 @@ export class ExamService {
 
   ) { }
 
+  public async fetchExams() {
+    const exams = await this.examModel.find();
+    return successResponse({ message: "Exams retrieved successfully", data: exams });
+  }
+
   /**
    * Creates a new exam and assigns it to students from the uploaded list.
    *
