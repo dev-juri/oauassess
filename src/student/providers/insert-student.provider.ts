@@ -17,15 +17,16 @@ export class InsertStudentProvider {
     ): Promise<string[] | null> {
         let insertedStudentIds: string[] = [];
 
+        // Extract student data from the tutorial list template
+        const students = parseTemplate<IStudent>(
+            tutorialList,
+            iStudentExpectedKeys,
+        );
+
         const session = await this.connection.startSession();
         session.startTransaction();
 
         try {
-            // Extract student data from the tutorial list template
-            const students = parseTemplate<IStudent>(
-                tutorialList,
-                iStudentExpectedKeys,
-            );
 
             const operations = students
                 .filter((student) => student['Matric No'])

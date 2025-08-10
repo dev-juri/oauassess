@@ -83,7 +83,6 @@ export class UpdateOeExamProvider {
       });
 
       const insertedQuestionIds = Object.values(result.insertedIds || {});
-      console.log(insertedQuestionIds);
 
       // TODO: Create Assistant and update exam with assistantId
 
