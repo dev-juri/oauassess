@@ -12,10 +12,9 @@ import { CacheService } from './cache.service';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
         const redisUrl = configService.get<string>('cacheConfig.redisUrl');
-        
         if (redisUrl) {
           const url = new URL(redisUrl);
-          
+
           return {
             store: redisStore,
             host: url.hostname || 'localhost',
@@ -25,10 +24,14 @@ import { CacheService } from './cache.service';
             ttl: configService.get('CACHE_TTL', 3600),
           };
         }
+
+        return {
+          ttl: configService.get('CACHE_TTL', 3600)
+        }
       },
     }),
   ],
   providers: [CacheService],
   exports: [NestCacheModule, CacheService],
 })
-export class CacheModule {}
+export class CacheModule { }
