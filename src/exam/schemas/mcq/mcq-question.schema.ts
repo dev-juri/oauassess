@@ -15,7 +15,7 @@ export type McqQuestionDocument = HydratedDocument<McqQuestion>;
   },
 })
 export class McqQuestion {
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true })
   question: string;
 
   @Prop({ type: [String], required: true  })

@@ -33,7 +33,7 @@ export class UpdateMcqExamProvider {
 
     @InjectConnection()
     private readonly connection: Connection,
-  ) {}
+  ) { }
 
   /**
    * Updates an MCQ exam with questions from an uploaded template file.
@@ -83,7 +83,7 @@ export class UpdateMcqExamProvider {
         session,
       });
 
-      const insertedQuestionIds = Object.values(result.upsertedIds || {});
+      const insertedQuestionIds = Object.values(result.insertedIds || {});
       exam.questions.push(...insertedQuestionIds);
       await exam.save({ session });
 
@@ -114,10 +114,8 @@ export class UpdateMcqExamProvider {
     }));
 
     const operations = collapseMcqList.map((item) => ({
-      updateOne: {
-        filter: { question: item.question },
-        update: { $set: item },
-        upsert: true,
+      insertOne: {
+        document: item,
       },
     }));
     return operations;
