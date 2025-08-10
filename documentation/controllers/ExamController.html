@@ -1,0 +1,1041 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>oauassess documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">oauassess documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content controller">
+                   <div class="content-data">
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Controllers</li>
+  <li class="breadcrumb-item" >ExamController</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/exam/exam.controller.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Prefix</h3>
+            </p>
+            <p class="comment">
+                <code>exam</code>
+            </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Controller for handling exam-related operations.
+Supports creating, updating, and deleting MCQ and open-ended (OE) exams.</p>
+
+            </p>
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#createExam" >createExam</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteMcqExam" >deleteMcqExam</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteOeExam" >deleteOeExam</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateMcqExam" >updateMcqExam</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateOeExam" >updateOeExam</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createExam"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>createExam</b></span>
+                        <a href="#createExam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createExam(createExamDto: <a href="../classes/CreateExamDto.html" target="_self">CreateExamDto</a>, tutorialList?: Express.Multer.File)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Post()<br />@HttpCode(HttpStatus.CREATED)<br />@UseInterceptors(undefined)<br />@ApiOperation({summary: &#x27;Create a new exam with an optional tutorial file upload&#x27;})<br />@ApiConsumes(&#x27;multipart/form-data&#x27;)<br />@ApiBody({description: &#x27;Exam details and optional tutorial file&#x27;, schema: undefined})<br />@ApiResponse({status: 201, description: &#x27;Exam created successfully&#x27;})<br />@ApiResponse({status: 400, description: &#x27;Invalid exam data&#x27;})<br />@ApiResponse({status: 401, description: &#x27;Unauthorized&#x27;})<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">src/exam/exam.controller.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Create a new exam.</p>
+<p>Accepts a tutorial list in <code>.xlsx</code> format and exam metadata.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>createExamDto</td>
+                                            <td>
+                                                            <code><a href="../classes/CreateExamDto.html" target="_self" >CreateExamDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>DTO containing exam metadata</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>tutorialList</td>
+                                            <td>
+                                                        <code>Express.Multer.File</code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>XLSX file upload with tutorial data</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Success response containing the created exam object</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteMcqExam"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>deleteMcqExam</b></span>
+                        <a href="#deleteMcqExam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteMcqExam(examId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Delete(&#x27;mcq/:examId&#x27;)<br />@HttpCode(HttpStatus.OK)<br />@ApiOperation({summary: &#x27;Delete an MCQ exam by ID&#x27;})<br />@ApiParam({name: &#x27;examId&#x27;, type: &#x27;string&#x27;, description: &#x27;ID of the MCQ exam&#x27;})<br />@ApiResponse({status: 200, description: &#x27;Exam deleted successfully&#x27;})<br />@ApiResponse({status: 404, description: &#x27;Exam not found&#x27;})<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">src/exam/exam.controller.ts:132</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Delete an MCQ exam and its associated questions.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>examId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>ID of the MCQ exam</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Deletion success message</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteOeExam"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>deleteOeExam</b></span>
+                        <a href="#deleteOeExam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteOeExam(examId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Delete(&#x27;oe/:examId&#x27;)<br />@HttpCode(HttpStatus.OK)<br />@ApiOperation({summary: &#x27;Delete an OE exam by ID&#x27;})<br />@ApiParam({name: &#x27;examId&#x27;, type: &#x27;string&#x27;, description: &#x27;ID of the OE exam&#x27;})<br />@ApiResponse({status: 200, description: &#x27;Exam deleted successfully&#x27;})<br />@ApiResponse({status: 404, description: &#x27;Exam not found&#x27;})<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="187"
+                                    class="link-to-prism">src/exam/exam.controller.ts:187</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Delete an OE exam and its associated questions.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>examId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>ID of the OE exam</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Deletion confirmation</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateMcqExam"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>updateMcqExam</b></span>
+                        <a href="#updateMcqExam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateMcqExam(updateExamParamDto: <a href="../classes/UpdateExamParamDto.html" target="_self">UpdateExamParamDto</a>, mcqTemplate: Express.Multer.File)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Patch(&#x27;mcq/:examId&#x27;)<br />@HttpCode(HttpStatus.OK)<br />@UseInterceptors(undefined)<br />@ApiOperation({summary: &#x27;Update MCQ exam by uploading a new template file&#x27;})<br />@ApiConsumes(&#x27;multipart/form-data&#x27;)<br />@ApiParam({name: &#x27;examId&#x27;, type: &#x27;string&#x27;, description: &#x27;ID of the MCQ exam&#x27;})<br />@ApiBody({description: &#x27;MCQ template file&#x27;, schema: undefined})<br />@ApiResponse({status: 200, description: &#x27;MCQ exam updated successfully&#x27;})<br />@ApiResponse({status: 400, description: &#x27;Invalid file or parameters&#x27;})<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/exam/exam.controller.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Upload a new MCQ template to update an existing exam.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>updateExamParamDto</td>
+                                            <td>
+                                                            <code><a href="../classes/UpdateExamParamDto.html" target="_self" >UpdateExamParamDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>DTO with the exam ID</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>mcqTemplate</td>
+                                            <td>
+                                                        <code>Express.Multer.File</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>XLSX file with updated MCQ questions</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Successful response containing the updated exam details</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateOeExam"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>updateOeExam</b></span>
+                        <a href="#updateOeExam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateOeExam(updateParamDto: <a href="../classes/UpdateExamParamDto.html" target="_self">UpdateExamParamDto</a>, templates: Express.Multer.File[])</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Patch(&#x27;oe/:examId&#x27;)<br />@HttpCode(HttpStatus.OK)<br />@UseInterceptors(undefined)<br />@ApiOperation({summary: &#x27;Update Open-ended exam with two required templates (e.g. mark guide and answers)&#x27;})<br />@ApiConsumes(&#x27;multipart/form-data&#x27;)<br />@ApiParam({name: &#x27;examId&#x27;, type: &#x27;string&#x27;, description: &#x27;ID of the OE exam&#x27;})<br />@ApiBody({description: &#x27;Two template files: mark guide and answers&#x27;, schema: undefined})<br />@ApiResponse({status: 200, description: &#x27;Open-ended exam updated successfully&#x27;})<br />@ApiResponse({status: 400, description: &#x27;Invalid template files&#x27;})<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="168"
+                                    class="link-to-prism">src/exam/exam.controller.ts:168</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Update an OE exam with new marking guide and question templates.</p>
+<p>Accepts a <code>.docx</code> or <code>.pdf</code> marking guide and a <code>.xlsx</code> question file.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>updateParamDto</td>
+                                            <td>
+                                                            <code><a href="../classes/UpdateExamParamDto.html" target="_self" >UpdateExamParamDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>templates</td>
+                                            <td>
+                                                        <code>Express.Multer.File[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Array of files (max 2): [marking guide, questions]</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Update result</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Controller,
+  Post,
+  Patch,
+  Delete,
+  Param,
+  UseInterceptors,
+  UploadedFile,
+  UploadedFiles,
+  Body,
+  HttpStatus,
+  HttpCode,
+} from &#x27;@nestjs/common&#x27;;
+import { CreateExamDto } from &#x27;./dtos/create-exam.dto&#x27;;
+import { UpdateExamParamDto } from &#x27;./dtos/update-exam-param.dto&#x27;;
+import { ExamService } from &#x27;./providers/exam.service&#x27;;
+import { FileInterceptor, FilesInterceptor } from &#x27;@nestjs/platform-express&#x27;;
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from &#x27;@nestjs/swagger&#x27;;
+
+/**
+ * Controller for handling exam-related operations.
+ * Supports creating, updating, and deleting MCQ and open-ended (OE) exams.
+ */
+@ApiBearerAuth()
+@ApiTags(&#x27;admin&#x27;)
+@Controller(&#x27;exam&#x27;)
+export class ExamController {
+  constructor(private readonly examService: ExamService) {}
+
+  /**
+   * Create a new exam.
+   *
+   * Accepts a tutorial list in &#x60;.xlsx&#x60; format and exam metadata.
+   *
+   * @param createExamDto - DTO containing exam metadata
+   * @param tutorialList - XLSX file upload with tutorial data
+   * @returns Success response containing the created exam object
+   */
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  @UseInterceptors(FileInterceptor(&#x27;tutorialList&#x27;))
+  @ApiOperation({ summary: &#x27;Create a new exam with an optional tutorial file upload&#x27; })
+  @ApiConsumes(&#x27;multipart/form-data&#x27;)
+  @ApiBody({
+    description: &#x27;Exam details and optional tutorial file&#x27;,
+    schema: {
+      type: &#x27;object&#x27;,
+      properties: {
+        courseName: { type: &#x27;string&#x27;, example: &#x27;Introduction to Computing&#x27; },
+        courseCode: { type: &#x27;string&#x27;, example: &#x27;CSC101&#x27; },
+        duration: { type: &#x27;integer&#x27;, example: 60 },
+        questionCount: { type: &#x27;integer&#x27;, example: 20 },
+        examType: {
+          type: &#x27;string&#x27;,
+          enum: [&#x27;McqQuestion&#x27;, &#x27;OeQuestion&#x27;],
+          example: &#x27;McqQuestion&#x27;,
+        },
+        tutorialList: {
+          type: &#x27;string&#x27;,
+          format: &#x27;binary&#x27;,
+          description: &#x27;Optional tutorial file upload&#x27;,
+        },
+      },
+      required: [&#x27;courseName&#x27;, &#x27;courseCode&#x27;, &#x27;duration&#x27;, &#x27;questionCount&#x27;, &#x27;examType&#x27;],
+    },
+  })
+  @ApiResponse({ status: 201, description: &#x27;Exam created successfully&#x27; })
+  @ApiResponse({ status: 400, description: &#x27;Invalid exam data&#x27; })
+  @ApiResponse({ status: 401, description: &#x27;Unauthorized&#x27; })
+  public async createExam(
+    @Body() createExamDto: CreateExamDto,
+    @UploadedFile() tutorialList?: Express.Multer.File,
+  ) {
+    return this.examService.createExam(createExamDto, tutorialList);
+  }
+
+  /**
+   * Upload a new MCQ template to update an existing exam.
+   *
+   * @param updateExamParamDto - DTO with the exam ID
+   * @param mcqTemplate - XLSX file with updated MCQ questions
+   * @returns Successful response containing the updated exam details
+   */
+  @Patch(&#x27;mcq/:examId&#x27;)
+  @HttpCode(HttpStatus.OK)
+  @UseInterceptors(FileInterceptor(&#x27;mcqList&#x27;))
+  @ApiOperation({ summary: &#x27;Update MCQ exam by uploading a new template file&#x27; })
+  @ApiConsumes(&#x27;multipart/form-data&#x27;)
+  @ApiParam({ name: &#x27;examId&#x27;, type: &#x27;string&#x27;, description: &#x27;ID of the MCQ exam&#x27; })
+  @ApiBody({
+    description: &#x27;MCQ template file&#x27;,
+    schema: {
+      type: &#x27;object&#x27;,
+      properties: {
+        mcqList: {
+          type: &#x27;string&#x27;,
+          format: &#x27;binary&#x27;,
+          description: &#x27;New MCQ template file&#x27;,
+        },
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: &#x27;MCQ exam updated successfully&#x27; })
+  @ApiResponse({ status: 400, description: &#x27;Invalid file or parameters&#x27; })
+  public async updateMcqExam(
+    @Param() updateExamParamDto: UpdateExamParamDto,
+    @UploadedFile() mcqTemplate: Express.Multer.File,
+  ) {
+    return this.examService.updateMcqExam(updateExamParamDto.examId, mcqTemplate);
+  }
+
+  /**
+   * Delete an MCQ exam and its associated questions.
+   *
+   * @param examId - ID of the MCQ exam
+   * @returns Deletion success message
+   */
+  @Delete(&#x27;mcq/:examId&#x27;)
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: &#x27;Delete an MCQ exam by ID&#x27; })
+  @ApiParam({ name: &#x27;examId&#x27;, type: &#x27;string&#x27;, description: &#x27;ID of the MCQ exam&#x27; })
+  @ApiResponse({ status: 200, description: &#x27;Exam deleted successfully&#x27; })
+  @ApiResponse({ status: 404, description: &#x27;Exam not found&#x27; })
+  public async deleteMcqExam(@Param(&#x27;examId&#x27;) examId: string) {
+    return this.examService.deleteMcqExam(examId);
+  }
+
+  /**
+   * Update an OE exam with new marking guide and question templates.
+   *
+   * Accepts a &#x60;.docx&#x60; or &#x60;.pdf&#x60; marking guide and a &#x60;.xlsx&#x60; question file.
+   *
+   * @param updateExamParamDto - DTO with the exam ID
+   * @param templates - Array of files (max 2): [marking guide, questions]
+   * @returns Update result
+   */
+  @Patch(&#x27;oe/:examId&#x27;)
+  @HttpCode(HttpStatus.OK)
+  @UseInterceptors(FilesInterceptor(&#x27;templates&#x27;, 2))
+  @ApiOperation({ summary: &#x27;Update Open-ended exam with two required templates (e.g. mark guide and answers)&#x27; })
+  @ApiConsumes(&#x27;multipart/form-data&#x27;)
+  @ApiParam({ name: &#x27;examId&#x27;, type: &#x27;string&#x27;, description: &#x27;ID of the OE exam&#x27; })
+  @ApiBody({
+    description: &#x27;Two template files: mark guide and answers&#x27;,
+    schema: {
+      type: &#x27;object&#x27;,
+      properties: {
+        templates: {
+          type: &#x27;array&#x27;,
+          items: {
+            type: &#x27;string&#x27;,
+            format: &#x27;binary&#x27;,
+          },
+        },
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: &#x27;Open-ended exam updated successfully&#x27; })
+  @ApiResponse({ status: 400, description: &#x27;Invalid template files&#x27; })
+  public async updateOeExam(
+    @Param() updateParamDto: UpdateExamParamDto,
+    @UploadedFiles() templates: Express.Multer.File[],
+  ) {
+    return this.examService.updateOeExam(updateParamDto.examId, templates);
+  }
+
+  /**
+   * Delete an OE exam and its associated questions.
+   *
+   * @param examId - ID of the OE exam
+   * @returns Deletion confirmation
+   */
+  @Delete(&#x27;oe/:examId&#x27;)
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: &#x27;Delete an OE exam by ID&#x27; })
+  @ApiParam({ name: &#x27;examId&#x27;, type: &#x27;string&#x27;, description: &#x27;ID of the OE exam&#x27; })
+  @ApiResponse({ status: 200, description: &#x27;Exam deleted successfully&#x27; })
+  @ApiResponse({ status: 404, description: &#x27;Exam not found&#x27; })
+  public async deleteOeExam(@Param(&#x27;examId&#x27;) examId: string) {
+    return this.examService.deleteOeExam(examId);
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'controller';
+            var COMPODOC_CURRENT_PAGE_URL = 'ExamController.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

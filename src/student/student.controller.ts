@@ -1,0 +1,45 @@
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
+import { LoginStudentDto } from './dtos/login-student.dto';
+import { StudentService } from './providers/student.service';
+import { Auth } from 'src/admin/auth/decorators/auth.decorator';
+import { AuthType } from 'src/admin/auth/enums/auth-type.enum';
+import { FetchQuestionParamsDto } from './dtos/fetch-question-params.dto';
+import { SubmitMcqExamDto } from './dtos/submit-mcq-exam.dto';
+import { SubmitOeExamDto } from './dtos/submit-oe-exam.dto';
+
+@Auth(AuthType.None)
+@Controller('student')
+export class StudentController {
+    constructor(
+        private readonly studentService: StudentService
+    ) { }
+
+    @HttpCode(HttpStatus.OK)
+    @Post('auth')
+    public async login(@Body() loginStudentDto: LoginStudentDto) {
+        return this.studentService.loginStudent(loginStudentDto)
+    }
+
+    @Get(':studentId/assignments')
+    public async fetchExams(@Param('studentId') studentId: string) {
+        return this.studentService.fetchStudentAssignments(studentId)
+    }
+
+    @Get(':studentId/assignments/:examId')
+    public async fetchQuestions(@Param() fetchQuestionparamsDto: FetchQuestionParamsDto) {
+        return this.studentService.fetchQuestionsForStudent(fetchQuestionparamsDto)
+    }
+
+    @HttpCode(HttpStatus.OK)
+    @Post('submit/mcq')
+    public async submitMcqExam(@Body() submitMcqExamDto: SubmitMcqExamDto) {
+        return this.studentService.submitMcqExam(submitMcqExamDto)
+    }
+
+    @HttpCode(HttpStatus.OK)
+    @Post('submit/oe')
+    public async submitOeExam(@Body() submitOeExamDto: SubmitOeExamDto) {
+        return this.studentService.submitOeExam(submitOeExamDto)
+    }
+
+}
