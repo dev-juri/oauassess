@@ -6,6 +6,6 @@ export class StudentAnswerDto {
     questionId: string;
 
     @IsString()
-    @MaxLength(1500)
+    @MaxLength(2000)
     answer: string;
 }

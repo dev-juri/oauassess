@@ -13,6 +13,7 @@ import { successResponse } from 'src/utils/response-writer';
 import { McqQuestion } from '../schemas/mcq/mcq-question.schema';
 import { UpdateOeExamProvider } from './update-oe-exam.provider';
 import { OeQuestion } from '../schemas/oe/oe-question.schema';
+import { GradeOeExamProvider } from './grade-oe-exam.provider';
 
 /**
  * Service responsible for managing exams and their related operations.
@@ -24,6 +25,7 @@ export class ExamService {
     private readonly createExamProvider: CreateExamProvider,
     private readonly updateMcqExamProvider: UpdateMcqExamProvider,
     private readonly updateOeExamProvider: UpdateOeExamProvider,
+    private readonly gradeOeExamProvider: GradeOeExamProvider,
 
     @InjectModel(Exam.name)
     private readonly examModel: Model<ExamDocument>,
@@ -184,5 +186,9 @@ export class ExamService {
     }
 
     return exam
+  }
+
+  public async gradeOeExam(examId: string) {
+    return this.gradeOeExamProvider.prepareResponsesForGrading(examId)
   }
 }

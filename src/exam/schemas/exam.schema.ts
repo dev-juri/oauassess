@@ -31,6 +31,9 @@ export class Exam {
   @Prop({ required: true })
   questionCount: number;
 
+  @Prop({ default: null })
+  markingFileId?: string;
+
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, refPath: 'examType' }],
   })

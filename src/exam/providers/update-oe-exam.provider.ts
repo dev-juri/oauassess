@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
 import { Exam, ExamDocument } from '../schemas/exam.schema';
@@ -17,6 +18,8 @@ import {
 } from 'src/utils/interfaces/oe-question.interface';
 import { IResponse, successResponse } from 'src/utils/response-writer';
 import { examType } from '../enums/exam-type.enum';
+import { OpenaiService } from 'src/openai/openai.service';
+import { InternalServerError } from 'openai';
 
 /**
  * Provider responsible for updating open-ended (OE) exams.
@@ -32,7 +35,9 @@ export class UpdateOeExamProvider {
 
     @InjectConnection()
     private readonly connection: Connection,
-  ) {}
+
+    private readonly openAIService: OpenaiService
+  ) { }
 
   /**
    * Updates an OE exam by inserting parsed questions from an uploaded template.
@@ -84,7 +89,13 @@ export class UpdateOeExamProvider {
 
       const insertedQuestionIds = Object.values(result.insertedIds || {});
 
-      // TODO: Create Assistant and update exam with assistantId
+      // Improve later, by sending an event to a queue. Implement retries and debouncing.
+      const uploadedFile = await this.openAIService.uploadMarkingGuide(markingGuide, exam.courseCode);
+      if(!uploadedFile) {
+        throw new InternalServerErrorException("Couldn't save marking guide")
+      } 
+
+      exam.markingFileId = uploadedFile.id
 
       exam.questions.push(...insertedQuestionIds);
       await exam.save({ session });
