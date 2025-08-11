@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ExamModule } from './exam/exam.module';
 import { StudentModule } from './student/student.module';
 import { CacheModule } from './cache/cache.module';
+import { OpenaiModule } from './openai/openai.module';
 import environmentValidation from './config/environment.validation';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
@@ -31,6 +32,7 @@ import cacheConfig from './config/cache.config';
     ExamModule,
     StudentModule,
     CacheModule,
+    OpenaiModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -25,6 +25,9 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { GradeOeExamDto } from './dtos/grade-oe-exam.dto';
+import { Auth } from 'src/admin/auth/decorators/auth.decorator';
+import { AuthType } from 'src/admin/auth/enums/auth-type.enum';
 
 /**
  * Controller for handling exam-related operations.
@@ -192,5 +195,11 @@ export class ExamController {
   @ApiResponse({ status: 404, description: 'Exam not found' })
   public async deleteOeExam(@Param('examId') examId: string) {
     return this.examService.deleteOeExam(examId);
+  }
+
+  @Auth(AuthType.None)
+  @Post('grade')
+  public async(@Body() gradeOeExamDto: GradeOeExamDto) {
+    return this.examService.gradeOeExam(gradeOeExamDto.examId);
   }
 }

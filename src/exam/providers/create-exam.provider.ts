@@ -24,7 +24,7 @@ export class CreateExamProvider {
     private readonly studentService: StudentService,
 
     @InjectModel(Exam.name)
-    private readonly mcqExamModel: Model<ExamDocument>,
+    private readonly examModel: Model<ExamDocument>,
 
     @InjectModel(ExamAssignment.name)
     private readonly examAssignmentModel: Model<ExamAssignmentDocument>,
@@ -58,7 +58,7 @@ export class CreateExamProvider {
     }
 
     try {
-      const exam = await this.mcqExamModel.create(createExamDto);
+      const exam = await this.examModel.create(createExamDto);
       await exam.save({ session });
 
       const operations = students.map((student) => ({
