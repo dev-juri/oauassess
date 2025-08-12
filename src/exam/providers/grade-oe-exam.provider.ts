@@ -38,9 +38,9 @@ export class GradeOeExamProvider {
 
         await this.oeExamGradingModel.create({
             assignment: assignment._id,
+            guideVectorStoreId: guideVectorId,
             responses: responses.map((res) => ({
                 questionId: res.questionId,
-                guideVectorStoreId: guideVectorId,
                 userResponse: res.answer,
                 aiComment: null,
                 aiScore: null,
