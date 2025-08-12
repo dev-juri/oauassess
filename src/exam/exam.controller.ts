@@ -197,8 +197,8 @@ export class ExamController {
     return this.examService.deleteOeExam(examId);
   }
 
-  @Auth(AuthType.None)
   @Post('grade')
+  @HttpCode(HttpStatus.OK)
   public async(@Body() gradeOeExamDto: GradeOeExamDto) {
     return this.examService.gradeOeExam(gradeOeExamDto.examId);
   }

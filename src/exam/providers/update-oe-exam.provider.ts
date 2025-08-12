@@ -95,7 +95,7 @@ export class UpdateOeExamProvider {
         throw new InternalServerErrorException("Couldn't save marking guide")
       } 
 
-      exam.markingFileId = uploadedFile.id
+      exam.guideVectorStoreId = uploadedFile.id
 
       exam.questions.push(...insertedQuestionIds);
       await exam.save({ session });
