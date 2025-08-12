@@ -7,5 +7,7 @@ export default Joi.object({
   JWT_ACCESS_TOKEN_TTL: Joi.string().required(),
   REDIS_URL: Joi.string(),
   CACHE_TTL: Joi.string().required(),
-  OPENAI_KEY: Joi.string().required()
+  OPENAI_KEY: Joi.string().required(),
+  BASE_URL: Joi.string().required(),
+  OPENAI_PROJ_ID: Joi.string().required()
 });
