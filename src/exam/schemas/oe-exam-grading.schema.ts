@@ -23,6 +23,9 @@ export class OeExamGrading {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'ExamAssignment', required: true })
   assignment: ExamAssignment;
 
+  @Prop({})
+  guideVectorStoreId: string;
+
   @Prop([
     {
       questionId: { type: mongoose.Schema.Types.ObjectId, ref: 'OeQuestion', required: true },

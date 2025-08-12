@@ -32,7 +32,7 @@ export class Exam {
   questionCount: number;
 
   @Prop({ default: null })
-  markingFileId?: string;
+  guideVectorStoreId?: string;
 
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, refPath: 'examType' }],

@@ -128,6 +128,7 @@ export class ExamService {
     }
 
     for (const template of templates) {
+      console.log(template.mimetype)
       if (
         template.mimetype ===
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
@@ -189,6 +190,6 @@ export class ExamService {
   }
 
   public async gradeOeExam(examId: string) {
-    return this.gradeOeExamProvider.prepareResponsesForGrading(examId)
+    return this.gradeOeExamProvider.gradeOeResponses(examId)
   }
 }

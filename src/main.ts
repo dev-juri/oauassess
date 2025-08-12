@@ -25,7 +25,7 @@ async function bootstrap() {
     .setTitle('OAU Assess')
     .setDescription('Documentation of endpoints powering OAU Assess')
     .setVersion('1.0')
-    .addServer("http://localhost:3000", "Localhost")
+    .addServer(process.env.BASE_URL, "BASE URL")
     .addBearerAuth(
       {
         type: 'http',

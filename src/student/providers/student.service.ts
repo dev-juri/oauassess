@@ -84,7 +84,9 @@ export class StudentService {
   }
 
   public async submitOeExam(submitOeExamDto: SubmitOeExamDto) {
-    await this.gradeOeExamProvider.submitResponses(submitOeExamDto)
+    const { guideVectorStoreId } = await this.examService.fetchExam(submitOeExamDto.examId)
+
+    await this.gradeOeExamProvider.submitResponses(submitOeExamDto, guideVectorStoreId)
     return successResponse({ message: "Exam Successfully Submitted." })
   }
 }
