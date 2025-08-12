@@ -1,4 +1,5 @@
 interface GradingRequest {
+  assignmentId: string;
   guideVectorId: string;
   oeExamGradingId: string;
   questionId: string;
@@ -8,6 +9,7 @@ interface GradingRequest {
 }
 
 interface GradingResult {
+  assignmentId: string;
   oeExamGradingId: string;
   responseId: string;
   aiScore: number;

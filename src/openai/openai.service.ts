@@ -59,6 +59,7 @@ export class OpenaiService {
                         const parsed = JSON.parse(cleanedResponse);
                         if (typeof parsed.score === "number" && typeof parsed.comment === "string") {
                             results.push({
+                                assignmentId: request.assignmentId,
                                 oeExamGradingId: request.oeExamGradingId,
                                 responseId: request.responseId,
                                 aiScore: parsed.score,
@@ -70,6 +71,7 @@ export class OpenaiService {
                     }
                 } else {
                     results.push({
+                        assignmentId: request.assignmentId,
                         oeExamGradingId: request.oeExamGradingId,
                         responseId: request.responseId,
                         aiScore: 0,
@@ -79,6 +81,7 @@ export class OpenaiService {
             } catch (error) {
                 console.error('Error with Responses API:', error);
                 results.push({
+                    assignmentId: request.assignmentId,
                     oeExamGradingId: request.oeExamGradingId,
                     responseId: request.responseId,
                     aiScore: 0,

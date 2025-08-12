@@ -95,6 +95,7 @@ export class GradeOeExamProvider {
             oe.responses.forEach(response => {
                 if (response.userResponse && response.userResponse.trim()) {
                     gradingRequests.push({
+                        assignmentId: oe.assignment.toString(),
                         guideVectorId: oe.guideVectorStoreId,
                         oeExamGradingId: oe._id.toString(),
                         questionId: response.questionId.toString(),
@@ -128,13 +129,13 @@ export class GradeOeExamProvider {
     }
 
     async gradeOeResponses(examId: string) {
-        const preparedResponses: GradingRequest[] = await this.prepareResponsesForGrading(examId)
+        const preparedResponses: GradingRequest[] = await this.prepareResponsesForGrading(examId);
 
-        if(preparedResponses.length == 0) {
+        if (preparedResponses.length === 0) {
             return successResponse({ message: "Exam Successfully Graded" });
         }
-        
-        const responses: GradingResult[] = await this.openAIService.gradeRequests(preparedResponses)
+
+        const responses: GradingResult[] = await this.openAIService.gradeRequests(preparedResponses);
 
         const ops = responses.map(r => ({
             updateOne: {
@@ -151,9 +152,29 @@ export class GradeOeExamProvider {
             },
         }));
 
-        if (ops.length === 0) return { matchedCount: 0, modifiedCount: 0 };
+        if (ops.length > 0) {
+            await this.oeExamGradingModel.bulkWrite(ops);
+        }
 
-        await this.oeExamGradingModel.bulkWrite(ops);
+        const assignmentTotals = responses.reduce<Record<string, number>>((acc, r) => {
+            acc[r.assignmentId] = (acc[r.assignmentId] || 0) + r.aiScore;
+            return acc;
+        }, {});
+
+        const assignmentOps = Object.entries(assignmentTotals)
+            .filter(([_, totalScore]) => typeof totalScore === 'number')
+            .map(([assignmentId, totalScore]) => ({
+                updateOne: {
+                    filter: { _id: new Types.ObjectId(assignmentId) },
+                    update: { $set: { score: totalScore } },
+                },
+            }));
+
+        if (assignmentOps.length > 0) {
+            await this.examAssignmentModel.bulkWrite(assignmentOps, { ordered: false });
+        }
+
         return successResponse({ message: "Exam Successfully Graded" });
     }
+
 }
