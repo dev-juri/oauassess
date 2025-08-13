@@ -11,6 +11,9 @@ import {
   HttpStatus,
   HttpCode,
   Get,
+  Header,
+  Res,
+  HttpException,
 } from '@nestjs/common';
 import { CreateExamDto } from './dtos/create-exam.dto';
 import { UpdateExamParamDto } from './dtos/update-exam-param.dto';
@@ -28,6 +31,7 @@ import {
 import { GradeOeExamDto } from './dtos/grade-oe-exam.dto';
 import { Auth } from 'src/admin/auth/decorators/auth.decorator';
 import { AuthType } from 'src/admin/auth/enums/auth-type.enum';
+import { Response } from 'express';
 
 /**
  * Controller for handling exam-related operations.
@@ -37,7 +41,7 @@ import { AuthType } from 'src/admin/auth/enums/auth-type.enum';
 @ApiTags('admin')
 @Controller('exam')
 export class ExamController {
-  constructor(private readonly examService: ExamService) {}
+  constructor(private readonly examService: ExamService) { }
 
   /**
    * Create a new exam.
@@ -199,7 +203,37 @@ export class ExamController {
 
   @Post('grade')
   @HttpCode(HttpStatus.OK)
-  public async(@Body() gradeOeExamDto: GradeOeExamDto) {
+  public async gradeExam(@Body() gradeOeExamDto: GradeOeExamDto) {
     return this.examService.gradeOeExam(gradeOeExamDto.examId);
+  }
+
+  @Get('report/:examId')
+  public async viewReport(@Param('examId') examId: string) {
+    return this.examService.generateExamReport(examId)
+  }
+  
+  @Get('report/:examId/download')
+  async downloadExamReport(
+    @Param('examId') examId: string,
+    @Res() res: Response,
+  ): Promise<void> {
+    try {
+      const { buffer, courseName } = await this.examService.generateExcelReport(examId);
+
+      const cleanCourseName = courseName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+      const filename = `report-${cleanCourseName}.xlsx`;
+
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+      res.setHeader('Content-Length', buffer.length);
+      res.setHeader('Cache-Control', 'no-cache');
+
+      res.send(buffer);
+    } catch (error) {
+      throw new HttpException(
+        error.message || 'Failed to download exam report',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 }

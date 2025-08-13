@@ -14,6 +14,8 @@ import { McqQuestion } from '../schemas/mcq/mcq-question.schema';
 import { UpdateOeExamProvider } from './update-oe-exam.provider';
 import { OeQuestion } from '../schemas/oe/oe-question.schema';
 import { GradeOeExamProvider } from './grade-oe-exam.provider';
+import { ExamAssignment, ExamAssignmentDocument } from '../schemas/exam-assigment.schema';
+import * as XLSX from 'xlsx';
 
 /**
  * Service responsible for managing exams and their related operations.
@@ -36,6 +38,8 @@ export class ExamService {
     @InjectModel(OeQuestion.name)
     private readonly oeQuestionModel: Model<OeQuestion>,
 
+    @InjectModel(ExamAssignment.name)
+    private readonly examAssignmentModel: Model<ExamAssignmentDocument>,
   ) { }
 
   public async fetchExams() {
@@ -192,4 +196,85 @@ export class ExamService {
   public async gradeOeExam(examId: string) {
     return this.gradeOeExamProvider.gradeOeResponses(examId)
   }
+
+  /**
+    * Generate report for a specific exam
+    * @param examId - The ID of the exam
+    * @returns 
+    */
+  async generateExamReport(examId: string) {
+    const assignments = await this.examAssignmentModel
+      .find({ exam: examId, isCompleted: true, score: { $ne: null } })
+      .populate('student', 'fullName matricNo')
+      .populate('exam', 'courseName courseCode')
+      .exec();
+
+    if (assignments.length === 0) {
+      throw new Error('No completed assignments found for this exam');
+    }
+
+    const examTitle = `${assignments[0].exam.courseCode} - ${assignments[0].exam.courseName}`;
+
+    const students = assignments.map(assignment => ({
+      studentName: assignment.student.fullName,
+      matricNumber: assignment.student.matricNo,
+      score: assignment.score
+    }));
+
+    return successResponse({
+      message: "Report generated successfully", data: {
+        examTitle,
+        examId,
+        students,
+      }
+    });
+  }
+
+  /**
+     * Generate Excel buffer for exam report
+     * @param examId - The ID of the exam
+     * @returns Promise<{ buffer: Buffer, courseName: string }>
+     */
+  async generateExcelReport(examId: string): Promise<{ buffer: Buffer, courseName: string }> {
+    const report = await this.generateExamReport(examId);
+
+    const workbook = XLSX.utils.book_new();
+
+    const excelData = [
+      // Header information
+      ['Exam Report'],
+      ['Exam Title:', report.data.examTitle],
+      [],
+      // Column headers
+      ['Student Name', 'Matric Number', 'Score'],
+      // Student data
+      ...report.data.students.map(student => [
+        student.studentName,
+        student.matricNumber,
+        student.score
+      ])
+    ];
+
+    const worksheet = XLSX.utils.aoa_to_sheet(excelData);
+
+    // Style the columns
+    worksheet['!cols'] = [
+      { width: 25 },
+      { width: 15 },
+      { width: 10 }
+    ];
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Exam Report');
+
+    const buffer = XLSX.write(workbook, {
+      type: 'buffer',
+      bookType: 'xlsx',
+      compression: true
+    });
+
+    const courseName = report.data.examTitle.split(' (')[0] || 'Report';
+
+    return { buffer: Buffer.from(buffer), courseName };
+  }
+
 }
