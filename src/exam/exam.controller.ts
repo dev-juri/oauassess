@@ -211,29 +211,45 @@ export class ExamController {
   public async viewReport(@Param('examId') examId: string) {
     return this.examService.generateExamReport(examId)
   }
-  
+
   @Get('report/:examId/download')
   async downloadExamReport(
     @Param('examId') examId: string,
     @Res() res: Response,
   ): Promise<void> {
-    try {
-      const { buffer, courseName } = await this.examService.generateExcelReport(examId);
+    const { buffer, courseName } = await this.examService.generateExcelReport(examId);
 
-      const cleanCourseName = courseName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
-      const filename = `report-${cleanCourseName}.xlsx`;
+    const cleanCourseName = courseName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+    const filename = `report-${cleanCourseName}.xlsx`;
 
-      res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-      res.setHeader('Content-Length', buffer.length);
-      res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Content-Length', buffer.length);
+    res.setHeader('Cache-Control', 'no-cache');
 
-      res.send(buffer);
-    } catch (error) {
-      throw new HttpException(
-        error.message || 'Failed to download exam report',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
+    res.send(buffer);
+
+  }
+
+  /**
+ * Download all student responses as a ZIP file containing individual PDFs
+ * @param examId - The ID of the exam
+ * @param res - Express response object
+ */
+  @Get('report/:examId/download-scripts')
+  async downloadAllStudentResponses(
+    @Param('examId') examId: string,
+    @Res() res: Response,
+  ): Promise<void> {
+    const { buffer, courseCode } = await this.examService.generateStudentResponsesZip(examId);
+
+    const filename = `scripts-${courseCode}.zip`;
+
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Content-Length', buffer.length);
+    res.setHeader('Cache-Control', 'no-cache');
+
+    res.send(buffer);
   }
 }
