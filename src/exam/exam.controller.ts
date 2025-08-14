@@ -11,9 +11,7 @@ import {
   HttpStatus,
   HttpCode,
   Get,
-  Header,
   Res,
-  HttpException,
 } from '@nestjs/common';
 import { CreateExamDto } from './dtos/create-exam.dto';
 import { UpdateExamParamDto } from './dtos/update-exam-param.dto';
@@ -201,18 +199,23 @@ export class ExamController {
     return this.examService.deleteOeExam(examId);
   }
 
+  @Get('ugr')
+  public async getOeExamsReadyForGrading() {
+    return this.examService.getOeExamsReadyForGrading()
+  }
+
   @Post('grade')
   @HttpCode(HttpStatus.OK)
   public async gradeExam(@Body() gradeOeExamDto: GradeOeExamDto) {
     return this.examService.gradeOeExam(gradeOeExamDto.examId);
   }
 
-  @Get('report/:examId')
+  @Get(':examId/report')
   public async viewReport(@Param('examId') examId: string) {
     return this.examService.generateExamReport(examId)
   }
 
-  @Get('report/:examId/download')
+  @Get(':examId/report/download')
   public async downloadExamReport(
     @Param('examId') examId: string,
     @Res() res: Response,
@@ -236,7 +239,7 @@ export class ExamController {
  * @param examId - The ID of the exam
  * @param res - Express response object
  */
-  @Get('report/:examId/download-scripts')
+  @Get(':examId/report/download-scripts')
   public async downloadAllStudentResponses(
     @Param('examId') examId: string,
     @Res() res: Response,
@@ -252,9 +255,4 @@ export class ExamController {
 
     res.send(buffer);
   }
-
-  @Get('ugr')
-  public async getOeExamsReadyForGrading() {
-    return this.examService.getOeExamsReadyForGrading()
-  } 
 }
