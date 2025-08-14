@@ -13,12 +13,12 @@ import { OeQuestion, OeQuestionSchema } from './schemas/oe/oe-question.schema';
 import { FetchExamAssignmentsProvider } from './providers/fetch-exam-assignments.provider';
 import { GradeOeExamProvider } from './providers/grade-oe-exam.provider';
 import { OeExamGrading, OeExamGradingSchema } from './schemas/oe-exam-grading.schema';
-import { OpenaiService } from 'src/openai/openai.service';
 import { OpenaiModule } from 'src/openai/openai.module';
+import { ExamReportProvider } from './providers/exam-report.provider';
 
 @Module({
   controllers: [ExamController],
-  providers: [ExamService, CreateExamProvider, UpdateMcqExamProvider, UpdateOeExamProvider, FetchExamAssignmentsProvider, GradeOeExamProvider],
+  providers: [ExamService, CreateExamProvider, UpdateMcqExamProvider, UpdateOeExamProvider, FetchExamAssignmentsProvider, GradeOeExamProvider, ExamReportProvider],
   imports: [
     forwardRef(() => StudentModule),
     OpenaiModule,

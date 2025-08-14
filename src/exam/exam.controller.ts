@@ -213,7 +213,7 @@ export class ExamController {
   }
 
   @Get('report/:examId/download')
-  async downloadExamReport(
+  public async downloadExamReport(
     @Param('examId') examId: string,
     @Res() res: Response,
   ): Promise<void> {
@@ -237,7 +237,7 @@ export class ExamController {
  * @param res - Express response object
  */
   @Get('report/:examId/download-scripts')
-  async downloadAllStudentResponses(
+  public async downloadAllStudentResponses(
     @Param('examId') examId: string,
     @Res() res: Response,
   ): Promise<void> {
@@ -252,4 +252,9 @@ export class ExamController {
 
     res.send(buffer);
   }
+
+  @Get('ugr')
+  public async getOeExamsReadyForGrading() {
+    return this.examService.getOeExamsReadyForGrading()
+  } 
 }
