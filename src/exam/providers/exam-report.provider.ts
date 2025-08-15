@@ -3,7 +3,6 @@ import {
     Injectable,
 } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { Exam, ExamDocument } from '../schemas/exam.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { successResponse } from 'src/utils/response-writer';
 import { ExamAssignment, ExamAssignmentDocument } from '../schemas/exam-assigment.schema';
@@ -14,6 +13,7 @@ import * as archiver from 'archiver';
 import { generateHTMLTemplate } from 'src/utils/generate-html-template';
 import { OeExamGrading } from '../schemas/oe-exam-grading.schema';
 import { examType } from '../enums/exam-type.enum';
+import { ExamDocument } from '../schemas/exam.schema';
 
 @Injectable()
 export class ExamReportProvider {
@@ -30,18 +30,25 @@ export class ExamReportProvider {
       * @param examId - The ID of the exam
       * @returns 
       */
-    async generateExamReport(examId: string) {
+    async generateExamReport(exam: ExamDocument) {
+
         const assignments = await this.examAssignmentModel
-            .find({ exam: examId, isCompleted: true, score: { $ne: null } })
+            .find({ exam: exam._id, isCompleted: true, score: { $ne: null } })
             .populate('student', 'fullName matricNo')
-            .populate('exam', 'courseName courseCode')
             .exec();
 
+        const examTitle = `${exam.courseCode} - ${exam.courseName}`;
+
         if (assignments.length === 0) {
-            throw new Error('No completed assignments found for this exam');
+            return successResponse({
+                message: "Report generated successfully", data: {
+                    examTitle,
+                    examId: exam._id,
+                    students: []
+                }
+            })
         }
 
-        const examTitle = `${assignments[0].exam.courseCode} - ${assignments[0].exam.courseName}`;
 
         const students = assignments.map(assignment => ({
             studentName: assignment.student.fullName,
@@ -52,7 +59,7 @@ export class ExamReportProvider {
         return successResponse({
             message: "Report generated successfully", data: {
                 examTitle,
-                examId,
+                examId: exam._id,
                 students,
             }
         });
@@ -63,8 +70,8 @@ export class ExamReportProvider {
        * @param examId - The ID of the exam
        * @returns Promise<{ buffer: Buffer, courseName: string }>
        */
-    async generateExcelReport(examId: string): Promise<{ buffer: Buffer, courseName: string }> {
-        const report = await this.generateExamReport(examId);
+    async generateExcelReport(exam: ExamDocument): Promise<{ buffer: Buffer, courseName: string }> {
+        const report = await this.generateExamReport(exam);
 
         const workbook = XLSX.utils.book_new();
 

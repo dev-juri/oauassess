@@ -200,6 +200,7 @@ export class ExamController {
   }
 
   @Get('ugr')
+  @HttpCode(HttpStatus.OK)
   public async getOeExamsReadyForGrading() {
     return this.examService.getOeExamsReadyForGrading()
   }
@@ -211,11 +212,13 @@ export class ExamController {
   }
 
   @Get(':examId/report')
+  @HttpCode(HttpStatus.OK)
   public async viewReport(@Param('examId') examId: string) {
     return this.examService.generateExamReport(examId)
   }
 
   @Get(':examId/report/download')
+  @HttpCode(HttpStatus.OK)
   public async downloadExamReport(
     @Param('examId') examId: string,
     @Res() res: Response,
@@ -240,6 +243,7 @@ export class ExamController {
  * @param res - Express response object
  */
   @Get(':examId/report/download-scripts')
+  @HttpCode(HttpStatus.OK)
   public async downloadAllStudentResponses(
     @Param('examId') examId: string,
     @Res() res: Response,

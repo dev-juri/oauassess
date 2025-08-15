@@ -205,7 +205,8 @@ export class ExamService {
     * @returns 
     */
   async generateExamReport(examId: string) {
-    return this.examReportProvider.generateExamReport(examId);
+    const exam = await this.fetchExam(examId)
+    return this.examReportProvider.generateExamReport(exam);
   }
 
   /**
@@ -214,7 +215,8 @@ export class ExamService {
      * @returns Promise<{ buffer: Buffer, courseName: string }>
      */
   async generateExcelReport(examId: string): Promise<{ buffer: Buffer, courseName: string }> {
-    return this.examReportProvider.generateExcelReport(examId)
+    const exam = await this.fetchExam(examId)
+    return this.examReportProvider.generateExcelReport(exam)
   }
 
   /**
