@@ -192,10 +192,6 @@ export class ExamReportProvider {
 
         const examId = exam._id.toString()
 
-        if (exam.examType != examType.OE) {
-            throw new BadRequestException("Scripts can only be generated for open ended exams")
-        }
-
         const assignments = await this.examAssignmentModel
             .find({ exam: examId, isCompleted: true })
             .populate('student', 'fullName matricNo')
