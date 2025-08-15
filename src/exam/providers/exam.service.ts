@@ -14,6 +14,9 @@ import { McqQuestion } from '../schemas/mcq/mcq-question.schema';
 import { UpdateOeExamProvider } from './update-oe-exam.provider';
 import { OeQuestion } from '../schemas/oe/oe-question.schema';
 import { GradeOeExamProvider } from './grade-oe-exam.provider';
+import { examType } from '../enums/exam-type.enum';
+import { ExamReportProvider } from './exam-report.provider';
+import { OeExamGrading } from '../schemas/oe-exam-grading.schema';
 
 /**
  * Service responsible for managing exams and their related operations.
@@ -26,6 +29,7 @@ export class ExamService {
     private readonly updateMcqExamProvider: UpdateMcqExamProvider,
     private readonly updateOeExamProvider: UpdateOeExamProvider,
     private readonly gradeOeExamProvider: GradeOeExamProvider,
+    private readonly examReportProvider: ExamReportProvider,
 
     @InjectModel(Exam.name)
     private readonly examModel: Model<ExamDocument>,
@@ -36,6 +40,8 @@ export class ExamService {
     @InjectModel(OeQuestion.name)
     private readonly oeQuestionModel: Model<OeQuestion>,
 
+    @InjectModel(OeExamGrading.name)
+    private readonly oeExamGradingModel: Model<OeExamGrading>
   ) { }
 
   public async fetchExams() {
@@ -192,4 +198,77 @@ export class ExamService {
   public async gradeOeExam(examId: string) {
     return this.gradeOeExamProvider.gradeOeResponses(examId)
   }
+
+  /**
+    * Generate report for a specific exam
+    * @param examId - The ID of the exam
+    * @returns 
+    */
+  async generateExamReport(examId: string) {
+    const exam = await this.fetchExam(examId)
+    return this.examReportProvider.generateExamReport(exam);
+  }
+
+  /**
+     * Generate Excel buffer for exam report
+     * @param examId - The ID of the exam
+     * @returns Promise<{ buffer: Buffer, courseName: string }>
+     */
+  async generateExcelReport(examId: string): Promise<{ buffer: Buffer, courseName: string }> {
+    const exam = await this.fetchExam(examId)
+    return this.examReportProvider.generateExcelReport(exam)
+  }
+
+  /**
+     * Generate ZIP file containing all student PDFs
+     * @param examId - The ID of the exam
+     * @returns Promise<{buffer: Buffer, courseCode: string}>
+     */
+  async generateStudentResponsesZip(examId: string): Promise<{ buffer: Buffer, courseCode: string }> {
+
+    const exam = await this.fetchExam(examId);
+    if (exam.examType != examType.OE) {
+      throw new BadRequestException("Scripts can only be generated for open ended exams")
+    }
+
+    return this.examReportProvider.generateStudentResponsesZip(exam);
+  }
+
+  async getOeExamsReadyForGrading() {
+    const gradings = await this.oeExamGradingModel.find({
+      $or: [
+        { 'responses.aiScore': null },
+        { 'responses.aiScore': { $exists: false } },
+        { 'responses.aiComment': null },
+        { 'responses.aiComment': { $exists: false } },
+        { 'responses.aiComment': '' }
+      ]
+    })
+      .populate({
+        path: 'assignment',
+        select: '_id student exam isCompleted score',
+        populate: [
+          { path: 'student', select: 'fullName matricNo' },
+          { path: 'exam', select: '_id courseName courseCode title' }
+        ]
+      })
+      .exec();
+    const examGroups = new Map();
+
+    for (const grading of gradings) {
+      const examId = (grading.assignment.exam as ExamDocument)._id.toString();
+      const examInfo = grading.assignment.exam;
+
+      if (!examGroups.has(examId)) {
+        examGroups.set(examId, {
+          examId: examId,
+          courseName: examInfo.courseName,
+          courseCode: examInfo.courseCode
+        });
+      }
+    }
+
+    return successResponse({ message: "Examinations with ungraded responses", data: Array.from(examGroups.values()) });
+  }
+
 }

@@ -11,6 +11,7 @@ import {
   HttpStatus,
   HttpCode,
   Get,
+  Res,
 } from '@nestjs/common';
 import { CreateExamDto } from './dtos/create-exam.dto';
 import { UpdateExamParamDto } from './dtos/update-exam-param.dto';
@@ -28,6 +29,7 @@ import {
 import { GradeOeExamDto } from './dtos/grade-oe-exam.dto';
 import { Auth } from 'src/admin/auth/decorators/auth.decorator';
 import { AuthType } from 'src/admin/auth/enums/auth-type.enum';
+import { Response } from 'express';
 
 /**
  * Controller for handling exam-related operations.
@@ -37,7 +39,7 @@ import { AuthType } from 'src/admin/auth/enums/auth-type.enum';
 @ApiTags('admin')
 @Controller('exam')
 export class ExamController {
-  constructor(private readonly examService: ExamService) {}
+  constructor(private readonly examService: ExamService) { }
 
   /**
    * Create a new exam.
@@ -197,9 +199,64 @@ export class ExamController {
     return this.examService.deleteOeExam(examId);
   }
 
+  @Get('ugr')
+  @HttpCode(HttpStatus.OK)
+  public async getOeExamsReadyForGrading() {
+    return this.examService.getOeExamsReadyForGrading()
+  }
+
   @Post('grade')
   @HttpCode(HttpStatus.OK)
-  public async(@Body() gradeOeExamDto: GradeOeExamDto) {
+  public async gradeExam(@Body() gradeOeExamDto: GradeOeExamDto) {
     return this.examService.gradeOeExam(gradeOeExamDto.examId);
+  }
+
+  @Get(':examId/report')
+  @HttpCode(HttpStatus.OK)
+  public async viewReport(@Param('examId') examId: string) {
+    return this.examService.generateExamReport(examId)
+  }
+
+  @Get(':examId/report/download')
+  @HttpCode(HttpStatus.OK)
+  public async downloadExamReport(
+    @Param('examId') examId: string,
+    @Res() res: Response,
+  ): Promise<void> {
+    const { buffer, courseName } = await this.examService.generateExcelReport(examId);
+
+    const cleanCourseName = courseName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+    const filename = `report-${cleanCourseName}.xlsx`;
+
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Content-Length', buffer.length);
+    res.setHeader('Cache-Control', 'no-cache');
+
+    res.send(buffer);
+
+  }
+
+  /**
+ * Download all student responses as a ZIP file containing individual PDFs
+ * @param examId - The ID of the exam
+ * @param res - Express response object
+ */
+  @Get(':examId/report/download-scripts')
+  @HttpCode(HttpStatus.OK)
+  public async downloadAllStudentResponses(
+    @Param('examId') examId: string,
+    @Res() res: Response,
+  ): Promise<void> {
+    const { buffer, courseCode } = await this.examService.generateStudentResponsesZip(examId);
+
+    const filename = `scripts-${courseCode}.zip`;
+
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Content-Length', buffer.length);
+    res.setHeader('Cache-Control', 'no-cache');
+
+    res.send(buffer);
   }
 }
