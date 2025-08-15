@@ -245,13 +245,22 @@ export class ExamReportProvider {
     async generateStudentPDF(studentData: StudentResponseData, courseInfo: any): Promise<Buffer> {
         const browser = await puppeteer.launch({
             headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-accelerated-2d-canvas',
+                '--no-first-run',
+                '--no-zygote',
+                '--disable-gpu'
+            ]
         });
 
         try {
             const page = await browser.newPage();
             const html = generateHTMLTemplate(studentData, courseInfo);
 
+            await page.setViewport({ width: 800, height: 600 });
             await page.setContent(html, { waitUntil: 'networkidle0' });
 
             const pdfBuffer = await page.pdf({
