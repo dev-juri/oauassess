@@ -171,7 +171,7 @@ export class GradeOeExamProvider {
                             $set: {
                                 score: {
                                     $cond: {
-                                        if: { $and: [{ $ne: ["$score", null] }, { $eq: [{ $type: "$score" }, "number"] }] },
+                                        if: { $ne: ["$score", null] },
                                         then: { $add: ["$score", totalScore] },
                                         else: totalScore
                                     }
