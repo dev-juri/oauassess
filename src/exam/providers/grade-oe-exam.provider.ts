@@ -166,7 +166,18 @@ export class GradeOeExamProvider {
             .map(([assignmentId, totalScore]) => ({
                 updateOne: {
                     filter: { _id: new Types.ObjectId(assignmentId) },
-                    update: { $inc: { score: totalScore } },
+                    update: [
+                        {
+                            $set: {
+                                score: {
+                                    $add: [
+                                        { $ifNull: ["$score", 0] },
+                                        totalScore
+                                    ]
+                                }
+                            }
+                        }
+                    ],
                 },
             }));
 
