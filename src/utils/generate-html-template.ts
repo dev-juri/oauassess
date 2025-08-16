@@ -254,7 +254,7 @@ export function generateHTMLTemplate(studentData: StudentResponseData, courseInf
                                 <div class="ai-score-container">
                                     <div class="ai-score">
                                         <div class="ai-score-label">AI Score</div>
-                                        <div class="ai-score-value">${response.aiScore}%</div>
+                                        <div class="ai-score-value">${response.aiScore}</div>
                                     </div>
                                 </div>
                             ` : ''}
