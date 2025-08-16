@@ -28,65 +28,77 @@ export class OpenaiService {
         2 Be objective and consistent in your grading
         3 Provide constructive feedback in your comment
         4 Consider partial credit where appropriate
-        5 Be specific about what the student did well and what they missed
+        5 Be specific about what the student did well and what they missed, alongside the score they obtained for each section of the question's rubric
         6 Ensure your score reflects the quality of the response according to the rubric`;
     }
 
     public async gradeRequests(gradingRequests: GradingRequest[]): Promise<GradingResult[]> {
         const results: GradingResult[] = [];
+        const batchSize = 5;
 
-        for (const request of gradingRequests) {
-            try {
-                const response = await this.client.responses.create({
-                    model: "gpt-4o",
-                    instructions: this.getGradingInstructions(),
-                    input: this.buildGradingPrompt(request),
-                    tools: [
-                        {
-                            type: "file_search",
-                            vector_store_ids: [request.guideVectorId],
-                            max_num_results: 1
+        for (let i = 0; i < gradingRequests.length; i += batchSize) {
+            const batch = gradingRequests.slice(i, i + batchSize);
+
+            const batchPromises = batch.map(async (request) => {
+                try {
+                    const response = await this.client.responses.create({
+                        model: "gpt-4o",
+                        instructions: this.getGradingInstructions(),
+                        input: this.buildGradingPrompt(request),
+                        tools: [
+                            {
+                                type: "file_search",
+                                vector_store_ids: [request.guideVectorId],
+                                max_num_results: 1
+                            }
+                        ],
+                        max_output_tokens: 300,
+                    });
+
+                    if (response.output) {
+                        const aiResponse = (response as OpenaiApiResponse).output[1].content[0].text.toString()
+                        const cleanedResponse = aiResponse.replace(/```json\s*|```/g, "").trim();
+
+                        try {
+                            const parsed = JSON.parse(cleanedResponse);
+                            if (typeof parsed.score === "number" && typeof parsed.comment === "string") {
+                                return {
+                                    assignmentId: request.assignmentId,
+                                    oeExamGradingId: request.oeExamGradingId,
+                                    responseId: request.responseId,
+                                    aiScore: parsed.score,
+                                    aiComment: parsed.comment
+                                };
+                            }
+                        } catch (err) {
+                            console.error(`JSON parsing error for request ${request.responseId}:`, err);
                         }
-                    ],
-                    max_output_tokens: 300,
-                });
-
-                if (response.output) {
-                    const aiResponse = (response as OpenaiApiResponse).output[1].content[0].text.toString()
-                    const cleanedResponse = aiResponse.replace(/```json\s*|```/g, "").trim();
-
-                    try {
-                        const parsed = JSON.parse(cleanedResponse);
-                        if (typeof parsed.score === "number" && typeof parsed.comment === "string") {
-                            results.push({
-                                assignmentId: request.assignmentId,
-                                oeExamGradingId: request.oeExamGradingId,
-                                responseId: request.responseId,
-                                aiScore: parsed.score,
-                                aiComment: parsed.comment
-                            });
-                        }
-                    } catch (err) {
-                        throw new Error(`Failed to parse assistant JSON: ${(err as Error).message}`);
                     }
-                } else {
-                    results.push({
+
+                    return {
                         assignmentId: request.assignmentId,
                         oeExamGradingId: request.oeExamGradingId,
                         responseId: request.responseId,
-                        aiScore: 0,
-                        aiComment: "No response received from API"
-                    });
+                        aiScore: null,
+                        aiComment: null
+                    };
+                } catch (error) {
+                    console.error(`Error with Responses API for request ${request.responseId}:`, error);
+                    return {
+                        assignmentId: request.assignmentId,
+                        oeExamGradingId: request.oeExamGradingId,
+                        responseId: request.responseId,
+                        aiScore: null,
+                        aiComment: null
+                    };
                 }
-            } catch (error) {
-                console.error('Error with Responses API:', error);
-                results.push({
-                    assignmentId: request.assignmentId,
-                    oeExamGradingId: request.oeExamGradingId,
-                    responseId: request.responseId,
-                    aiScore: 0,
-                    aiComment: "API error - please review manually"
-                });
+            });
+
+            const batchResults = await Promise.all(batchPromises);
+            results.push(...batchResults);
+
+            if (i + batchSize < gradingRequests.length) {
+                await new Promise(resolve => setTimeout(resolve, 1000));
             }
         }
 
