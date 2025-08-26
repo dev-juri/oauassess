@@ -95,7 +95,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Classes</li>
-  <li class="breadcrumb-item" >McqQuestion</li>
+  <li class="breadcrumb-item" >OeExamGrading</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -119,7 +119,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/exam/schemas/mcq/mcq-question.schema.ts</code>
+            <code>src/exam/schemas/oe-exam-grading.schema.ts</code>
         </p>
 
 
@@ -141,15 +141,15 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier"></span>
-                                <a href="#answer" >answer</a>
+                                <a href="#assignment" >assignment</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
-                                <a href="#options" >options</a>
+                                <a href="#guideVectorStoreId" >guideVectorStoreId</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
-                                <a href="#question" >question</a>
+                                <a href="#responses" >responses</a>
                             </li>
                         </ul>
                     </td>
@@ -174,11 +174,47 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="answer"></a>
+                    <a name="assignment"></a>
                     <span class="name">
                             <span class="modifier"></span>
-                        <span ><b>answer</b></span>
-                        <a href="#answer"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>assignment</b></span>
+                        <a href="#assignment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/ExamAssignment.html" target="_self" >ExamAssignment</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({type: undefined, ref: &#x27;ExamAssignment&#x27;, required: true})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/exam/schemas/oe-exam-grading.schema.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="guideVectorStoreId"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>guideVectorStoreId</b></span>
+                        <a href="#guideVectorStoreId"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -193,13 +229,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @Prop({required: true})<br />
+                            @Prop({})<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/exam/schemas/mcq/mcq-question.schema.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/exam/schemas/oe-exam-grading.schema.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -210,17 +246,17 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="options"></a>
+                    <a name="responses"></a>
                     <span class="name">
                             <span class="modifier"></span>
-                        <span ><b>options</b></span>
-                        <a href="#options"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>responses</b></span>
+                        <a href="#responses"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>string[]</code>
+                        <i>Type : </i>    <code>literal type[]</code>
 
                     </td>
                 </tr>
@@ -229,49 +265,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @Prop({type: undefined, required: true})<br />
+                            @Prop([&#x27;undefined&#x27;])<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/exam/schemas/mcq/mcq-question.schema.ts:22</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="question"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                        <span ><b>question</b></span>
-                        <a href="#question"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Prop({required: true})<br />
-                        </code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/exam/schemas/mcq/mcq-question.schema.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/exam/schemas/oe-exam-grading.schema.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -292,8 +292,12 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
 import { HydratedDocument } from &#x27;mongoose&#x27;;
+import * as mongoose from &#x27;mongoose&#x27;;
+import { ExamAssignment } from &#x27;./exam-assigment.schema&#x27;;
+import { OeQuestion } from &#x27;./oe/oe-question.schema&#x27;;
+import { ref } from &#x27;joi&#x27;;
 
-export type McqQuestionDocument &#x3D; HydratedDocument&lt;McqQuestion&gt;;
+export type OeExamGradingDocument &#x3D; HydratedDocument&lt;OeExamGrading&gt;;
 
 @Schema({
   timestamps: true,
@@ -306,18 +310,31 @@ export type McqQuestionDocument &#x3D; HydratedDocument&lt;McqQuestion&gt;;
     },
   },
 })
-export class McqQuestion {
-  @Prop({ required: true })
-  question: string;
+export class OeExamGrading {
 
-  @Prop({ type: [String], required: true  })
-  options: string[];
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: &#x27;ExamAssignment&#x27;, required: true })
+  assignment: ExamAssignment;
 
-  @Prop({ required: true })
-  answer: string;
+  @Prop({})
+  guideVectorStoreId: string;
+
+  @Prop([
+    {
+      questionId: { type: mongoose.Schema.Types.ObjectId, ref: &#x27;OeQuestion&#x27;, required: true },
+      userResponse: { type: String, required: true },
+      aiComment: { type: String, default: null },
+      aiScore: { type: Number, default: null },
+    }
+  ])
+  responses: {
+    questionId: OeQuestion;
+    userResponse: string;
+    aiComment?: string;
+    aiScore?: number;
+  }[];
 }
 
-export const McqQuestionSchema &#x3D; SchemaFactory.createForClass(McqQuestion);
+export const OeExamGradingSchema &#x3D; SchemaFactory.createForClass(OeExamGrading);
 </code></pre>
     </div>
 </div>
@@ -356,7 +373,7 @@ export const McqQuestionSchema &#x3D; SchemaFactory.createForClass(McqQuestion);
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'McqQuestion.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'OeExamGrading.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

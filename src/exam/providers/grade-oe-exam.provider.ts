@@ -55,7 +55,7 @@ export class GradeOeExamProvider {
         const completedAssignments = await this.examAssignmentModel
             .find({
                 exam: new Types.ObjectId(examId),
-                isCompleted: true,
+                isCompleted: false,
             })
             .select('_id')
             .lean();

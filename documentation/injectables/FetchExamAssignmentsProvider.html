@@ -144,11 +144,19 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Async</span>
+                                <a href="#cacheMcqQuestions" >cacheMcqQuestions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#generateAndCacheQuestions" >generateAndCacheQuestions</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
                                 <a href="#getAssignmentsForStudent" >getAssignmentsForStudent</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getCachedMcqQuestion" >getCachedMcqQuestion</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -157,6 +165,10 @@
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#shuffleAndSelect" >shuffleAndSelect</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateStudentMcqScore" >updateStudentMcqScore</a>
                             </li>
                         </ul>
                     </td>
@@ -176,7 +188,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(examAssignmentModel: <a href="../undefineds/ExamAssignmentDocument.html" target="_self">Model&lt;ExamAssignmentDocument&gt;</a>, mcqModel: Model<any>, oeModel: Model<any>, cacheManager: Cache)</code>
+<code>constructor(examAssignmentModel: <a href="../undefineds/ExamAssignmentDocument.html" target="_self">Model&lt;ExamAssignmentDocument&gt;</a>, mcqModel: Model<any>, oeModel: Model<any>, cacheService: <a href="../injectables/CacheService.html" target="_self">CacheService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -235,10 +247,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>cacheManager</td>
+                                                        <td>cacheService</td>
                                                   
                                                         <td>
-                                                                    <code>Cache</code>
+                                                                        <code><a href="../injectables/CacheService.html" target="_self" >CacheService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -264,6 +276,110 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="cacheMcqQuestions"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>cacheMcqQuestions</b></span>
+                        <a href="#cacheMcqQuestions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>cacheMcqQuestions(questions: T[], ttl?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="188"
+                                    class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:188</a></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>T</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Cache individual MCQ questions for faster retrieval</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>questions</td>
+                                            <td>
+                                                        <code>T[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Array of question objects (lean or full documents)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>ttl</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Time to live in seconds (optional)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="generateAndCacheQuestions"></a>
                     <span class="name">
                             <span class="modifier">Async</span>
@@ -282,15 +398,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="83"
-                                    class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:83</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:104</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Generate and cache a list of randomized question IDs for a student-exam combo</p>
+                        <div class="io-description"><p>Generate and cache a list of randomized questions for a student-exam combo</p>
 </div>
 
                             <div class="io-description">
@@ -333,7 +449,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;string[]&gt;</code>
+                            <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#CachedQuestion" target="_self" >Promise&lt;CachedQuestion[]&gt;</a></code>
 
                         </div>
                             <div class="io-description">
@@ -365,8 +481,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="44"
-                                    class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:44</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -418,6 +534,93 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getCachedMcqQuestion"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getCachedMcqQuestion</b></span>
+                        <a href="#getCachedMcqQuestion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getCachedMcqQuestion(questionId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="216"
+                                    class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:216</a></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>T</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Retrieve a single MCQ question from cache</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>questionId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The ID of the question to retrieve</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;T | null&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>The cached question or null if not found</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getQuestionModel"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
@@ -436,8 +639,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="139"
-                                    class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:139</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="244"
+                                    class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:244</a></div>
                         </td>
                     </tr>
 
@@ -507,8 +710,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="127"
-                                    class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:127</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="232"
+                                    class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:232</a></div>
                         </td>
                     </tr>
 
@@ -523,7 +726,7 @@
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Shuffle an array and return <code>count</code> number of items</p>
+                        <div class="io-description"><p>Shuffle the array and return <code>count</code> number of items</p>
 </div>
 
                             <div class="io-description">
@@ -576,6 +779,99 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateStudentMcqScore"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>updateStudentMcqScore</b></span>
+                        <a href="#updateStudentMcqScore"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateStudentMcqScore(examId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, studentId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, score: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="40"
+                                    class="link-to-prism">src/exam/providers/fetch-exam-assignments.provider.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>examId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>studentId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>score</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
     </div>
@@ -583,25 +879,25 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-    Inject,
     Injectable,
     NotFoundException,
     InternalServerErrorException,
+    ForbiddenException,
 } from &#x27;@nestjs/common&#x27;;
 import { InjectModel } from &#x27;@nestjs/mongoose&#x27;;
 import { Model } from &#x27;mongoose&#x27;;
-import { CACHE_MANAGER } from &#x27;@nestjs/cache-manager&#x27;;
-import { Cache } from &#x27;cache-manager&#x27;;
-
 import { ExamAssignment, ExamAssignmentDocument } from &#x27;../schemas/exam-assigment.schema&#x27;;
-import { Exam, ExamDocument } from &#x27;../schemas/exam.schema&#x27;;
+import { ExamDocument } from &#x27;../schemas/exam.schema&#x27;;
 import { examType } from &#x27;../enums/exam-type.enum&#x27;;
 import { Types } from &#x27;mongoose&#x27;;
+import { CacheService } from &#x27;src/cache/cache.service&#x27;;
+import { McqQuestion, McqQuestionDocument } from &#x27;../schemas/mcq/mcq-question.schema&#x27;;
+import { generateExamQuestionsCacheKey, generateMcqQuestionCacheKey } from &#x27;../constants/cache-keys&#x27;;
 
 /**
- * Cache for just 1hour
+ * Cache for just 1 day
  */
-const CACHE_TTL &#x3D; 3600;
+const CACHE_TTL &#x3D; 1000 * 60 * 60 * 24;
 
 /**
  * Provider class to generate and/or fetch assignment for each student
@@ -618,16 +914,36 @@ export class FetchExamAssignmentsProvider {
         @InjectModel(&#x27;OeQuestion&#x27;)
         private readonly oeModel: Model&lt;any&gt;,
 
-        @Inject(CACHE_MANAGER)
-        private readonly cacheManager: Cache,
+        private readonly cacheService: CacheService,
     ) { }
+
+    async updateStudentMcqScore(examId: string, studentId: string, score: number) {
+        const assignment &#x3D; await this.examAssignmentModel.findOne({ exam: examId, student: studentId });
+
+        if (!assignment) {
+            throw new NotFoundException(&quot;Assignment not found for student.&quot;);
+        }
+
+        if (assignment.score !&#x3D;&#x3D; undefined &amp;&amp; assignment.score !&#x3D;&#x3D; null) {
+            throw new ForbiddenException(&quot;Exam has already been graded.&quot;);
+        }
+
+        await this.examAssignmentModel.updateOne(
+            { _id: assignment._id },
+            {
+                score: score,
+                isCompleted: true
+            },
+            { runValidators: true }
+        );
+    }
 
     /**
      * Get all exam assignments for a given student and include cached/randomized questions.
      */
     async getAssignmentsForStudent(studentId: string) {
         const assignments &#x3D; await this.examAssignmentModel
-            .find({ student: new Types.ObjectId(studentId) })
+            .find({ student: new Types.ObjectId(studentId), isCompleted: false })
             .populate({
                 path: &#x27;exam&#x27;,
                 select: &#x27;courseName courseCode duration examType questionCount questions&#x27;,
@@ -636,19 +952,19 @@ export class FetchExamAssignmentsProvider {
             .exec();
 
         if (!assignments.length) {
-            throw new NotFoundException(&#x60;No exam assignments found for student ${studentId}&#x60;);
+            return [];
         }
 
         const results &#x3D; await Promise.all(
             assignments.map(async (assignment) &#x3D;&gt; {
-                const exam &#x3D; assignment.exam as unknown as ExamDocument;
+                const exam &#x3D; assignment.exam as ExamDocument;
 
                 if (!exam || !exam.questions?.length) return null;
 
                 const examId &#x3D; exam._id.toString();
-                await this.generateAndCacheQuestions(studentId, exam);
 
                 return {
+                    assignmentId: assignment._id,
                     examId,
                     courseName: exam.courseName,
                     courseCode: exam.courseCode,
@@ -658,55 +974,140 @@ export class FetchExamAssignmentsProvider {
             }),
         );
 
-        return results.filter(Boolean); // Remove nulls
+        return results.filter(Boolean);
     }
 
+
     /**
-     * Generate and cache a list of randomized question IDs for a student-exam combo
+     * Generate and cache a list of randomized questions for a student-exam combo
      */
-    async generateAndCacheQuestions(studentId: string, exam: ExamDocument): Promise&lt;string[]&gt; {
+    async generateAndCacheQuestions(
+        studentId: string,
+        exam: ExamDocument
+    ): Promise&lt;CachedQuestion[]&gt; {
         const examId &#x3D; exam._id.toString();
-        const cacheKey &#x3D; &#x60;exam-questions:${studentId}:${examId}&#x60;;
+        const cacheKey &#x3D; generateExamQuestionsCacheKey(studentId, examId);
 
-        // Return cached question IDs if available
-        const cached &#x3D; await this.cacheManager.get&lt;string[]&gt;(cacheKey);
-        if (cached) return cached;
+        try {
+            // Check if questions are already cached
+            const cached &#x3D; await this.cacheService.get&lt;CachedQuestion[]&gt;(cacheKey);
+            if (cached) {
+                return cached;
+            }
 
-        const questions &#x3D; exam.questions;
-        if (!questions?.length) {
-            throw new Error(&#x60;No questions available for exam ${examId}&#x60;);
+            // Validate exam questions
+            const questions &#x3D; exam.questions;
+            if (!questions?.length) {
+                throw new Error(&#x60;No questions available for exam ${examId}&#x60;);
+            }
+
+            if (exam.questionCount &gt; questions.length) {
+                throw new Error(
+                    &#x60;Exam ${examId} requests ${exam.questionCount} questions but only ${questions.length} are available&#x60;
+                );
+            }
+
+            // Select random questions
+            const selected &#x3D; this.shuffleAndSelect(questions, exam.questionCount);
+
+            // Get the appropriate model based on exam type
+            const model &#x3D; this.getQuestionModel(exam.examType);
+
+            // Bulk fetch all questions in a single query
+            const fullQuestions &#x3D; await model
+                .find({ _id: { $in: selected } })
+                .lean()
+                .exec();
+
+            // Validate that we got the expected number of questions
+            if (fullQuestions.length !&#x3D;&#x3D; selected.length) {
+                throw new Error(
+                    &#x60;Expected ${selected.length} questions but found ${fullQuestions.length} for exam ${examId}&#x60;
+                );
+            }
+
+            // Process questions based on exam type
+            let processedQuestions: CachedQuestion[];
+
+            if (exam.examType &#x3D;&#x3D;&#x3D; &#x27;OeQuestion&#x27;) {
+                // For Open-Ended questions, only id and question
+                processedQuestions &#x3D; fullQuestions.map(q &#x3D;&gt; ({
+                    id: q._id.toString(),
+                    question: q.question
+                }));
+            } else {
+                // For MCQ questions, id, question, and options
+                processedQuestions &#x3D; fullQuestions.map(q &#x3D;&gt; ({
+                    id: q._id.toString(),
+                    question: q.question,
+                    options: q.options
+                }));
+
+                // Cache individual MCQ questions
+                await this.cacheMcqQuestions(fullQuestions, CACHE_TTL);
+            }
+
+            // Cache the processed questions for this student-exam combination
+            await this.cacheService.set&lt;CachedQuestion[]&gt;(cacheKey, processedQuestions, CACHE_TTL);
+
+            return processedQuestions;
+
+        } catch (error) {
+            console.error(&#x27;Error in generateAndCacheQuestions:&#x27;, error);
+            throw new InternalServerErrorException(
+                &#x60;Error fetching questions for exam ${examId}: ${error.message}&#x60;
+            );
         }
-
-        if (exam.questionCount &gt; questions.length) {
-            throw new Error(&#x60;Exam ${examId} requests ${exam.questionCount} questions but only ${questions.length} are available&#x60;);
-        }
-
-        const selected &#x3D; this.shuffleAndSelect(questions, exam.questionCount);
-        const questionIds &#x3D; selected.map((q) &#x3D;&gt; q.toString());
-
-        // Cache the selected question IDs
-        await this.cacheManager.set(cacheKey, questionIds, CACHE_TTL);
-
-        // Load full question objects and cache each individually
-        const model &#x3D; this.getQuestionModel(exam.examType);
-        const fullQuestions &#x3D; await model.find({ _id: { $in: selected } }).lean().exec();
-
-        await Promise.all(
-            fullQuestions.map(async (question) &#x3D;&gt; {
-                const qid &#x3D; question._id.toString();
-                const key &#x3D; &#x60;question:${qid}&#x60;;
-                const exists &#x3D; await this.cacheManager.get(key);
-                if (!exists) {
-                    await this.cacheManager.set(key, question, CACHE_TTL);
-                }
-            }),
-        );
-
-        return questionIds;
     }
 
     /**
-     * Shuffle an array and return &#x60;count&#x60; number of items
+     * Cache individual MCQ questions for faster retrieval
+     * @param questions - Array of question objects (lean or full documents)
+     * @param ttl - Time to live in seconds (optional)
+     */
+    async cacheMcqQuestions&lt;T extends { _id: any }&gt;(
+        questions: T[],
+        ttl?: number
+    ): Promise&lt;void&gt; {
+        try {
+            const cacheItems &#x3D; questions.map(question &#x3D;&gt; {
+                if (!question._id) {
+                    throw new Error(&#x27;Question missing _id field&#x27;);
+                }
+
+                return {
+                    key: generateMcqQuestionCacheKey(question._id.toString()),
+                    value: question,
+                    ttl
+                };
+            });
+
+            await this.cacheService.mset(cacheItems);
+        } catch (error) {
+            throw new Error(&#x60;Failed to cache individual MCQ questions: ${error.message}&#x60;);
+        }
+    }
+
+    /**
+     * Retrieve a single MCQ question from cache
+     * @param questionId - The ID of the question to retrieve
+     * @returns The cached question or null if not found
+     */
+    async getCachedMcqQuestion&lt;T &#x3D; any&gt;(questionId: string): Promise&lt;T | null&gt; {
+        try {
+            const cacheKey &#x3D; generateMcqQuestionCacheKey(questionId);
+
+            const cacheQuestion &#x3D; await this.cacheService.get&lt;T&gt;(cacheKey);
+
+            return cacheQuestion
+        } catch (error) {
+            console.error(&#x60;Error retrieving cached MCQ question ${questionId}:&#x60;, error);
+            return null;
+        }
+    }
+
+    /**
+     * Shuffle the array and return &#x60;count&#x60; number of items
      */
     private shuffleAndSelect&lt;T&gt;(array: T[], count: number): T[] {
         const copy &#x3D; [...array];

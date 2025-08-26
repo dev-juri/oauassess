@@ -337,10 +337,34 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                        <a href="./miscellaneous/variables.html#ENV">src/app.module.ts</a>
+                <a href="./injectables/AppService.html">src/app.service.ts</a>
             </td>
-            <td>variable</td>
-            <td>ENV</td>
+            <td>injectable</td>
+            <td>AppService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/CacheService.html">src/cache/cache.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>CacheService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#generateExamQuestionsCacheKey">src/exam/constants/cache-keys.ts</a>
+            </td>
+            <td>function</td>
+            <td>generateExamQuestionsCacheKey</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/1)</span>
@@ -349,13 +373,13 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/AppService.html">src/app.service.ts</a>
+                        <a href="./miscellaneous/functions.html#generateMcqQuestionCacheKey">src/exam/constants/cache-keys.ts</a>
             </td>
-            <td>injectable</td>
-            <td>AppService</td>
+            <td>function</td>
+            <td>generateMcqQuestionCacheKey</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/2)</span>
+                <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
         <tr class="very-good">
@@ -385,6 +409,18 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
+                <a href="./classes/GradeOeExamDto.html">src/exam/dtos/grade-oe-exam.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>GradeOeExamDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
                 <a href="./classes/Mcq.html">src/exam/dtos/mcq.dto.ts</a>
             </td>
             <td>class</td>
@@ -406,16 +442,52 @@
                 <span class="coverage-count">(2/2)</span>
             </td>
         </tr>
-        <tr class="very-good">
+        <tr class="good">
             <td>
                 <!-- miscellaneous -->
                 <a href="./controllers/ExamController.html">src/exam/exam.controller.ts</a>
             </td>
             <td>controller</td>
             <td>ExamController</td>
-            <td align="right" data-sort="100">
-                <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(6/6)</span>
+            <td align="right" data-sort="58">
+                <span class="coverage-percent">58 %</span>
+                <span class="coverage-count">(7/12)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/McqQuestionCache.html">src/exam/interfaces/question-cache-type.interface.ts</a>
+            </td>
+            <td>interface</td>
+            <td>McqQuestionCache</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/OeQuestionCache.html">src/exam/interfaces/question-cache-type.interface.ts</a>
+            </td>
+            <td>interface</td>
+            <td>OeQuestionCache</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#CachedQuestion">src/exam/interfaces/question-cache-type.interface.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>CachedQuestion</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
         <tr class="good">
@@ -430,16 +502,28 @@
                 <span class="coverage-count">(2/3)</span>
             </td>
         </tr>
-        <tr class="very-good">
+        <tr class="good">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/ExamReportProvider.html">src/exam/providers/exam-report.provider.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>ExamReportProvider</td>
+            <td align="right" data-sort="71">
+                <span class="coverage-percent">71 %</span>
+                <span class="coverage-count">(5/7)</span>
+            </td>
+        </tr>
+        <tr class="good">
             <td>
                 <!-- miscellaneous -->
                 <a href="./injectables/ExamService.html">src/exam/providers/exam.service.ts</a>
             </td>
             <td>injectable</td>
             <td>ExamService</td>
-            <td align="right" data-sort="85">
-                <span class="coverage-percent">85 %</span>
-                <span class="coverage-count">(6/7)</span>
+            <td align="right" data-sort="64">
+                <span class="coverage-percent">64 %</span>
+                <span class="coverage-count">(9/14)</span>
             </td>
         </tr>
         <tr class="very-good">
@@ -449,9 +533,9 @@
             </td>
             <td>injectable</td>
             <td>FetchExamAssignmentsProvider</td>
-            <td align="right" data-sort="83">
-                <span class="coverage-percent">83 %</span>
-                <span class="coverage-count">(5/6)</span>
+            <td align="right" data-sort="77">
+                <span class="coverage-percent">77 %</span>
+                <span class="coverage-count">(7/9)</span>
             </td>
         </tr>
         <tr class="very-good">
@@ -464,6 +548,18 @@
             <td align="right" data-sort="100">
                 <span class="coverage-percent">100 %</span>
                 <span class="coverage-count">(1/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/GradeOeExamProvider.html">src/exam/providers/grade-oe-exam.provider.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>GradeOeExamProvider</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
             </td>
         </tr>
         <tr class="good">
@@ -535,7 +631,7 @@
             <td>Exam</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/7)</span>
+                <span class="coverage-count">(0/8)</span>
             </td>
         </tr>
         <tr class="low">
@@ -593,6 +689,42 @@
             </td>
             <td>type alias</td>
             <td>McqQuestionDocument</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/OeExamGrading.html">src/exam/schemas/oe-exam-grading.schema.ts</a>
+            </td>
+            <td>class</td>
+            <td>OeExamGrading</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#OeExamGradingSchema">src/exam/schemas/oe-exam-grading.schema.ts</a>
+            </td>
+            <td>variable</td>
+            <td>OeExamGradingSchema</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#OeExamGradingDocument">src/exam/schemas/oe-exam-grading.schema.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>OeExamGradingDocument</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/1)</span>
@@ -661,6 +793,30 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
+                <a href="./injectables/OpenaiService.html">src/openai/openai.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>OpenaiService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/FetchQuestionParamsDto.html">src/student/dtos/fetch-question-params.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>FetchQuestionParamsDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
                 <a href="./classes/LoginStudentDto.html">src/student/dtos/login-student.dto.ts</a>
             </td>
             <td>class</td>
@@ -668,6 +824,42 @@
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/StudentAnswerDto.html">src/student/dtos/student-answer.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>StudentAnswerDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/3)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/SubmitMcqExamDto.html">src/student/dtos/submit-mcq-exam.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>SubmitMcqExamDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/SubmitOeExamDto.html">src/student/dtos/submit-oe-exam.dto.ts</a>
+            </td>
+            <td>class</td>
+            <td>SubmitOeExamDto</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
             </td>
         </tr>
         <tr class="low">
@@ -691,7 +883,7 @@
             <td>StudentService</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/5)</span>
+                <span class="coverage-count">(0/8)</span>
             </td>
         </tr>
         <tr class="low">
@@ -739,7 +931,55 @@
             <td>StudentController</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="very-good">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#generateHTMLTemplate">src/utils/generate-html-template.ts</a>
+            </td>
+            <td>function</td>
+            <td>generateHTMLTemplate</td>
+            <td align="right" data-sort="100">
+                <span class="coverage-percent">100 %</span>
+                <span class="coverage-count">(1/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/GradingRequest.html">src/utils/interfaces/grading-request.ts</a>
+            </td>
+            <td>interface</td>
+            <td>GradingRequest</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/GradingResult.html">src/utils/interfaces/grading-request.ts</a>
+            </td>
+            <td>interface</td>
+            <td>GradingResult</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/OpenaiApiResponse.html">src/utils/interfaces/grading-request.ts</a>
+            </td>
+            <td>interface</td>
+            <td>OpenaiApiResponse</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
             </td>
         </tr>
         <tr class="very-good">
@@ -788,6 +1028,30 @@
             <td align="right" data-sort="100">
                 <span class="coverage-percent">100 %</span>
                 <span class="coverage-count">(1/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/QuestionResponse.html">src/utils/interfaces/report.interface.ts</a>
+            </td>
+            <td>interface</td>
+            <td>QuestionResponse</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./interfaces/StudentResponseData.html">src/utils/interfaces/report.interface.ts</a>
+            </td>
+            <td>interface</td>
+            <td>StudentResponseData</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
             </td>
         </tr>
         <tr class="very-good">

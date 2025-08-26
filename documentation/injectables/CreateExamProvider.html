@@ -165,7 +165,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(connection: Connection, studentService: <a href="../injectables/StudentService.html" target="_self">StudentService</a>, mcqExamModel: <a href="../classes/Exam.html" target="_self">Model&lt;ExamDocument&gt;</a>, examAssignmentModel: <a href="../undefineds/ExamAssignmentDocument.html" target="_self">Model&lt;ExamAssignmentDocument&gt;</a>)</code>
+<code>constructor(connection: Connection, studentService: <a href="../injectables/StudentService.html" target="_self">StudentService</a>, examModel: <a href="../classes/Exam.html" target="_self">Model&lt;ExamDocument&gt;</a>, examAssignmentModel: <a href="../undefineds/ExamAssignmentDocument.html" target="_self">Model&lt;ExamAssignmentDocument&gt;</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -212,7 +212,7 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>mcqExamModel</td>
+                                                        <td>examModel</td>
                                                   
                                                         <td>
                                                                         <code><a href="../classes/Exam.html" target="_self" >Model&lt;ExamDocument&gt;</a></code>
@@ -385,7 +385,7 @@ export class CreateExamProvider {
     private readonly studentService: StudentService,
 
     @InjectModel(Exam.name)
-    private readonly mcqExamModel: Model&lt;ExamDocument&gt;,
+    private readonly examModel: Model&lt;ExamDocument&gt;,
 
     @InjectModel(ExamAssignment.name)
     private readonly examAssignmentModel: Model&lt;ExamAssignmentDocument&gt;,
@@ -419,7 +419,7 @@ export class CreateExamProvider {
     }
 
     try {
-      const exam &#x3D; await this.mcqExamModel.create(createExamDto);
+      const exam &#x3D; await this.examModel.create(createExamDto);
       await exam.save({ session });
 
       const operations &#x3D; students.map((student) &#x3D;&gt; ({

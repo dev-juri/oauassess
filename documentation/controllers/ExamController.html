@@ -187,6 +187,40 @@ Supports creating, updating, and deleting MCQ and open-ended (OE) exams.</p>
                             <li>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#downloadAllStudentResponses" >downloadAllStudentResponses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#downloadExamReport" >downloadExamReport</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#fetchExams" >fetchExams</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#getOeExamsReadyForGrading" >getOeExamsReadyForGrading</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#gradeExam" >gradeExam</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
@@ -211,6 +245,13 @@ Supports creating, updating, and deleting MCQ and open-ended (OE) exams.</p>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
                                 <a href="#updateOeExam" >updateOeExam</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#viewReport" >viewReport</a>
                             </li>
                         </ul>
                     </td>
@@ -268,8 +309,8 @@ Supports creating, updating, and deleting MCQ and open-ended (OE) exams.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="78"
-                                    class="link-to-prism">src/exam/exam.controller.ts:78</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/exam/exam.controller.ts:84</a></div>
                         </td>
                     </tr>
 
@@ -380,8 +421,8 @@ Supports creating, updating, and deleting MCQ and open-ended (OE) exams.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="132"
-                                    class="link-to-prism">src/exam/exam.controller.ts:132</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/exam/exam.controller.ts:143</a></div>
                         </td>
                     </tr>
 
@@ -473,8 +514,8 @@ Supports creating, updating, and deleting MCQ and open-ended (OE) exams.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="187"
-                                    class="link-to-prism">src/exam/exam.controller.ts:187</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="198"
+                                    class="link-to-prism">src/exam/exam.controller.ts:198</a></div>
                         </td>
                     </tr>
 
@@ -534,6 +575,379 @@ Supports creating, updating, and deleting MCQ and open-ended (OE) exams.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="downloadAllStudentResponses"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>downloadAllStudentResponses</b></span>
+                        <a href="#downloadAllStudentResponses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>downloadAllStudentResponses(examId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, res: Response)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;:examId/report/download-scripts&#x27;)<br />@HttpCode(HttpStatus.OK)<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="247"
+                                    class="link-to-prism">src/exam/exam.controller.ts:247</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Download all student responses as a ZIP file containing individual PDFs</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>examId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The ID of the exam</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>res</td>
+                                            <td>
+                                                        <code>Response</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Express response object</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="downloadExamReport"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>downloadExamReport</b></span>
+                        <a href="#downloadExamReport"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>downloadExamReport(examId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, res: Response)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;:examId/report/download&#x27;)<br />@HttpCode(HttpStatus.OK)<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="222"
+                                    class="link-to-prism">src/exam/exam.controller.ts:222</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>examId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>res</td>
+                                            <td>
+                                                        <code>Response</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchExams"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>fetchExams</b></span>
+                        <a href="#fetchExams"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchExams()</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;/all&#x27;)<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/exam/exam.controller.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getOeExamsReadyForGrading"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>getOeExamsReadyForGrading</b></span>
+                        <a href="#getOeExamsReadyForGrading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getOeExamsReadyForGrading()</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;ugr&#x27;)<br />@HttpCode(HttpStatus.OK)<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="204"
+                                    class="link-to-prism">src/exam/exam.controller.ts:204</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="gradeExam"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>gradeExam</b></span>
+                        <a href="#gradeExam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>gradeExam(gradeOeExamDto: <a href="../classes/GradeOeExamDto.html" target="_self">GradeOeExamDto</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Post(&#x27;grade&#x27;)<br />@HttpCode(HttpStatus.OK)<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="210"
+                                    class="link-to-prism">src/exam/exam.controller.ts:210</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>gradeOeExamDto</td>
+                                            <td>
+                                                            <code><a href="../classes/GradeOeExamDto.html" target="_self" >GradeOeExamDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="updateMcqExam"></a>
                     <span class="name">
                             <span class="modifier"></span>
@@ -569,8 +983,8 @@ Supports creating, updating, and deleting MCQ and open-ended (OE) exams.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">src/exam/exam.controller.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="124"
+                                    class="link-to-prism">src/exam/exam.controller.ts:124</a></div>
                         </td>
                     </tr>
 
@@ -683,8 +1097,8 @@ Supports creating, updating, and deleting MCQ and open-ended (OE) exams.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="168"
-                                    class="link-to-prism">src/exam/exam.controller.ts:168</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/exam/exam.controller.ts:179</a></div>
                         </td>
                     </tr>
 
@@ -755,6 +1169,85 @@ Supports creating, updating, and deleting MCQ and open-ended (OE) exams.</p>
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="viewReport"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>viewReport</b></span>
+                        <a href="#viewReport"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>viewReport(examId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;:examId/report&#x27;)<br />@HttpCode(HttpStatus.OK)<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="216"
+                                    class="link-to-prism">src/exam/exam.controller.ts:216</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>examId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>    </div>
 
 
@@ -771,6 +1264,8 @@ Supports creating, updating, and deleting MCQ and open-ended (OE) exams.</p>
   Body,
   HttpStatus,
   HttpCode,
+  Get,
+  Res,
 } from &#x27;@nestjs/common&#x27;;
 import { CreateExamDto } from &#x27;./dtos/create-exam.dto&#x27;;
 import { UpdateExamParamDto } from &#x27;./dtos/update-exam-param.dto&#x27;;
@@ -785,6 +1280,10 @@ import {
   ApiResponse,
   ApiTags,
 } from &#x27;@nestjs/swagger&#x27;;
+import { GradeOeExamDto } from &#x27;./dtos/grade-oe-exam.dto&#x27;;
+import { Auth } from &#x27;src/admin/auth/decorators/auth.decorator&#x27;;
+import { AuthType } from &#x27;src/admin/auth/enums/auth-type.enum&#x27;;
+import { Response } from &#x27;express&#x27;;
 
 /**
  * Controller for handling exam-related operations.
@@ -794,7 +1293,7 @@ import {
 @ApiTags(&#x27;admin&#x27;)
 @Controller(&#x27;exam&#x27;)
 export class ExamController {
-  constructor(private readonly examService: ExamService) {}
+  constructor(private readonly examService: ExamService) { }
 
   /**
    * Create a new exam.
@@ -827,10 +1326,10 @@ export class ExamController {
         tutorialList: {
           type: &#x27;string&#x27;,
           format: &#x27;binary&#x27;,
-          description: &#x27;Optional tutorial file upload&#x27;,
+          description: &#x27;Tutorial file upload&#x27;,
         },
       },
-      required: [&#x27;courseName&#x27;, &#x27;courseCode&#x27;, &#x27;duration&#x27;, &#x27;questionCount&#x27;, &#x27;examType&#x27;],
+      required: [&#x27;courseName&#x27;, &#x27;courseCode&#x27;, &#x27;duration&#x27;, &#x27;questionCount&#x27;, &#x27;examType&#x27;, &#x27;tutorialList&#x27;],
     },
   })
   @ApiResponse({ status: 201, description: &#x27;Exam created successfully&#x27; })
@@ -841,6 +1340,11 @@ export class ExamController {
     @UploadedFile() tutorialList?: Express.Multer.File,
   ) {
     return this.examService.createExam(createExamDto, tutorialList);
+  }
+
+  @Get(&#x27;/all&#x27;)
+  public async fetchExams() {
+    return await this.examService.fetchExams();
   }
 
   /**
@@ -947,6 +1451,67 @@ export class ExamController {
   @ApiResponse({ status: 404, description: &#x27;Exam not found&#x27; })
   public async deleteOeExam(@Param(&#x27;examId&#x27;) examId: string) {
     return this.examService.deleteOeExam(examId);
+  }
+
+  @Get(&#x27;ugr&#x27;)
+  @HttpCode(HttpStatus.OK)
+  public async getOeExamsReadyForGrading() {
+    return this.examService.getOeExamsReadyForGrading()
+  }
+
+  @Post(&#x27;grade&#x27;)
+  @HttpCode(HttpStatus.OK)
+  public async gradeExam(@Body() gradeOeExamDto: GradeOeExamDto) {
+    return this.examService.gradeOeExam(gradeOeExamDto.examId);
+  }
+
+  @Get(&#x27;:examId/report&#x27;)
+  @HttpCode(HttpStatus.OK)
+  public async viewReport(@Param(&#x27;examId&#x27;) examId: string) {
+    return this.examService.generateExamReport(examId)
+  }
+
+  @Get(&#x27;:examId/report/download&#x27;)
+  @HttpCode(HttpStatus.OK)
+  public async downloadExamReport(
+    @Param(&#x27;examId&#x27;) examId: string,
+    @Res() res: Response,
+  ): Promise&lt;void&gt; {
+    const { buffer, courseName } &#x3D; await this.examService.generateExcelReport(examId);
+
+    const cleanCourseName &#x3D; courseName.replace(/[^a-zA-Z0-9\s]/g, &#x27;&#x27;).replace(/\s+/g, &#x27;_&#x27;);
+    const filename &#x3D; &#x60;report-${cleanCourseName}.xlsx&#x60;;
+
+    res.setHeader(&#x27;Content-Type&#x27;, &#x27;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&#x27;);
+    res.setHeader(&#x27;Content-Disposition&#x27;, &#x60;attachment; filename&#x3D;&quot;${filename}&quot;&#x60;);
+    res.setHeader(&#x27;Content-Length&#x27;, buffer.length);
+    res.setHeader(&#x27;Cache-Control&#x27;, &#x27;no-cache&#x27;);
+
+    res.send(buffer);
+
+  }
+
+  /**
+ * Download all student responses as a ZIP file containing individual PDFs
+ * @param examId - The ID of the exam
+ * @param res - Express response object
+ */
+  @Get(&#x27;:examId/report/download-scripts&#x27;)
+  @HttpCode(HttpStatus.OK)
+  public async downloadAllStudentResponses(
+    @Param(&#x27;examId&#x27;) examId: string,
+    @Res() res: Response,
+  ): Promise&lt;void&gt; {
+    const { buffer, courseCode } &#x3D; await this.examService.generateStudentResponsesZip(examId);
+
+    const filename &#x3D; &#x60;scripts-${courseCode}.zip&#x60;;
+
+    res.setHeader(&#x27;Content-Type&#x27;, &#x27;application/zip&#x27;);
+    res.setHeader(&#x27;Content-Disposition&#x27;, &#x60;attachment; filename&#x3D;&quot;${filename}&quot;&#x60;);
+    res.setHeader(&#x27;Content-Length&#x27;, buffer.length);
+    res.setHeader(&#x27;Cache-Control&#x27;, &#x27;no-cache&#x27;);
+
+    res.send(buffer);
   }
 }
 </code></pre>

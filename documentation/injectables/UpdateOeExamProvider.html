@@ -165,12 +165,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(oeQuestionModel: <a href="../classes/OeQuestion.html" target="_self">Model&lt;OeQuestionDocument&gt;</a>, examSchema: <a href="../classes/Exam.html" target="_self">Model&lt;ExamDocument&gt;</a>, connection: Connection)</code>
+<code>constructor(oeQuestionModel: <a href="../classes/OeQuestion.html" target="_self">Model&lt;OeQuestionDocument&gt;</a>, examSchema: <a href="../classes/Exam.html" target="_self">Model&lt;ExamDocument&gt;</a>, connection: Connection, openAIService: <a href="../injectables/OpenaiService.html" target="_self">OpenaiService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/exam/providers/update-oe-exam.provider.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/exam/providers/update-oe-exam.provider.ts:28</a></div>
                             </td>
                         </tr>
 
@@ -223,6 +223,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>openAIService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/OpenaiService.html" target="_self" >OpenaiService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -260,8 +272,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/exam/providers/update-oe-exam.provider.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="57"
+                                    class="link-to-prism">src/exam/providers/update-oe-exam.provider.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -367,6 +379,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
   BadRequestException,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
 } from &#x27;@nestjs/common&#x27;;
 import { Exam, ExamDocument } from &#x27;../schemas/exam.schema&#x27;;
@@ -383,6 +396,8 @@ import {
 } from &#x27;src/utils/interfaces/oe-question.interface&#x27;;
 import { IResponse, successResponse } from &#x27;src/utils/response-writer&#x27;;
 import { examType } from &#x27;../enums/exam-type.enum&#x27;;
+import { OpenaiService } from &#x27;src/openai/openai.service&#x27;;
+import { InternalServerError } from &#x27;openai&#x27;;
 
 /**
  * Provider responsible for updating open-ended (OE) exams.
@@ -398,7 +413,9 @@ export class UpdateOeExamProvider {
 
     @InjectConnection()
     private readonly connection: Connection,
-  ) {}
+
+    private readonly openAIService: OpenaiService
+  ) { }
 
   /**
    * Updates an OE exam by inserting parsed questions from an uploaded template.
@@ -449,9 +466,14 @@ export class UpdateOeExamProvider {
       });
 
       const insertedQuestionIds &#x3D; Object.values(result.insertedIds || {});
-      console.log(insertedQuestionIds);
 
-      // TODO: Create Assistant and update exam with assistantId
+      // Improve later, by sending an event to a queue. Implement retries and debouncing.
+      const uploadedFile &#x3D; await this.openAIService.uploadMarkingGuide(markingGuide, exam.courseCode);
+      if(!uploadedFile) {
+        throw new InternalServerErrorException(&quot;Couldn&#x27;t save marking guide&quot;)
+      } 
+
+      exam.guideVectorStoreId &#x3D; uploadedFile.id
 
       exam.questions.push(...insertedQuestionIds);
       await exam.save({ session });

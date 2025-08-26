@@ -79,16 +79,19 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content controller">
+               <div class="content injectable">
                    <div class="content-data">
 
 
 
 
 
+
+
+
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Controllers</li>
-  <li class="breadcrumb-item" >StudentController</li>
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >CacheService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -112,16 +115,8 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/student/student.controller.ts</code>
+            <code>src/cache/cache.service.ts</code>
         </p>
-
-            <p class="comment">
-                <h3>Prefix</h3>
-            </p>
-            <p class="comment">
-                <code>student</code>
-            </p>
-
 
 
 
@@ -141,37 +136,24 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier"></span>
-                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#fetchExams" >fetchExams</a>
+                                <a href="#del" >del</a>
                             </li>
                             <li>
-                                    <span class="modifier"></span>
-                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#fetchQuestions" >fetchQuestions</a>
+                                <a href="#get" >get</a>
                             </li>
                             <li>
-                                    <span class="modifier"></span>
-                                    <span class="modifier"></span>
-                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#login" >login</a>
+                                <a href="#mget" >mget</a>
                             </li>
                             <li>
-                                    <span class="modifier"></span>
-                                    <span class="modifier"></span>
-                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#submitMcqExam" >submitMcqExam</a>
+                                <a href="#mset" >mset</a>
                             </li>
                             <li>
-                                    <span class="modifier"></span>
-                                    <span class="modifier"></span>
-                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#submitOeExam" >submitOeExam</a>
+                                <a href="#set" >set</a>
                             </li>
                         </ul>
                     </td>
@@ -185,6 +167,55 @@
     </table>
 </section>
 
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(cacheManager: Cache)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/cache/cache.service.ts:6</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>cacheManager</td>
+                                                  
+                                                        <td>
+                                                                    <code>Cache</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
             <section data-compodoc="block-methods">
     
     <h3 id="methods">
@@ -194,35 +225,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="fetchExams"></a>
+                    <a name="del"></a>
                     <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>fetchExams</b></span>
-                        <a href="#fetchExams"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>del</b></span>
+                        <a href="#del"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>fetchExams(studentId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>del(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Get(&#x27;:studentId/assignments&#x27;)<br /></code>
-                </td>
-            </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="24"
-                                    class="link-to-prism">src/student/student.controller.ts:24</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="28"
+                                    class="link-to-prism">src/cache/cache.service.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -243,7 +265,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>studentId</td>
+                                                <td>key</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -258,7 +280,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -272,38 +294,37 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="fetchQuestions"></a>
+                    <a name="get"></a>
                     <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>fetchQuestions</b></span>
-                        <a href="#fetchQuestions"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>get</b></span>
+                        <a href="#get"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>fetchQuestions(fetchQuestionparamsDto: <a href="../classes/FetchQuestionParamsDto.html" target="_self">FetchQuestionParamsDto</a>)</code>
+                    <code>get(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Get(&#x27;:studentId/assignments/:examId&#x27;)<br /></code>
-                </td>
-            </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="29"
-                                    class="link-to-prism">src/student/student.controller.ts:29</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="11"
+                                    class="link-to-prism">src/cache/cache.service.ts:11</a></div>
                         </td>
                     </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>T</li>
+                            </ul>
+                        </td>
+                    </tr>
 
             <tr>
                 <td class="col-md-4">
@@ -321,9 +342,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>fetchQuestionparamsDto</td>
+                                                <td>key</td>
                                             <td>
-                                                            <code><a href="../classes/FetchQuestionParamsDto.html" target="_self" >FetchQuestionParamsDto</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -336,7 +357,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
+                            <b>Returns : </b>    <code>Promise&lt;T | null&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -350,39 +371,37 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="login"></a>
+                    <a name="mget"></a>
                     <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier"></span>
-                            <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>login</b></span>
-                        <a href="#login"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>mget</b></span>
+                        <a href="#mget"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>login(loginStudentDto: <a href="../classes/LoginStudentDto.html" target="_self">LoginStudentDto</a>)</code>
+                    <code>mget(keys: string[])</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@HttpCode(HttpStatus.OK)<br />@Post(&#x27;auth&#x27;)<br /></code>
-                </td>
-            </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/student/student.controller.ts:19</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/cache/cache.service.ts:37</a></div>
                         </td>
                     </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>T</li>
+                            </ul>
+                        </td>
+                    </tr>
 
             <tr>
                 <td class="col-md-4">
@@ -400,9 +419,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>loginStudentDto</td>
+                                                <td>keys</td>
                                             <td>
-                                                            <code><a href="../classes/LoginStudentDto.html" target="_self" >LoginStudentDto</a></code>
+                                                        <code>string[]</code>
                                             </td>
 
                                             <td>
@@ -415,7 +434,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
+                            <b>Returns : </b>    <code>Promise&lt;[]&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -429,39 +448,37 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="submitMcqExam"></a>
+                    <a name="mset"></a>
                     <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier"></span>
-                            <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>submitMcqExam</b></span>
-                        <a href="#submitMcqExam"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>mset</b></span>
+                        <a href="#mset"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>submitMcqExam(submitMcqExamDto: <a href="../classes/SubmitMcqExamDto.html" target="_self">SubmitMcqExamDto</a>)</code>
+                    <code>mset(items: Array<literal type>)</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@HttpCode(HttpStatus.OK)<br />@Post(&#x27;submit/mcq&#x27;)<br /></code>
-                </td>
-            </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/student/student.controller.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/cache/cache.service.ts:47</a></div>
                         </td>
                     </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>T</li>
+                            </ul>
+                        </td>
+                    </tr>
 
             <tr>
                 <td class="col-md-4">
@@ -479,9 +496,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>submitMcqExamDto</td>
+                                                <td>items</td>
                                             <td>
-                                                            <code><a href="../classes/SubmitMcqExamDto.html" target="_self" >SubmitMcqExamDto</a></code>
+                                                        <code>Array&lt;literal type&gt;</code>
                                             </td>
 
                                             <td>
@@ -494,7 +511,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -508,39 +525,37 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="submitOeExam"></a>
+                    <a name="set"></a>
                     <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier"></span>
-                            <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>submitOeExam</b></span>
-                        <a href="#submitOeExam"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>set</b></span>
+                        <a href="#set"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>submitOeExam(submitOeExamDto: <a href="../classes/SubmitOeExamDto.html" target="_self">SubmitOeExamDto</a>)</code>
+                    <code>set(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, value: T, ttl?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@HttpCode(HttpStatus.OK)<br />@Post(&#x27;submit/oe&#x27;)<br /></code>
-                </td>
-            </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="41"
-                                    class="link-to-prism">src/student/student.controller.ts:41</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="20"
+                                    class="link-to-prism">src/cache/cache.service.ts:20</a></div>
                         </td>
                     </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>T</li>
+                            </ul>
+                        </td>
+                    </tr>
 
             <tr>
                 <td class="col-md-4">
@@ -558,9 +573,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>submitOeExamDto</td>
+                                                <td>key</td>
                                             <td>
-                                                            <code><a href="../classes/SubmitOeExamDto.html" target="_self" >SubmitOeExamDto</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -569,11 +584,35 @@
 
 
                                         </tr>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                        <code>T</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>ttl</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -583,61 +622,71 @@
             </tr>
         </tbody>
     </table>
-</section>    </div>
+</section>
+
+    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from &#x27;@nestjs/common&#x27;;
-import { LoginStudentDto } from &#x27;./dtos/login-student.dto&#x27;;
-import { StudentService } from &#x27;./providers/student.service&#x27;;
-import { Auth } from &#x27;src/admin/auth/decorators/auth.decorator&#x27;;
-import { AuthType } from &#x27;src/admin/auth/enums/auth-type.enum&#x27;;
-import { FetchQuestionParamsDto } from &#x27;./dtos/fetch-question-params.dto&#x27;;
-import { SubmitMcqExamDto } from &#x27;./dtos/submit-mcq-exam.dto&#x27;;
-import { SubmitOeExamDto } from &#x27;./dtos/submit-oe-exam.dto&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Inject } from &#x27;@nestjs/common&#x27;;
+import { CACHE_MANAGER } from &#x27;@nestjs/cache-manager&#x27;;
+import { Cache } from &#x27;cache-manager&#x27;;
 
-@Auth(AuthType.None)
-@Controller(&#x27;student&#x27;)
-export class StudentController {
-    constructor(
-        private readonly studentService: StudentService
-    ) { }
+@Injectable()
+export class CacheService {
+  constructor(
+    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
+  ) {}
 
-    @HttpCode(HttpStatus.OK)
-    @Post(&#x27;auth&#x27;)
-    public async login(@Body() loginStudentDto: LoginStudentDto) {
-        return this.studentService.loginStudent(loginStudentDto)
+  async get&lt;T&gt;(key: string): Promise&lt;T | null&gt; {
+    try {
+      const cached &#x3D; await this.cacheManager.get&lt;T&gt;(key);
+      return cached;
+    } catch (error) {
+      return null;
     }
+  }
 
-    @Get(&#x27;:studentId/assignments&#x27;)
-    public async fetchExams(@Param(&#x27;studentId&#x27;) studentId: string) {
-        return this.studentService.fetchStudentAssignments(studentId)
+  async set&lt;T&gt;(key: string, value: T, ttl?: number): Promise&lt;void&gt; {
+    try {
+      await this.cacheManager.set(key, value, ttl);
+    } catch (error) {
+      console.error(&#x60;Cache set error for key ${key}:&#x60;, error);
     }
+  }
 
-    @Get(&#x27;:studentId/assignments/:examId&#x27;)
-    public async fetchQuestions(@Param() fetchQuestionparamsDto: FetchQuestionParamsDto) {
-        return this.studentService.fetchQuestionsForStudent(fetchQuestionparamsDto)
+  async del(key: string): Promise&lt;void&gt; {
+    try {
+      await this.cacheManager.del(key);
+    } catch (error) {
+      console.error(&#x60;Cache delete error for key ${key}:&#x60;, error);
     }
+  }
 
-    @HttpCode(HttpStatus.OK)
-    @Post(&#x27;submit/mcq&#x27;)
-    public async submitMcqExam(@Body() submitMcqExamDto: SubmitMcqExamDto) {
-        return this.studentService.submitMcqExam(submitMcqExamDto)
+  // Get multiple keys at once
+  async mget&lt;T&gt;(keys: string[]): Promise&lt;(T | null)[]&gt; {
+    try {
+      const promises &#x3D; keys.map(key &#x3D;&gt; this.get&lt;T&gt;(key));
+      return await Promise.all(promises);
+    } catch (error) {
+      return keys.map(() &#x3D;&gt; null);
     }
+  }
 
-    @HttpCode(HttpStatus.OK)
-    @Post(&#x27;submit/oe&#x27;)
-    public async submitOeExam(@Body() submitOeExamDto: SubmitOeExamDto) {
-        return this.studentService.submitOeExam(submitOeExamDto)
+  // Set multiple key-value pairs
+  async mset&lt;T&gt;(items: Array&lt;{ key: string; value: T; ttl?: number }&gt;): Promise&lt;void&gt; {
+    try {
+      await Promise.all(
+        items.map(item &#x3D;&gt; this.set(item.key, item.value, item.ttl))
+      );
+    } catch (error) {
+      console.error(&#x27;Cache mset error:&#x27;, error);
     }
-
-}
-</code></pre>
+  }
+}</code></pre>
     </div>
+
 </div>
-
-
-
 
 
 
@@ -676,8 +725,8 @@ export class StudentController {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'controller';
-            var COMPODOC_CURRENT_PAGE_URL = 'StudentController.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'CacheService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -95,7 +95,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Classes</li>
-  <li class="breadcrumb-item" >McqQuestion</li>
+  <li class="breadcrumb-item" >SubmitOeExamDto</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -119,7 +119,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/exam/schemas/mcq/mcq-question.schema.ts</code>
+            <code>src/student/dtos/submit-oe-exam.dto.ts</code>
         </p>
 
 
@@ -141,15 +141,19 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier"></span>
-                                <a href="#answer" >answer</a>
+                                    <span class="modifier"></span>
+                                <a href="#examId" >examId</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
-                                <a href="#options" >options</a>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                <a href="#responses" >responses</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
-                                <a href="#question" >question</a>
+                                    <span class="modifier"></span>
+                                <a href="#studentId" >studentId</a>
                             </li>
                         </ul>
                     </td>
@@ -174,11 +178,12 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="answer"></a>
+                    <a name="examId"></a>
                     <span class="name">
                             <span class="modifier"></span>
-                        <span ><b>answer</b></span>
-                        <a href="#answer"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier"></span>
+                        <span ><b>examId</b></span>
+                        <a href="#examId"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -193,13 +198,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @Prop({required: true})<br />
+                            @IsString()<br />@IsNotEmpty()<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/exam/schemas/mcq/mcq-question.schema.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/student/dtos/submit-oe-exam.dto.ts:13</a></div>
                         </td>
                     </tr>
 
@@ -210,17 +215,19 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="options"></a>
+                    <a name="responses"></a>
                     <span class="name">
                             <span class="modifier"></span>
-                        <span ><b>options</b></span>
-                        <a href="#options"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                        <span ><b>responses</b></span>
+                        <a href="#responses"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>string[]</code>
+                        <i>Type : </i>    <code>StudentAnswerDto[]</code>
 
                     </td>
                 </tr>
@@ -229,13 +236,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @Prop({type: undefined, required: true})<br />
+                            @IsArray()<br />@ValidateNested({each: true})<br />@Type(undefined)<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/exam/schemas/mcq/mcq-question.schema.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/student/dtos/submit-oe-exam.dto.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -246,11 +253,12 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="question"></a>
+                    <a name="studentId"></a>
                     <span class="name">
                             <span class="modifier"></span>
-                        <span ><b>question</b></span>
-                        <a href="#question"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier"></span>
+                        <span ><b>studentId</b></span>
+                        <a href="#studentId"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -265,13 +273,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @Prop({required: true})<br />
+                            @IsString()<br />@IsNotEmpty()<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/exam/schemas/mcq/mcq-question.schema.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/student/dtos/submit-oe-exam.dto.ts:9</a></div>
                         </td>
                     </tr>
 
@@ -290,35 +298,26 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
-import { HydratedDocument } from &#x27;mongoose&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IsArray, IsNotEmpty, IsString, ValidateNested } from &quot;class-validator&quot;;
+import { StudentAnswerDto } from &quot;./student-answer.dto&quot;;
+import { Type } from &quot;class-transformer&quot;;
 
-export type McqQuestionDocument &#x3D; HydratedDocument&lt;McqQuestion&gt;;
+export class SubmitOeExamDto {
 
-@Schema({
-  timestamps: true,
-  toJSON: {
-    virtuals: true,
-    transform: (doc, ret) &#x3D;&gt; {
-      ret.id &#x3D; ret._id;
-      delete ret._id;
-      return ret;
-    },
-  },
-})
-export class McqQuestion {
-  @Prop({ required: true })
-  question: string;
+    @IsString()
+    @IsNotEmpty()
+    studentId: string;
 
-  @Prop({ type: [String], required: true  })
-  options: string[];
+    @IsString()
+    @IsNotEmpty()
+    examId: string;
+    
 
-  @Prop({ required: true })
-  answer: string;
-}
-
-export const McqQuestionSchema &#x3D; SchemaFactory.createForClass(McqQuestion);
-</code></pre>
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() &#x3D;&gt; StudentAnswerDto)
+    responses: StudentAnswerDto[];
+}</code></pre>
     </div>
 </div>
 
@@ -356,7 +355,7 @@ export const McqQuestionSchema &#x3D; SchemaFactory.createForClass(McqQuestion);
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'McqQuestion.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'SubmitOeExamDto.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
