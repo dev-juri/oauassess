@@ -313,21 +313,22 @@ export class InsertStudentProvider {
     ): Promise&lt;string[] | null&gt; {
         let insertedStudentIds: string[] &#x3D; [];
 
+        // Extract student data from the tutorial list template
+        const students &#x3D; parseTemplate&lt;IStudent&gt;(
+            tutorialList,
+            iStudentExpectedKeys,
+        );
+
         const session &#x3D; await this.connection.startSession();
         session.startTransaction();
 
         try {
-            // Extract student data from the tutorial list template
-            const students &#x3D; parseTemplate&lt;IStudent&gt;(
-                tutorialList,
-                iStudentExpectedKeys,
-            );
 
             const operations &#x3D; students
                 .filter((student) &#x3D;&gt; student[&#x27;Matric No&#x27;])
                 .map((student) &#x3D;&gt; {
                     const mappedStudent &#x3D; {
-                        matricNo: student[&#x27;Matric No&#x27;],
+                        matricNo: student[&#x27;Matric No&#x27;].toUpperCase(),
                         fullName: student[&#x27;FullName&#x27;],
                     };
 
@@ -339,8 +340,6 @@ export class InsertStudentProvider {
                         },
                     };
                 });
-
-            await this.studentModel.bulkWrite(operations, { session });
 
             await this.studentModel.bulkWrite(operations, { session });
 

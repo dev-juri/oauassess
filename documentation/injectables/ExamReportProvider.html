@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >StudentService</li>
+  <li class="breadcrumb-item" >ExamReportProvider</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,7 +115,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/student/providers/student.service.ts</code>
+            <code>src/exam/providers/exam-report.provider.ts</code>
         </p>
 
 
@@ -136,34 +136,24 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#fetchQuestionsForStudent" >fetchQuestionsForStudent</a>
+                                <a href="#generateExamReport" >generateExamReport</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#fetchStudentAssignments" >fetchStudentAssignments</a>
+                                <a href="#generateExcelReport" >generateExcelReport</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#insertStudents" >insertStudents</a>
+                                <a href="#generateStudentPDF" >generateStudentPDF</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#loginStudent" >loginStudent</a>
+                                <a href="#generateStudentResponsesZip" >generateStudentResponsesZip</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#submitMcqExam" >submitMcqExam</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#submitOeExam" >submitOeExam</a>
+                                <a href="#getStudentResponses" >getStudentResponses</a>
                             </li>
                         </ul>
                     </td>
@@ -183,12 +173,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(studentModel: <a href="../classes/Student.html" target="_self">Model&lt;StudentDocument&gt;</a>, insertStudentProvider: <a href="../injectables/InsertStudentProvider.html" target="_self">InsertStudentProvider</a>, fetchExamAssignmentsProvider: <a href="../injectables/FetchExamAssignmentsProvider.html" target="_self">FetchExamAssignmentsProvider</a>, examService: <a href="../injectables/ExamService.html" target="_self">ExamService</a>, gradeOeExamProvider: <a href="../injectables/GradeOeExamProvider.html" target="_self">GradeOeExamProvider</a>)</code>
+<code>constructor(oeExamGradingModel: Model<OeExamGrading>, examAssignmentModel: <a href="../undefineds/ExamAssignmentDocument.html" target="_self">Model&lt;ExamAssignmentDocument&gt;</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/student/providers/student.service.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/exam/providers/exam-report.provider.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -206,10 +196,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>studentModel</td>
+                                                        <td>oeExamGradingModel</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../classes/Student.html" target="_self" >Model&lt;StudentDocument&gt;</a></code>
+                                                                    <code>Model&lt;OeExamGrading&gt;</code>
                                                         </td>
                                                   
                                                     <td>
@@ -218,46 +208,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>insertStudentProvider</td>
+                                                        <td>examAssignmentModel</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/InsertStudentProvider.html" target="_self" >InsertStudentProvider</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>fetchExamAssignmentsProvider</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/FetchExamAssignmentsProvider.html" target="_self" >FetchExamAssignmentsProvider</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>examService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/ExamService.html" target="_self" >ExamService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>gradeOeExamProvider</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/GradeOeExamProvider.html" target="_self" >GradeOeExamProvider</a></code>
+                                                                        <code><a href="../miscellaneous/typealiases.html#ExamAssignmentDocument" target="_self" >Model&lt;ExamAssignmentDocument&gt;</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -283,33 +237,34 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="fetchQuestionsForStudent"></a>
+                    <a name="generateExamReport"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>fetchQuestionsForStudent</b></span>
-                        <a href="#fetchQuestionsForStudent"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>generateExamReport</b></span>
+                        <a href="#generateExamReport"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>fetchQuestionsForStudent(fetchQuestionParamsDto: <a href="../classes/FetchQuestionParamsDto.html" target="_self">FetchQuestionParamsDto</a>)</code>
+                    <code>generateExamReport(exam: <a href="../undefineds/ExamDocument.html" target="_self">ExamDocument</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="59"
-                                    class="link-to-prism">src/student/providers/student.service.ts:59</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">src/exam/providers/exam-report.provider.ts:33</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Generate report for a specific exam</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -324,9 +279,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>fetchQuestionParamsDto</td>
+                                                <td>exam</td>
                                             <td>
-                                                            <code><a href="../classes/FetchQuestionParamsDto.html" target="_self" >FetchQuestionParamsDto</a></code>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExamDocument" target="_self" >ExamDocument</a></code>
                                             </td>
 
                                             <td>
@@ -353,33 +308,34 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="fetchStudentAssignments"></a>
+                    <a name="generateExcelReport"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>fetchStudentAssignments</b></span>
-                        <a href="#fetchStudentAssignments"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>generateExcelReport</b></span>
+                        <a href="#generateExcelReport"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>fetchStudentAssignments(studentId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>generateExcelReport(exam: <a href="../undefineds/ExamDocument.html" target="_self">ExamDocument</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="53"
-                                    class="link-to-prism">src/student/providers/student.service.ts:53</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">src/exam/providers/exam-report.provider.ts:73</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Generate Excel buffer for exam report</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -394,7 +350,249 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>studentId</td>
+                                                <td>exam</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExamDocument" target="_self" >ExamDocument</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;literal type&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise&lt;{ buffer: Buffer, courseName: string }&gt;</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="generateStudentPDF"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>generateStudentPDF</b></span>
+                        <a href="#generateStudentPDF"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>generateStudentPDF(studentData: <a href="../interfaces/StudentResponseData.html" target="_self">StudentResponseData</a>, courseInfo: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="245"
+                                    class="link-to-prism">src/exam/providers/exam-report.provider.ts:245</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Generate PDF for a single student</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>studentData</td>
+                                            <td>
+                                                            <code><a href="../interfaces/StudentResponseData.html" target="_self" >StudentResponseData</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Student response data</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>courseInfo</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Course information</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;Buffer&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise<Buffer> - PDF buffer</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="generateStudentResponsesZip"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>generateStudentResponsesZip</b></span>
+                        <a href="#generateStudentResponsesZip"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>generateStudentResponsesZip(exam: <a href="../undefineds/ExamDocument.html" target="_self">ExamDocument</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="191"
+                                    class="link-to-prism">src/exam/providers/exam-report.provider.ts:191</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Generate ZIP file containing all student PDFs</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>exam</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExamDocument" target="_self" >ExamDocument</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;literal type&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise&lt;{buffer: Buffer, courseCode: string}&gt;</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStudentResponses"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getStudentResponses</b></span>
+                        <a href="#getStudentResponses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getStudentResponses(examId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/exam/providers/exam-report.provider.ts:120</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get all student responses for an exam</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>examId</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -404,296 +602,23 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The ID of the exam</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
+                            <b>Returns : </b>        <code><a href="../interfaces/StudentResponseData.html" target="_self" >Promise&lt;StudentResponseData[]&gt;</a></code>
 
                         </div>
                             <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="insertStudents"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>insertStudents</b></span>
-                        <a href="#insertStudents"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>insertStudents(tutorialList: Express.Multer.File)</code>
-                </td>
-            </tr>
+                                <p>Promise&lt;StudentResponseData[]&gt;</p>
 
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="47"
-                                    class="link-to-prism">src/student/providers/student.service.ts:47</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>tutorialList</td>
-                                            <td>
-                                                        <code>Express.Multer.File</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;[] | null&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="loginStudent"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>loginStudent</b></span>
-                        <a href="#loginStudent"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>loginStudent(loginStudentDto: <a href="../classes/LoginStudentDto.html" target="_self">LoginStudentDto</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="33"
-                                    class="link-to-prism">src/student/providers/student.service.ts:33</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>loginStudentDto</td>
-                                            <td>
-                                                            <code><a href="../classes/LoginStudentDto.html" target="_self" >LoginStudentDto</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="submitMcqExam"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>submitMcqExam</b></span>
-                        <a href="#submitMcqExam"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>submitMcqExam(submitMcqExamDto: <a href="../classes/SubmitMcqExamDto.html" target="_self">SubmitMcqExamDto</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="67"
-                                    class="link-to-prism">src/student/providers/student.service.ts:67</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>submitMcqExamDto</td>
-                                            <td>
-                                                            <code><a href="../classes/SubmitMcqExamDto.html" target="_self" >SubmitMcqExamDto</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="submitOeExam"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>submitOeExam</b></span>
-                        <a href="#submitOeExam"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>submitOeExam(submitOeExamDto: <a href="../classes/SubmitOeExamDto.html" target="_self">SubmitOeExamDto</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="86"
-                                    class="link-to-prism">src/student/providers/student.service.ts:86</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>submitOeExamDto</td>
-                                            <td>
-                                                            <code><a href="../classes/SubmitOeExamDto.html" target="_self" >SubmitOeExamDto</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
-
-                        </div>
-                            <div class="io-description">
-                                
                             </div>
                 </td>
             </tr>
@@ -705,97 +630,288 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { forwardRef, Inject, Injectable, NotFoundException, UnauthorizedException } from &#x27;@nestjs/common&#x27;;
-import { InjectModel } from &#x27;@nestjs/mongoose&#x27;;
-import { Student, StudentDocument } from &#x27;../schemas/student.schema&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+    BadRequestException,
+    Injectable,
+} from &#x27;@nestjs/common&#x27;;
 import { Model } from &#x27;mongoose&#x27;;
-import { InsertStudentProvider } from &#x27;./insert-student.provider&#x27;;
-import { LoginStudentDto } from &#x27;../dtos/login-student.dto&#x27;;
+import { InjectModel } from &#x27;@nestjs/mongoose&#x27;;
 import { successResponse } from &#x27;src/utils/response-writer&#x27;;
-import { ExamService } from &#x27;src/exam/providers/exam.service&#x27;;
-import { FetchExamAssignmentsProvider } from &#x27;src/exam/providers/fetch-exam-assignments.provider&#x27;;
-import { FetchQuestionParamsDto } from &#x27;../dtos/fetch-question-params.dto&#x27;;
-import { SubmitMcqExamDto } from &#x27;../dtos/submit-mcq-exam.dto&#x27;;
-import { SubmitOeExamDto } from &#x27;../dtos/submit-oe-exam.dto&#x27;;
-import { GradeOeExamProvider } from &#x27;src/exam/providers/grade-oe-exam.provider&#x27;;
+import { ExamAssignment, ExamAssignmentDocument } from &#x27;../schemas/exam-assigment.schema&#x27;;
+import * as XLSX from &#x27;xlsx&#x27;;
+import { QuestionResponse, StudentResponseData } from &#x27;src/utils/interfaces/report.interface&#x27;;
+import * as puppeteer from &#x27;puppeteer&#x27;;
+import * as archiver from &#x27;archiver&#x27;;
+import { generateHTMLTemplate } from &#x27;src/utils/generate-html-template&#x27;;
+import { OeExamGrading } from &#x27;../schemas/oe-exam-grading.schema&#x27;;
+import { examType } from &#x27;../enums/exam-type.enum&#x27;;
+import { ExamDocument } from &#x27;../schemas/exam.schema&#x27;;
 
 @Injectable()
-export class StudentService {
-  constructor(
-    @InjectModel(Student.name)
-    private readonly studentModel: Model&lt;StudentDocument&gt;,
+export class ExamReportProvider {
+    constructor(
+        @InjectModel(OeExamGrading.name)
+        private readonly oeExamGradingModel: Model&lt;OeExamGrading&gt;,
 
-    private readonly insertStudentProvider: InsertStudentProvider,
+        @InjectModel(ExamAssignment.name)
+        private readonly examAssignmentModel: Model&lt;ExamAssignmentDocument&gt;,
+    ) { }
 
-    @Inject(forwardRef(() &#x3D;&gt; FetchExamAssignmentsProvider))
-    private readonly fetchExamAssignmentsProvider: FetchExamAssignmentsProvider,
+    /**
+      * Generate report for a specific exam
+      * @param examId - The ID of the exam
+      * @returns 
+      */
+    async generateExamReport(exam: ExamDocument) {
 
-    @Inject(forwardRef(() &#x3D;&gt; ExamService))
-    private readonly examService: ExamService,
+        const assignments &#x3D; await this.examAssignmentModel
+            .find({ exam: exam._id, isCompleted: true, score: { $ne: null } })
+            .populate(&#x27;student&#x27;, &#x27;fullName matricNo&#x27;)
+            .exec();
 
-    private readonly gradeOeExamProvider: GradeOeExamProvider,
+        const examTitle &#x3D; &#x60;${exam.courseCode} - ${exam.courseName}&#x60;;
 
-  ) { }
-
-  public async loginStudent(loginStudentDto: LoginStudentDto) {
-
-    let student &#x3D; await this.studentModel.findOne({ matricNo: loginStudentDto.matricNo })
-    if (!student) {
-      throw new NotFoundException(&#x27;Student with matric number does not exist.&#x27;)
-    }
-
-    if (student.fullName.split(&#x27; &#x27;)[0].toLowerCase() !&#x3D; loginStudentDto.password.toLowerCase()) {
-      throw new UnauthorizedException(&#x27;Incorrect password&#x27;)
-    }
-
-    return successResponse({ message: &#x27;Login Successful&#x27;, data: student })
-  }
-
-  public async insertStudents(
-    tutorialList: Express.Multer.File,
-  ): Promise&lt;string[] | null&gt; {
-    return this.insertStudentProvider.insertStudents(tutorialList)
-  }
-
-  public async fetchStudentAssignments(studentId: string) {
-    const result &#x3D; await this.fetchExamAssignmentsProvider.getAssignmentsForStudent(studentId)
-
-    return successResponse({ message: &#x27;Exam Assignments for Student fetched&#x27;, data: result })
-  }
-
-  public async fetchQuestionsForStudent(fetchQuestionParamsDto: FetchQuestionParamsDto) {
-    const exam &#x3D; await this.examService.fetchExam(fetchQuestionParamsDto.examId);
-
-    const questions &#x3D; await this.fetchExamAssignmentsProvider.generateAndCacheQuestions(fetchQuestionParamsDto.studentId, exam)
-
-    return successResponse({ message: &quot;Questions retrieved successfully&quot;, data: questions })
-  }
-
-  public async submitMcqExam(submitMcqExamDto: SubmitMcqExamDto) {
-    const scores &#x3D; await Promise.all(
-      submitMcqExamDto.responses.map(async (response) &#x3D;&gt; {
-        const question &#x3D; await this.fetchExamAssignmentsProvider.getCachedMcqQuestion(response.questionId);
-
-        if (question &amp;&amp; question.answer &#x3D;&#x3D;&#x3D; response.answer) {
-          return 1;
+        if (assignments.length &#x3D;&#x3D;&#x3D; 0) {
+            return successResponse({
+                message: &quot;Report generated successfully&quot;, data: {
+                    examTitle,
+                    examId: exam._id,
+                    students: []
+                }
+            })
         }
-        return 0;
-      })
-    );
 
-    const totalScore &#x3D; scores.reduce((sum, score) &#x3D;&gt; sum + score, 0);
 
-    await this.fetchExamAssignmentsProvider.updateStudentMcqScore(submitMcqExamDto.examId, submitMcqExamDto.studentId, totalScore);
+        const students &#x3D; assignments.map(assignment &#x3D;&gt; ({
+            studentName: assignment.student.fullName,
+            matricNumber: assignment.student.matricNo,
+            score: assignment.score
+        }));
 
-    return successResponse({ message: &quot;Exam Successfully Submitted.&quot; })
-  }
+        return successResponse({
+            message: &quot;Report generated successfully&quot;, data: {
+                examTitle,
+                examId: exam._id,
+                students,
+            }
+        });
+    }
 
-  public async submitOeExam(submitOeExamDto: SubmitOeExamDto) {
-    const { guideVectorStoreId } &#x3D; await this.examService.fetchExam(submitOeExamDto.examId)
+    /**
+       * Generate Excel buffer for exam report
+       * @param examId - The ID of the exam
+       * @returns Promise&lt;{ buffer: Buffer, courseName: string }&gt;
+       */
+    async generateExcelReport(exam: ExamDocument): Promise&lt;{ buffer: Buffer, courseName: string }&gt; {
+        const report &#x3D; await this.generateExamReport(exam);
 
-    await this.gradeOeExamProvider.submitResponses(submitOeExamDto, guideVectorStoreId)
-    return successResponse({ message: &quot;Exam Successfully Submitted.&quot; })
-  }
+        const workbook &#x3D; XLSX.utils.book_new();
+
+        const excelData &#x3D; [
+            // Header information
+            [&#x27;Exam Report&#x27;],
+            [&#x27;Exam Title:&#x27;, report.data.examTitle],
+            [],
+            // Column headers
+            [&#x27;Student Name&#x27;, &#x27;Matric Number&#x27;, &#x27;Score&#x27;],
+            // Student data
+            ...report.data.students.map(student &#x3D;&gt; [
+                student.studentName,
+                student.matricNumber,
+                student.score
+            ])
+        ];
+
+        const worksheet &#x3D; XLSX.utils.aoa_to_sheet(excelData);
+
+        // Style the columns
+        worksheet[&#x27;!cols&#x27;] &#x3D; [
+            { width: 25 },
+            { width: 15 },
+            { width: 10 }
+        ];
+
+        XLSX.utils.book_append_sheet(workbook, worksheet, &#x27;Exam Report&#x27;);
+
+        const buffer &#x3D; XLSX.write(workbook, {
+            type: &#x27;buffer&#x27;,
+            bookType: &#x27;xlsx&#x27;,
+            compression: true
+        });
+
+        const courseName &#x3D; report.data.examTitle.split(&#x27; (&#x27;)[0] || &#x27;Report&#x27;;
+
+        return { buffer: Buffer.from(buffer), courseName };
+    }
+
+    /**
+     * Get all student responses for an exam
+     * @param examId - The ID of the exam
+     * @returns Promise&lt;StudentResponseData[]&gt;
+     */
+    async getStudentResponses(examId: string): Promise&lt;StudentResponseData[]&gt; {
+        const assignments &#x3D; await this.examAssignmentModel
+            .find({ exam: examId, isCompleted: true })
+            .populate(&#x27;student&#x27;, &#x27;fullName matricNo&#x27;)
+            .populate(&#x27;exam&#x27;, &#x27;courseName courseCode&#x27;)
+            .exec();
+
+        if (assignments.length &#x3D;&#x3D;&#x3D; 0) {
+            throw new Error(&#x27;No completed assignments found for this exam&#x27;);
+        }
+
+        const assignmentIds &#x3D; assignments.map(assignment &#x3D;&gt; assignment._id);
+
+        const examGradings &#x3D; await this.oeExamGradingModel
+            .find({ assignment: { $in: assignmentIds } })
+            .populate({
+                path: &#x27;assignment&#x27;,
+                select: &#x27;_id student exam isCompleted score&#x27;,
+                populate: [
+                    { path: &#x27;student&#x27;, select: &#x27;fullName matricNo&#x27; },
+                    { path: &#x27;exam&#x27;, select: &#x27;courseName courseCode&#x27; }
+                ]
+            })
+            .populate(&#x27;responses.questionId&#x27;, &#x27;question&#x27;)
+            .exec();
+
+        const studentResponses: StudentResponseData[] &#x3D; [];
+
+        for (const assignment of assignments) {
+            const assignmentId &#x3D; assignment._id.toString();
+
+            const grading &#x3D; examGradings.find(g &#x3D;&gt;
+                (g.assignment as ExamAssignmentDocument)._id.toString() &#x3D;&#x3D;&#x3D; assignmentId
+            );
+
+            let responses: QuestionResponse[] &#x3D; [];
+
+            if (grading &amp;&amp; grading.responses &amp;&amp; grading.responses.length &gt; 0) {
+
+                responses &#x3D; grading.responses.map((response, index) &#x3D;&gt; {
+                    const questionData &#x3D; response.questionId as any;
+
+                    return {
+                        totalScore: assignment.score,
+                        questionNumber: index + 1,
+                        question: questionData?.question || &#x27;Question text not available&#x27;,
+                        studentResponse: response.userResponse || &#x27;No response provided&#x27;,
+                        aiScore: response.aiScore || null,
+                        aiComment: response.aiComment || null,
+                    };
+                });
+            }
+
+            const studentData &#x3D; {
+                totalScore: assignment.score.toString(),
+                studentName: assignment.student.fullName,
+                matricNumber: assignment.student.matricNo,
+                responses: responses,
+            };
+
+            studentResponses.push(studentData);
+        }
+
+        return studentResponses;
+    }
+
+    /**
+       * Generate ZIP file containing all student PDFs
+       * @param examId - The ID of the exam
+       * @returns Promise&lt;{buffer: Buffer, courseCode: string}&gt;
+       */
+    async generateStudentResponsesZip(exam: ExamDocument): Promise&lt;{ buffer: Buffer, courseCode: string }&gt; {
+
+        const examId &#x3D; exam._id.toString()
+
+        const assignments &#x3D; await this.examAssignmentModel
+            .find({ exam: examId, isCompleted: true })
+            .populate(&#x27;student&#x27;, &#x27;fullName matricNo&#x27;)
+            .populate(&#x27;exam&#x27;, &#x27;courseName courseCode examType&#x27;)
+            .exec();
+
+        if (assignments.length &#x3D;&#x3D;&#x3D; 0) {
+            throw new Error(&#x27;No completed assignments found for this exam&#x27;);
+        }
+
+        const courseInfo &#x3D; assignments[0].exam;
+        const courseCode &#x3D; courseInfo?.courseCode;
+
+        const studentResponses &#x3D; await this.getStudentResponses(examId);
+
+        const archive &#x3D; archiver(&#x27;zip&#x27;, {
+            zlib: { level: 9 }
+        });
+
+        const chunks: Buffer[] &#x3D; [];
+
+        const zipPromise &#x3D; new Promise&lt;Buffer&gt;((resolve, reject) &#x3D;&gt; {
+            archive.on(&#x27;data&#x27;, (chunk) &#x3D;&gt; chunks.push(chunk));
+            archive.on(&#x27;end&#x27;, () &#x3D;&gt; resolve(Buffer.concat(chunks)));
+            archive.on(&#x27;error&#x27;, reject);
+        });
+
+        for (const studentData of studentResponses) {
+            try {
+                const pdfBuffer &#x3D; await this.generateStudentPDF(studentData, courseInfo);
+                const matric &#x3D; studentData.matricNumber.replace(/\//g, &quot;&quot;).trim()
+                const fileName &#x3D; &#x60;${matric}.pdf&#x60;;
+                archive.append(pdfBuffer, { name: fileName });
+            } catch (error) {
+            }
+        }
+
+        await archive.finalize();
+
+        const buffer &#x3D; await zipPromise;
+
+        return { buffer, courseCode };
+    }
+
+    /**
+     * Generate PDF for a single student
+     * @param studentData - Student response data
+     * @param courseInfo - Course information
+     * @returns Promise&lt;Buffer&gt; - PDF buffer
+     */
+    async generateStudentPDF(studentData: StudentResponseData, courseInfo: any): Promise&lt;Buffer&gt; {
+        const browser &#x3D; await puppeteer.launch({
+            headless: true,
+            args: [
+                &#x27;--no-sandbox&#x27;,
+                &#x27;--disable-setuid-sandbox&#x27;,
+                &#x27;--disable-dev-shm-usage&#x27;,
+                &#x27;--disable-accelerated-2d-canvas&#x27;,
+                &#x27;--no-first-run&#x27;,
+                &#x27;--no-zygote&#x27;,
+                &#x27;--disable-gpu&#x27;
+            ]
+        });
+
+        try {
+            const page &#x3D; await browser.newPage();
+            const html &#x3D; generateHTMLTemplate(studentData, courseInfo);
+
+            await page.setViewport({ width: 800, height: 600 });
+            await page.setContent(html, { waitUntil: &#x27;networkidle0&#x27; });
+
+            const pdfBuffer &#x3D; await page.pdf({
+                format: &#x27;A4&#x27;,
+                printBackground: true,
+                margin: {
+                    top: &#x27;20mm&#x27;,
+                    right: &#x27;15mm&#x27;,
+                    bottom: &#x27;20mm&#x27;,
+                    left: &#x27;15mm&#x27;
+                }
+            });
+
+            return Buffer.from(pdfBuffer);
+        } finally {
+            await browser.close();
+        }
+    }
+
 }
 </code></pre>
     </div>
@@ -840,7 +956,7 @@ export class StudentService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'StudentService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ExamReportProvider.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -79,16 +79,19 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content controller">
+               <div class="content injectable">
                    <div class="content-data">
 
 
 
 
 
+
+
+
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Controllers</li>
-  <li class="breadcrumb-item" >StudentController</li>
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >OpenaiService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -112,16 +115,8 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/student/student.controller.ts</code>
+            <code>src/openai/openai.service.ts</code>
         </p>
-
-            <p class="comment">
-                <h3>Prefix</h3>
-            </p>
-            <p class="comment">
-                <code>student</code>
-            </p>
-
 
 
 
@@ -131,6 +126,22 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#client" >client</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -141,37 +152,22 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier"></span>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#fetchExams" >fetchExams</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#buildGradingPrompt" >buildGradingPrompt</a>
                             </li>
                             <li>
-                                    <span class="modifier"></span>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#fetchQuestions" >fetchQuestions</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#getGradingInstructions" >getGradingInstructions</a>
                             </li>
                             <li>
-                                    <span class="modifier"></span>
-                                    <span class="modifier"></span>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#login" >login</a>
+                                <a href="#gradeRequests" >gradeRequests</a>
                             </li>
                             <li>
-                                    <span class="modifier"></span>
-                                    <span class="modifier"></span>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#submitMcqExam" >submitMcqExam</a>
-                            </li>
-                            <li>
-                                    <span class="modifier"></span>
-                                    <span class="modifier"></span>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#submitOeExam" >submitOeExam</a>
+                                <a href="#uploadMarkingGuide" >uploadMarkingGuide</a>
                             </li>
                         </ul>
                     </td>
@@ -185,6 +181,55 @@
     </table>
 </section>
 
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(configService: ConfigService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/openai/openai.service.ts:9</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>configService</td>
+                                                  
+                                                        <td>
+                                                                    <code>ConfigService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
             <section data-compodoc="block-methods">
     
     <h3 id="methods">
@@ -194,35 +239,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="fetchExams"></a>
+                    <a name="buildGradingPrompt"></a>
                     <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>fetchExams</b></span>
-                        <a href="#fetchExams"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                        <span ><b>buildGradingPrompt</b></span>
+                        <a href="#buildGradingPrompt"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>fetchExams(studentId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>buildGradingPrompt(request: <a href="../interfaces/GradingRequest.html" target="_self">GradingRequest</a>)</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Get(&#x27;:studentId/assignments&#x27;)<br /></code>
-                </td>
-            </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="24"
-                                    class="link-to-prism">src/student/student.controller.ts:24</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="19"
+                                    class="link-to-prism">src/openai/openai.service.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -243,7 +279,198 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>studentId</td>
+                                                <td>request</td>
+                                            <td>
+                                                            <code><a href="../interfaces/GradingRequest.html" target="_self" >GradingRequest</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getGradingInstructions"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getGradingInstructions</b></span>
+                        <a href="#getGradingInstructions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getGradingInstructions()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="23"
+                                    class="link-to-prism">src/openai/openai.service.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="gradeRequests"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>gradeRequests</b></span>
+                        <a href="#gradeRequests"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>gradeRequests(gradingRequests: <a href="../interfaces/GradingRequest.html" target="_self">GradingRequest[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">src/openai/openai.service.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>gradingRequests</td>
+                                            <td>
+                                                            <code><a href="../interfaces/GradingRequest.html" target="_self" >GradingRequest[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/GradingResult.html" target="_self" >Promise&lt;GradingResult[]&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadMarkingGuide"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>uploadMarkingGuide</b></span>
+                        <a href="#uploadMarkingGuide"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>uploadMarkingGuide(markingGuide: Express.Multer.File, courseCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/openai/openai.service.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>markingGuide</td>
+                                            <td>
+                                                        <code>Express.Multer.File</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>courseCode</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -268,376 +495,191 @@
             </tr>
         </tbody>
     </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="fetchQuestions"></a>
+                    <a name="client"></a>
                     <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>fetchQuestions</b></span>
-                        <a href="#fetchQuestions"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>client</b></span>
+                        <a href="#client"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>fetchQuestions(fetchQuestionparamsDto: <a href="../classes/FetchQuestionParamsDto.html" target="_self">FetchQuestionParamsDto</a>)</code>
-                </td>
-            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>OpenAI</code>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Get(&#x27;:studentId/assignments/:examId&#x27;)<br /></code>
-                </td>
-            </tr>
-
+                    </td>
+                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="29"
-                                    class="link-to-prism">src/student/student.controller.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/openai/openai.service.ts:9</a></div>
                         </td>
                     </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>fetchQuestionparamsDto</td>
-                                            <td>
-                                                            <code><a href="../classes/FetchQuestionParamsDto.html" target="_self" >FetchQuestionParamsDto</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
         </tbody>
     </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="login"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier"></span>
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>login</b></span>
-                        <a href="#login"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>login(loginStudentDto: <a href="../classes/LoginStudentDto.html" target="_self">LoginStudentDto</a>)</code>
-                </td>
-            </tr>
+</section>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@HttpCode(HttpStatus.OK)<br />@Post(&#x27;auth&#x27;)<br /></code>
-                </td>
-            </tr>
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/student/student.controller.ts:19</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>loginStudentDto</td>
-                                            <td>
-                                                            <code><a href="../classes/LoginStudentDto.html" target="_self" >LoginStudentDto</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="submitMcqExam"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier"></span>
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>submitMcqExam</b></span>
-                        <a href="#submitMcqExam"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>submitMcqExam(submitMcqExamDto: <a href="../classes/SubmitMcqExamDto.html" target="_self">SubmitMcqExamDto</a>)</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@HttpCode(HttpStatus.OK)<br />@Post(&#x27;submit/mcq&#x27;)<br /></code>
-                </td>
-            </tr>
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/student/student.controller.ts:35</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>submitMcqExamDto</td>
-                                            <td>
-                                                            <code><a href="../classes/SubmitMcqExamDto.html" target="_self" >SubmitMcqExamDto</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="submitOeExam"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier"></span>
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>submitOeExam</b></span>
-                        <a href="#submitOeExam"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>submitOeExam(submitOeExamDto: <a href="../classes/SubmitOeExamDto.html" target="_self">SubmitOeExamDto</a>)</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@HttpCode(HttpStatus.OK)<br />@Post(&#x27;submit/oe&#x27;)<br /></code>
-                </td>
-            </tr>
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="41"
-                                    class="link-to-prism">src/student/student.controller.ts:41</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>submitOeExamDto</td>
-                                            <td>
-                                                            <code><a href="../classes/SubmitOeExamDto.html" target="_self" >SubmitOeExamDto</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>    </div>
+    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from &#x27;@nestjs/common&#x27;;
-import { LoginStudentDto } from &#x27;./dtos/login-student.dto&#x27;;
-import { StudentService } from &#x27;./providers/student.service&#x27;;
-import { Auth } from &#x27;src/admin/auth/decorators/auth.decorator&#x27;;
-import { AuthType } from &#x27;src/admin/auth/enums/auth-type.enum&#x27;;
-import { FetchQuestionParamsDto } from &#x27;./dtos/fetch-question-params.dto&#x27;;
-import { SubmitMcqExamDto } from &#x27;./dtos/submit-mcq-exam.dto&#x27;;
-import { SubmitOeExamDto } from &#x27;./dtos/submit-oe-exam.dto&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
+import { ConfigService } from &#x27;@nestjs/config&#x27;;
+import OpenAI from &#x27;openai&#x27;;
+import { ResponseFileSearchToolCall } from &#x27;openai/resources/responses/responses&#x27;;
+import { config } from &#x27;process&#x27;;
 
-@Auth(AuthType.None)
-@Controller(&#x27;student&#x27;)
-export class StudentController {
+@Injectable()
+export class OpenaiService {
+    private readonly client: OpenAI;
     constructor(
-        private readonly studentService: StudentService
-    ) { }
-
-    @HttpCode(HttpStatus.OK)
-    @Post(&#x27;auth&#x27;)
-    public async login(@Body() loginStudentDto: LoginStudentDto) {
-        return this.studentService.loginStudent(loginStudentDto)
+        private readonly configService: ConfigService
+    ) {
+        this.client &#x3D; new OpenAI({
+            apiKey: configService.get&lt;string&gt;(&#x27;appConfig.openAiKey&#x27;),
+            project: configService.get&lt;string&gt;(&#x27;appConfig.openAiProjId&#x27;)
+        })
     }
 
-    @Get(&#x27;:studentId/assignments&#x27;)
-    public async fetchExams(@Param(&#x27;studentId&#x27;) studentId: string) {
-        return this.studentService.fetchStudentAssignments(studentId)
+    private buildGradingPrompt(request: GradingRequest): string {
+        return &#x60;Question: ${request.questionText}\n Student Response: ${request.userResponse}&#x60;;
     }
 
-    @Get(&#x27;:studentId/assignments/:examId&#x27;)
-    public async fetchQuestions(@Param() fetchQuestionparamsDto: FetchQuestionParamsDto) {
-        return this.studentService.fetchQuestionsForStudent(fetchQuestionparamsDto)
+    private getGradingInstructions(): string {
+        return &#x60;You are an expert exam grader. Your task is to grade student responses based on the grading guide provided in the vector store. Always return a valid JSON string that follows the type { score: number, comment: string }. Guidelines: 1) Strictly follow the marking guide in the vector store (contains question + rubric). 2) Always break down your comment into rubric components, showing how marks were allotted. Use the format: &quot;The student wrote X which corresponds to Y in the guide (m/total).&quot; 3) Keep comments concise, structured, and objective. 4) Award partial credit when applicable. 5) Always state what was done well, what was partially correct, and what was missing, with marks per section. 6) The score must equal the sum of marks given in the breakdown. Example response: { &quot;score&quot;: 7, &quot;comment&quot;: &quot;The student explained xyz which matches abc in the guide (3/3). They partially mentioned def but missed key detail (2/4). No attempt on ghi (0/3).&quot; }&#x60;;
     }
 
-    @HttpCode(HttpStatus.OK)
-    @Post(&#x27;submit/mcq&#x27;)
-    public async submitMcqExam(@Body() submitMcqExamDto: SubmitMcqExamDto) {
-        return this.studentService.submitMcqExam(submitMcqExamDto)
+    public async gradeRequests(gradingRequests: GradingRequest[]): Promise&lt;GradingResult[]&gt; {
+        const results: GradingResult[] &#x3D; [];
+        const batchSize &#x3D; 5;
+
+        for (let i &#x3D; 0; i &lt; gradingRequests.length; i +&#x3D; batchSize) {
+            const batch &#x3D; gradingRequests.slice(i, i + batchSize);
+
+            const batchPromises &#x3D; batch.map(async (request) &#x3D;&gt; {
+                try {
+                    const response &#x3D; await this.client.responses.create({
+                        model: &quot;gpt-4o&quot;,
+                        instructions: this.getGradingInstructions(),
+                        input: this.buildGradingPrompt(request),
+                        tools: [
+                            {
+                                type: &quot;file_search&quot;,
+                                vector_store_ids: [request.guideVectorId],
+                                max_num_results: 1
+                            }
+                        ],
+                        max_output_tokens: 300,
+                    });
+
+                    if (response.output) {
+                        const aiResponse &#x3D; (response as OpenaiApiResponse).output[1].content[0].text.toString()
+                        const cleanedResponse &#x3D; aiResponse.replace(/&#x60;&#x60;&#x60;json\s*|&#x60;&#x60;&#x60;/g, &quot;&quot;).trim();
+
+                        try {
+                            const parsed &#x3D; JSON.parse(cleanedResponse);
+                            if (typeof parsed.score &#x3D;&#x3D;&#x3D; &quot;number&quot; &amp;&amp; typeof parsed.comment &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+                                return {
+                                    assignmentId: request.assignmentId,
+                                    oeExamGradingId: request.oeExamGradingId,
+                                    responseId: request.responseId,
+                                    aiScore: parsed.score,
+                                    aiComment: parsed.comment
+                                };
+                            }
+                        } catch (err) {
+                            console.error(&#x60;JSON parsing error for request ${request.responseId}:&#x60;, err);
+                        }
+                    }
+
+                    return {
+                        assignmentId: request.assignmentId,
+                        oeExamGradingId: request.oeExamGradingId,
+                        responseId: request.responseId,
+                        aiScore: null,
+                        aiComment: null
+                    };
+                } catch (error) {
+                    console.error(&#x60;Error with Responses API for request ${request.responseId}:&#x60;, error);
+                    return {
+                        assignmentId: request.assignmentId,
+                        oeExamGradingId: request.oeExamGradingId,
+                        responseId: request.responseId,
+                        aiScore: null,
+                        aiComment: null
+                    };
+                }
+            });
+
+            const batchResults &#x3D; await Promise.all(batchPromises);
+            results.push(...batchResults);
+
+            if (i + batchSize &lt; gradingRequests.length) {
+                await new Promise(resolve &#x3D;&gt; setTimeout(resolve, 1000));
+            }
+        }
+
+        return results;
     }
 
-    @HttpCode(HttpStatus.OK)
-    @Post(&#x27;submit/oe&#x27;)
-    public async submitOeExam(@Body() submitOeExamDto: SubmitOeExamDto) {
-        return this.studentService.submitOeExam(submitOeExamDto)
+    public async uploadMarkingGuide(markingGuide: Express.Multer.File, courseCode: string) {
+        let uploadedFileId &#x3D; undefined
+        try {
+            const uint8Array &#x3D; new Uint8Array(markingGuide.buffer);
+            const file &#x3D; new File([uint8Array], &#x60;${markingGuide.originalname}&#x60;, {
+                type: markingGuide.mimetype,
+            });
+            console.log(markingGuide.originalname)
+
+            const uploadedFile &#x3D; await this.client.files.create({
+                file: file,
+                purpose: &quot;user_data&quot;,
+            });
+
+            uploadedFileId &#x3D; uploadedFile.id
+
+            const vectorStore &#x3D; await this.client.vectorStores.create({
+                name: &#x60;${courseCode}-mg&#x60;,
+                expires_after: {
+                    anchor: &quot;last_active_at&quot;,
+                    days: 2
+                }
+            });
+
+            await this.client.vectorStores.files.create(
+                vectorStore.id,
+                {
+                    file_id: uploadedFile.id,
+                }
+            );
+
+            return vectorStore;
+        } catch (error) {
+            console.log(error)
+            if (uploadedFileId) {
+                await this.client.files.delete(uploadedFileId).catch(() &#x3D;&gt; { });
+            }
+            throw error;
+        }
     }
 
 }
 </code></pre>
     </div>
+
 </div>
-
-
-
 
 
 
@@ -676,8 +718,8 @@ export class StudentController {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'controller';
-            var COMPODOC_CURRENT_PAGE_URL = 'StudentController.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'OpenaiService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
